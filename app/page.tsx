@@ -1,13 +1,20 @@
 import Navbar from "@/components/layout/Navbar";
 import Section from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
+import Loader from "@/components/ui/Loader";
+import Projects from "@/components/sections/Projects";
+import About from "@/components/sections/About";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
     <>
+      <Loader />
+
       <Navbar />
 
       <main>
+        {/* HOME */}
         <Section id="home" className="flex min-h-screen items-center">
           <div className="max-w-3xl">
             <p className="mb-4 text-sm uppercase tracking-[0.2em] text-neutral-500">
@@ -35,17 +42,14 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section id="about" className="min-h-screen">
-          <h2 className="text-4xl font-semibold tracking-tight">About</h2>
-        </Section>
+        {/* ABOUT */}
+        <About />
 
-        <Section id="projects" className="min-h-screen">
-          <h2 className="text-4xl font-semibold tracking-tight">Projects</h2>
-        </Section>
+        {/* PROJECTS */}
+        <Projects />
 
-        <Section id="contact" className="min-h-screen">
-          <h2 className="text-4xl font-semibold tracking-tight">Contact</h2>
-        </Section>
+        {/* CONTACT */}
+        <Contact />
       </main>
     </>
   );
