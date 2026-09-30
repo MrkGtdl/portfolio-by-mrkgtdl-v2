@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lanyard from "@/components/ui/Lanyard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,47 +22,6 @@ const panels = [
     description:
       "I combine design, code, and interaction to create modern digital experiences that feel intentional from the first interaction to the last.",
   },
-  // {
-  //   number: "02",
-  //   label: "MY APPROACH",
-  //   bg: "bg-blue-500",
-  //   title: (
-  //     <>
-  //       Design with <br />
-  //       <span>purpose.</span>
-  //     </>
-  //   ),
-  //   description:
-  //     "I believe good digital experiences come from the balance between visual direction, thoughtful interaction, and solid engineering.",
-  // },
-  // {
-  //   number: "03",
-  //   label: "WHAT I DO",
-  //   bg: "bg-green-500",
-  //   title: (
-  //     <>
-  //       Turning ideas <br />
-  //       into <br />
-  //       <span>interfaces.</span>
-  //     </>
-  //   ),
-  //   description:
-  //     "From responsive websites to interactive experiences, I build products that are clear, engaging, and built to perform.",
-  // },
-  // {
-  //   number: "04",
-  //   label: "HOW I WORK",
-  //   bg: "bg-purple-500",
-  //   title: (
-  //     <>
-  //       Think. <br />
-  //       Build. <br />
-  //       <span>Refine.</span>
-  //     </>
-  //   ),
-  //   description:
-  //     "I start by understanding the problem, build with intention, then refine the details until the experience feels right.",
-  // },
   {
     number: "05",
     label: "THE GOAL",
@@ -88,30 +48,18 @@ export default function About() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const originalPanels = panelsRef.current.filter(Boolean);
+      const allPanels = panelsRef.current.filter(Boolean);
 
-      if (!originalPanels.length) return;
-
-      /*
-       * ------------------------------------------------------
-       * CLONE FIRST PANEL
-       *
-       * Same concept as the GSAP demo:
-       * first panel is duplicated at the end so that
-       * 05 -> 01 can happen seamlessly.
-       * ------------------------------------------------------
-       */
-
-      const allPanels = originalPanels;
+      if (!allPanels.length) return;
 
       /*
        * ------------------------------------------------------
        * PANEL LAYERING
        *
-       * Every panel pins at top.
+       * Every panel pins at the top.
        *
-       * pinSpacing: false means panels stack on top
-       * of each other instead of creating vertical gaps.
+       * pinSpacing: false keeps the panels layered
+       * so the next panel overlaps the current panel.
        * ------------------------------------------------------
        */
 
@@ -133,11 +81,8 @@ export default function About() {
        * ------------------------------------------------------
        * PANEL ENTER ANIMATION
        *
-       * Because panels are layered and pinned,
-       * the next panel naturally covers the current one.
-       *
-       * We add a subtle scale to make the transition
-       * feel more cinematic.
+       * No scale / zoom effect.
+       * Only the content fades and moves into place.
        * ------------------------------------------------------
        */
 
@@ -151,7 +96,7 @@ export default function About() {
           opacity: 0,
         });
 
-        ScrollTrigger.create({
+        const contentTrigger = ScrollTrigger.create({
           trigger: panel,
           start: "top 90%",
           end: "top top",
@@ -166,25 +111,8 @@ export default function About() {
             });
           },
         });
-      });
-      /*
-       * ------------------------------------------------------
-       * SCROLL WRAPPING
-       * ------------------------------------------------------
-       */
 
-      const handleScroll = () => {
-        const scroll = pageScrollTrigger.scroll();
-
-        if (scroll > maxScroll) {
-          pageScrollTrigger.scroll(1);
-        } else if (scroll < 1) {
-          pageScrollTrigger.scroll(maxScroll - 1);
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll, {
-        passive: true,
+        triggers.push(contentTrigger);
       });
 
       /*
@@ -240,9 +168,7 @@ export default function About() {
             }}
             className={`relative h-screen w-full overflow-hidden ${panel.bg}`}
           >
-            {/* ------------------------------------------ */}
             {/* NUMBER */}
-            {/* ------------------------------------------ */}
 
             <div className="absolute bottom-8 left-6 z-50 sm:left-10 lg:left-16">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
@@ -250,9 +176,7 @@ export default function About() {
               </p>
             </div>
 
-            {/* ------------------------------------------ */}
             {/* PANEL 01 */}
-            {/* ------------------------------------------ */}
 
             {index === 0 ? (
               <div className="grid h-full grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
@@ -274,32 +198,22 @@ export default function About() {
                   </div>
                 </div>
 
-                {/* IMAGE */}
+                {/* LANYARD */}
 
                 <div className="relative hidden h-full overflow-hidden lg:block">
-                  <div className="absolute inset-8 overflow-hidden bg-black/10">
-                    <img
-                      src="/images/about.jpg"
-                      alt="About"
-                      className="h-full w-full object-cover grayscale"
+                  <div className="absolute inset-8 overflow-hidden">
+                    <Lanyard
+                      position={[0, 0, 30]}
+                      gravity={[0, -40, 0]}
+                      fov={20}
+                      transparent
+                      lanyardWidth={1}
                     />
-
-                    <div className="absolute inset-0 bg-black/10" />
-
-                    <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.3em]">
-                        Visual / 01
-                      </p>
-
-                      <p className="font-mono text-[9px] opacity-60">2026</p>
-                    </div>
                   </div>
                 </div>
               </div>
             ) : (
-              /* ------------------------------------------ */
               /* PANELS 02 - 05 */
-              /* ------------------------------------------ */
 
               <div className="flex h-full items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16">
                 <div className="grid w-full gap-16 lg:grid-cols-[0.25fr_1fr]">
