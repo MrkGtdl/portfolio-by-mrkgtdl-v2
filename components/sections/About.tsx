@@ -6,8 +6,81 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const panels = [
+  {
+    number: "01",
+    label: "ABOUT ME",
+    bg: "bg-red-500",
+    title: (
+      <>
+        I build digital <br />
+        experiences that <br />
+        <span>feel alive.</span>
+      </>
+    ),
+    description:
+      "I combine design, code, and interaction to create modern digital experiences that feel intentional from the first interaction to the last.",
+  },
+  // {
+  //   number: "02",
+  //   label: "MY APPROACH",
+  //   bg: "bg-blue-500",
+  //   title: (
+  //     <>
+  //       Design with <br />
+  //       <span>purpose.</span>
+  //     </>
+  //   ),
+  //   description:
+  //     "I believe good digital experiences come from the balance between visual direction, thoughtful interaction, and solid engineering.",
+  // },
+  // {
+  //   number: "03",
+  //   label: "WHAT I DO",
+  //   bg: "bg-green-500",
+  //   title: (
+  //     <>
+  //       Turning ideas <br />
+  //       into <br />
+  //       <span>interfaces.</span>
+  //     </>
+  //   ),
+  //   description:
+  //     "From responsive websites to interactive experiences, I build products that are clear, engaging, and built to perform.",
+  // },
+  // {
+  //   number: "04",
+  //   label: "HOW I WORK",
+  //   bg: "bg-purple-500",
+  //   title: (
+  //     <>
+  //       Think. <br />
+  //       Build. <br />
+  //       <span>Refine.</span>
+  //     </>
+  //   ),
+  //   description:
+  //     "I start by understanding the problem, build with intention, then refine the details until the experience feels right.",
+  // },
+  {
+    number: "05",
+    label: "THE GOAL",
+    bg: "bg-yellow-500",
+    title: (
+      <>
+        Code into motion. <br />
+        Ideas into <br />
+        <span>systems.</span>
+      </>
+    ),
+    description:
+      "The goal is simple: create digital work that looks considered, feels natural, and leaves a lasting impression.",
+  },
+];
+
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
+  const panelsRef = useRef<HTMLDivElement[]>([]);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -15,104 +88,116 @@ export default function About() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      /* --------------------------------
-         HERO TEXT REVEAL
-      -------------------------------- */
+      const originalPanels = panelsRef.current.filter(Boolean);
 
-      gsap.from(".about-hero-label", {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
+      if (!originalPanels.length) return;
 
-        scrollTrigger: {
-          trigger: ".about-hero",
-          start: "top 75%",
-          once: true,
-        },
+      /*
+       * ------------------------------------------------------
+       * CLONE FIRST PANEL
+       *
+       * Same concept as the GSAP demo:
+       * first panel is duplicated at the end so that
+       * 05 -> 01 can happen seamlessly.
+       * ------------------------------------------------------
+       */
+
+      const allPanels = originalPanels;
+
+      /*
+       * ------------------------------------------------------
+       * PANEL LAYERING
+       *
+       * Every panel pins at top.
+       *
+       * pinSpacing: false means panels stack on top
+       * of each other instead of creating vertical gaps.
+       * ------------------------------------------------------
+       */
+
+      const triggers: ScrollTrigger[] = [];
+
+      allPanels.forEach((panel) => {
+        const trigger = ScrollTrigger.create({
+          trigger: panel,
+          start: "top top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
+
+        triggers.push(trigger);
       });
 
-      gsap.from(".about-hero-title", {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        delay: 0.1,
-        ease: "power4.out",
+      /*
+       * ------------------------------------------------------
+       * PANEL ENTER ANIMATION
+       *
+       * Because panels are layered and pinned,
+       * the next panel naturally covers the current one.
+       *
+       * We add a subtle scale to make the transition
+       * feel more cinematic.
+       * ------------------------------------------------------
+       */
 
-        scrollTrigger: {
-          trigger: ".about-hero",
-          start: "top 70%",
-          once: true,
-        },
+      allPanels.forEach((panel, index) => {
+        if (index === 0) return;
+
+        const content = panel.querySelectorAll(".about-content");
+
+        gsap.set(content, {
+          y: 50,
+          opacity: 0,
+        });
+
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top 90%",
+          end: "top top",
+          scrub: true,
+
+          onUpdate: (self) => {
+            const progress = self.progress;
+
+            gsap.set(content, {
+              y: 50 - progress * 50,
+              opacity: progress,
+            });
+          },
+        });
+      });
+      /*
+       * ------------------------------------------------------
+       * SCROLL WRAPPING
+       * ------------------------------------------------------
+       */
+
+      const handleScroll = () => {
+        const scroll = pageScrollTrigger.scroll();
+
+        if (scroll > maxScroll) {
+          pageScrollTrigger.scroll(1);
+        } else if (scroll < 1) {
+          pageScrollTrigger.scroll(maxScroll - 1);
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, {
+        passive: true,
       });
 
-      /* --------------------------------
-         DESCRIPTION
-      -------------------------------- */
+      /*
+       * ------------------------------------------------------
+       * CLEANUP
+       * ------------------------------------------------------
+       */
 
-      gsap.from(".about-description", {
-        y: 70,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-
-        scrollTrigger: {
-          trigger: ".about-description",
-          start: "top 80%",
-          once: true,
-        },
-      });
-
-      /* --------------------------------
-         INFO BLOCKS
-      -------------------------------- */
-
-      gsap.from(".about-info-item", {
-        y: 50,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: "power3.out",
-
-        scrollTrigger: {
-          trigger: ".about-info",
-          start: "top 80%",
-          once: true,
-        },
-      });
-
-      /* --------------------------------
-         BOTTOM INFO
-      -------------------------------- */
-
-      gsap.from(".about-bottom", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-
-        scrollTrigger: {
-          trigger: ".about-bottom",
-          start: "top 85%",
-          once: true,
-        },
-      });
-
-      /* --------------------------------
-         SUBTLE HERO PARALLAX
-      -------------------------------- */
-
-      gsap.to(".about-hero-title", {
-        y: -70,
-        ease: "none",
-
-        scrollTrigger: {
-          trigger: ".about-hero",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
+      return () => {
+        triggers.forEach((trigger) => {
+          trigger.kill();
+        });
+      };
     }, section);
 
     return () => ctx.revert();
@@ -122,99 +207,157 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative overflow-hidden bg-[#0a0a0a] px-6 py-24 text-white sm:px-10 lg:px-16"
+      className="relative w-full overflow-hidden text-black"
     >
-      <div className="mx-auto max-w-7xl">
-        {/* HEADER */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-6">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">
-            About / 01
+      {/* ------------------------------------------------ */}
+      {/* HEADER */}
+      {/* ------------------------------------------------ */}
+
+      <div className="fixed left-0 right-0 top-0 z-[200] px-6 py-6 sm:px-10 lg:px-16">
+        <div className="flex items-center justify-between border-b border-black/10 pb-5 mix-blend-difference">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white">
+            About
           </p>
 
-          <span className="font-mono text-xs text-white/30">2026</span>
-        </div>
-
-        {/* HERO */}
-        <div className="about-hero mt-20">
-          <p className="about-hero-label mb-8 text-sm uppercase tracking-[0.25em] text-white/40">
-            Creative Developer
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
+            Selected / 2026
           </p>
-
-          <div className="overflow-hidden">
-            <h2 className="about-hero-title text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-[8rem]">
-              I build digital
-              <br />
-              experiences that
-              <br />
-              <span className="text-white/30">feel alive.</span>
-            </h2>
-          </div>
         </div>
+      </div>
 
-        {/* DESCRIPTION */}
-        <div className="about-description mt-24 grid gap-12 border-t border-white/10 pt-10 lg:grid-cols-[1fr_2fr]">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/30">
-              A little about me
-            </p>
-          </div>
+      {/* ------------------------------------------------ */}
+      {/* PANELS */}
+      {/* ------------------------------------------------ */}
 
-          <div className="max-w-3xl">
-            <p className="text-xl leading-relaxed text-white/70 sm:text-2xl">
-              I&apos;m a developer focused on creating modern web experiences
-              that combine thoughtful design, clean engineering, and meaningful
-              interaction.
-            </p>
+      <div>
+        {panels.map((panel, index) => (
+          <article
+            key={panel.number}
+            ref={(element) => {
+              if (element) {
+                panelsRef.current[index] = element;
+              }
+            }}
+            className={`relative h-screen w-full overflow-hidden ${panel.bg}`}
+          >
+            {/* ------------------------------------------ */}
+            {/* NUMBER */}
+            {/* ------------------------------------------ */}
 
-            <p className="mt-8 text-base leading-7 text-white/40">
-              From responsive interfaces to interactive digital experiences, I
-              enjoy turning ideas into products that are simple to use, visually
-              engaging, and built to last.
-            </p>
-          </div>
-        </div>
+            <div className="absolute bottom-8 left-6 z-50 sm:left-10 lg:left-16">
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
+                {panel.number} / {String(panels.length).padStart(2, "0")}
+              </p>
+            </div>
 
-        {/* INFO */}
-        <div className="about-info mt-24 grid border-t border-white/10 sm:grid-cols-3">
-          {/* ROLE */}
-          <div className="about-info-item border-b border-white/10 py-8 sm:border-b-0 sm:border-r sm:pr-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
-              Role
-            </p>
+            {/* ------------------------------------------ */}
+            {/* PANEL 01 */}
+            {/* ------------------------------------------ */}
 
-            <p className="mt-4 text-lg text-white/80">Full-Stack Developer</p>
-          </div>
+            {index === 0 ? (
+              <div className="grid h-full grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
+                {/* TEXT */}
 
-          {/* FOCUS */}
-          <div className="about-info-item border-b border-white/10 py-8 sm:border-b-0 sm:border-r sm:px-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
-              Focus
-            </p>
+                <div className="flex h-full items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16">
+                  <div className="max-w-5xl">
+                    <p className="about-content mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
+                      {panel.label}
+                    </p>
 
-            <p className="mt-4 text-lg text-white/80">Web &amp; Interactive</p>
-          </div>
+                    <h2 className="about-content text-5xl font-semibold leading-[0.9] tracking-[-0.065em] text-black sm:text-7xl lg:text-[7.3rem]">
+                      {panel.title}
+                    </h2>
 
-          {/* STACK */}
-          <div className="about-info-item py-8 sm:pl-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
-              Stack
-            </p>
+                    <p className="about-content mt-10 max-w-xl text-base leading-7 text-black/50 sm:text-lg">
+                      {panel.description}
+                    </p>
+                  </div>
+                </div>
 
-            <p className="mt-4 text-lg text-white/80">
-              React · Next.js · TypeScript
-            </p>
-          </div>
-        </div>
+                {/* IMAGE */}
 
-        {/* BOTTOM */}
-        <div className="about-bottom mt-24 flex flex-col justify-between gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
-            Based in the Philippines
-          </p>
+                <div className="relative hidden h-full overflow-hidden lg:block">
+                  <div className="absolute inset-8 overflow-hidden bg-black/10">
+                    <img
+                      src="/images/about.jpg"
+                      alt="About"
+                      className="h-full w-full object-cover grayscale"
+                    />
 
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
-            Available for selected projects
-          </p>
+                    <div className="absolute inset-0 bg-black/10" />
+
+                    <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.3em]">
+                        Visual / 01
+                      </p>
+
+                      <p className="font-mono text-[9px] opacity-60">2026</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* ------------------------------------------ */
+              /* PANELS 02 - 05 */
+              /* ------------------------------------------ */
+
+              <div className="flex h-full items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16">
+                <div className="grid w-full gap-16 lg:grid-cols-[0.25fr_1fr]">
+                  {/* SIDE */}
+
+                  <div className="about-content hidden lg:block">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
+                      About / {panel.number}
+                    </p>
+
+                    <div className="mt-8 h-px w-20 bg-black/20" />
+
+                    <p className="mt-6 max-w-[180px] text-xs leading-5 text-black/40">
+                      A closer look at how I approach digital work.
+                    </p>
+                  </div>
+
+                  {/* MAIN */}
+
+                  <div className="max-w-7xl">
+                    <p className="about-content mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
+                      {panel.label}
+                    </p>
+
+                    <h2 className="about-content text-6xl font-semibold leading-[0.88] tracking-[-0.065em] text-black sm:text-8xl lg:text-[9rem]">
+                      {panel.title}
+                    </h2>
+
+                    <div className="about-content mt-14 flex max-w-4xl flex-col gap-10 border-t border-black/15 pt-8 sm:flex-row sm:items-start sm:justify-between">
+                      <p className="max-w-xl text-base leading-7 text-black/50 sm:text-lg">
+                        {panel.description}
+                      </p>
+
+                      <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40">
+                        Scroll to explore
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+
+      {/* ------------------------------------------------ */}
+      {/* SCROLL INDICATOR */}
+      {/* ------------------------------------------------ */}
+
+      <div className="fixed bottom-8 right-6 z-[200] mix-blend-difference sm:right-10 lg:right-16">
+        <div className="flex items-center gap-4 text-white">
+          <span className="font-mono text-[9px] uppercase tracking-[0.25em]">
+            Scroll
+          </span>
+
+          <div className="h-px w-16 bg-white/30 sm:w-24" />
+
+          <span className="font-mono text-[12px]">↓</span>
         </div>
       </div>
     </section>
