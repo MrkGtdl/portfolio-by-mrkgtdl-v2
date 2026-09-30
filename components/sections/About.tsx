@@ -52,18 +52,13 @@ export default function About() {
 
       if (!allPanels.length) return;
 
+      const triggers: ScrollTrigger[] = [];
+
       /*
        * ------------------------------------------------------
        * PANEL LAYERING
-       *
-       * Every panel pins at the top.
-       *
-       * pinSpacing: false keeps the panels layered
-       * so the next panel overlaps the current panel.
        * ------------------------------------------------------
        */
-
-      const triggers: ScrollTrigger[] = [];
 
       allPanels.forEach((panel) => {
         const trigger = ScrollTrigger.create({
@@ -80,9 +75,6 @@ export default function About() {
       /*
        * ------------------------------------------------------
        * PANEL ENTER ANIMATION
-       *
-       * No scale / zoom effect.
-       * Only the content fades and moves into place.
        * ------------------------------------------------------
        */
 
@@ -114,12 +106,6 @@ export default function About() {
 
         triggers.push(contentTrigger);
       });
-
-      /*
-       * ------------------------------------------------------
-       * CLEANUP
-       * ------------------------------------------------------
-       */
 
       return () => {
         triggers.forEach((trigger) => {
@@ -201,13 +187,13 @@ export default function About() {
                 {/* LANYARD */}
 
                 <div className="relative hidden h-full overflow-hidden lg:block">
-                  <div className="absolute inset-8 overflow-hidden">
+                  <div className="absolute inset-8 -translate-y-10 overflow-hidden">
                     <Lanyard
-                      position={[0, 0, 30]}
+                      position={[0, 0, 15]}
                       gravity={[0, -40, 0]}
                       fov={20}
                       transparent
-                      lanyardWidth={1}
+                      lanyardWidth={2}
                     />
                   </div>
                 </div>

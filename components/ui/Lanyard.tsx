@@ -20,7 +20,7 @@ import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
 // replace with your own imports, see the usage snippet for details
 const cardGLB = "/assets/lanyard/card.glb";
-const lanyard = "/assets/lanyard/lanyard.png";
+const lanyard = "/assets/lanyard/logo.jpeg";
 
 import * as THREE from "three";
 import "./Lanyard.css";
