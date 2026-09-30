@@ -7,6 +7,7 @@ import {
   useTexture,
   Environment,
   Lightformer,
+  Text,
 } from "@react-three/drei";
 import {
   BallCollider,
@@ -49,6 +50,8 @@ export default function Lanyard({
   imageFit = "cover",
   lanyardImage = null,
   lanyardWidth = 1,
+  cardName = "KENNETH",
+  cardRole = "FULL-STACK DEVELOPER",
 }) {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768,
@@ -79,6 +82,8 @@ export default function Lanyard({
             imageFit={imageFit}
             lanyardImage={lanyardImage}
             lanyardWidth={lanyardWidth}
+            cardName={cardName}
+            cardRole={cardRole}
           />
         </Physics>
         <Environment blur={0.75}>
@@ -124,6 +129,8 @@ function Band({
   imageFit = "cover",
   lanyardImage = null,
   lanyardWidth = 1,
+  cardName = "KENNETH",
+  cardRole = "FULL-STACK DEVELOPER",
 }) {
   const band = useRef(),
     fixed = useRef(),

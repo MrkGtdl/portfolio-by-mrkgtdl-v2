@@ -89,7 +89,7 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden bg-[#0a0a0a] text-white md:h-screen"
+      className="relative overflow-hidden bg-transparent text-white md:h-screen"
     >
       {/* SECTION HEADER */}
       <div className="absolute left-5 right-5 top-6 z-20 flex items-center justify-between sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-16 lg:right-16">

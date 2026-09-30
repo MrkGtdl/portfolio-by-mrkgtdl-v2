@@ -1,265 +1,168 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight, Code2, Layers3, Sparkles } from "lucide-react";
 import Lanyard from "@/components/ui/Lanyard";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const panels = [
-  {
-    number: "01",
-    label: "ABOUT ME",
-    bg: "bg-red-500",
-    title: (
-      <>
-        I build digital <br />
-        experiences that <br />
-        <span>feel alive.</span>
-      </>
-    ),
-    description:
-      "I combine design, code, and interaction to create modern digital experiences that feel intentional from the first interaction to the last.",
-  },
-  {
-    number: "05",
-    label: "THE GOAL",
-    bg: "bg-yellow-500",
-    title: (
-      <>
-        Code into motion. <br />
-        Ideas into <br />
-        <span>systems.</span>
-      </>
-    ),
-    description:
-      "The goal is simple: create digital work that looks considered, feels natural, and leaves a lasting impression.",
-  },
-];
-
 export default function About() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const panelsRef = useRef<HTMLDivElement[]>([]);
-
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      const allPanels = panelsRef.current.filter(Boolean);
-
-      if (!allPanels.length) return;
-
-      const triggers: ScrollTrigger[] = [];
-
-      /*
-       * ------------------------------------------------------
-       * PANEL LAYERING
-       * ------------------------------------------------------
-       */
-
-      allPanels.forEach((panel) => {
-        const trigger = ScrollTrigger.create({
-          trigger: panel,
-          start: "top top",
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-        });
-
-        triggers.push(trigger);
-      });
-
-      /*
-       * ------------------------------------------------------
-       * PANEL ENTER ANIMATION
-       * ------------------------------------------------------
-       */
-
-      allPanels.forEach((panel, index) => {
-        if (index === 0) return;
-
-        const content = panel.querySelectorAll(".about-content");
-
-        gsap.set(content, {
-          y: 50,
-          opacity: 0,
-        });
-
-        const contentTrigger = ScrollTrigger.create({
-          trigger: panel,
-          start: "top 90%",
-          end: "top top",
-          scrub: true,
-
-          onUpdate: (self) => {
-            const progress = self.progress;
-
-            gsap.set(content, {
-              y: 50 - progress * 50,
-              opacity: progress,
-            });
-          },
-        });
-
-        triggers.push(contentTrigger);
-      });
-
-      return () => {
-        triggers.forEach((trigger) => {
-          trigger.kill();
-        });
-      };
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="about"
-      className="relative w-full overflow-hidden text-black"
+      className="relative min-h-screen overflow-hidden bg-transparent px-5 py-20 text-white sm:px-6 sm:py-24 md:px-12 lg:px-20"
     >
-      {/* ------------------------------------------------ */}
-      {/* HEADER */}
-      {/* ------------------------------------------------ */}
-
-      <div className="fixed left-0 right-0 top-0 z-[200] px-6 py-6 sm:px-10 lg:px-16">
-        <div className="flex items-center justify-between border-b border-black/10 pb-5 mix-blend-difference">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white">
-            About
-          </p>
-
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
-            Selected / 2026
-          </p>
-        </div>
+      {/* Background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-white/[0.025] blur-[100px] sm:h-[400px] sm:w-[400px] lg:h-[500px] lg:w-[500px]" />
       </div>
 
-      {/* ------------------------------------------------ */}
-      {/* PANELS */}
-      {/* ------------------------------------------------ */}
+      <div className="relative mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-14 flex items-end justify-between border-b border-white/10 pb-5 sm:mb-16 md:mb-20 md:pb-6">
+          <div>
+            <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/40 sm:mb-3 sm:text-xs sm:tracking-[0.3em]">
+              01 — About Me
+            </p>
 
-      <div>
-        {panels.map((panel, index) => (
-          <article
-            key={panel.number}
-            ref={(element) => {
-              if (element) {
-                panelsRef.current[index] = element;
-              }
-            }}
-            className={`relative h-screen w-full overflow-hidden ${panel.bg}`}
-          >
-            {/* NUMBER */}
+            <h2 className="text-4xl font-medium tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+              Who I am
+            </h2>
+          </div>
 
-            <div className="absolute bottom-8 left-6 z-50 sm:left-10 lg:left-16">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
-                {panel.number} / {String(panels.length).padStart(2, "0")}
+          <span className="hidden text-sm text-white/30 sm:block">/ 2026</span>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
+          {/* LEFT */}
+          <div>
+            <p className="max-w-3xl text-2xl font-light leading-[1.2] tracking-tight text-white/90 sm:text-3xl md:text-4xl lg:text-5xl">
+              I build digital experiences that combine{" "}
+              <span className="text-white/40">
+                thoughtful design, clean code,
+              </span>{" "}
+              and meaningful functionality.
+            </p>
+
+            <div className="mt-9 max-w-2xl space-y-5 text-sm leading-6 text-white/50 sm:mt-12 sm:space-y-6 sm:text-base sm:leading-7">
+              <p>
+                I’m a full-stack web developer focused on building modern,
+                responsive, and scalable web applications.
+              </p>
+
+              <p>
+                I enjoy turning ideas into functional digital products—from
+                polished interfaces and interactive experiences to reliable
+                backend systems.
+              </p>
+
+              <p>
+                My goal is simple: create websites and applications that look
+                refined, feel intuitive, and work the way they should.
               </p>
             </div>
 
-            {/* PANEL 01 */}
+            {/* CTA */}
+            <div className="mt-8 sm:mt-10">
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-white px-5 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-white/90 sm:px-6"
+              >
+                Let’s work together
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
+              </a>
+            </div>
+          </div>
 
-            {index === 0 ? (
-              <div className="grid h-full grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
-                {/* TEXT */}
+          {/* RIGHT */}
+          <div className="relative">
+            {/* Lanyard - Desktop / Large Tablet Only */}
+            <div className="relative hidden w-full -translate-y-20 overflow-visible lg:block">
+              <Lanyard
+                position={[0, 0, 15]}
+                gravity={[0, -40, 0]}
+                frontImage="/id2.jpeg"
+                backImage="/icon.png"
+                imageFit="cover"
+                lanyardWidth={3}
+              />
+            </div>
 
-                <div className="flex h-full items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16">
-                  <div className="max-w-5xl">
-                    <p className="about-content mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
-                      {panel.label}
-                    </p>
+            {/* Info Cards */}
+            <div className="flex flex-col gap-3 sm:gap-4 lg:mt-4">
+              <InfoCard
+                icon={<Code2 size={20} />}
+                number="01"
+                title="Development"
+                description="Building responsive and scalable web applications with modern technologies."
+              />
 
-                    <h2 className="about-content text-5xl font-semibold leading-[0.9] tracking-[-0.065em] text-black sm:text-7xl lg:text-[7.3rem]">
-                      {panel.title}
-                    </h2>
+              <InfoCard
+                icon={<Layers3 size={20} />}
+                number="02"
+                title="Full-Stack"
+                description="Working across frontend, backend, databases, and the systems that connect them."
+              />
 
-                    <p className="about-content mt-10 max-w-xl text-base leading-7 text-black/50 sm:text-lg">
-                      {panel.description}
-                    </p>
-                  </div>
-                </div>
+              <InfoCard
+                icon={<Sparkles size={20} />}
+                number="03"
+                title="Experience"
+                description="Creating interfaces that are clean, purposeful, and enjoyable to use."
+              />
 
-                {/* LANYARD */}
-
-                <div className="relative hidden h-full overflow-hidden lg:block">
-                  <div className="absolute inset-8 -translate-y-10 overflow-hidden">
-                    <Lanyard
-                      position={[0, 0, 15]}
-                      gravity={[0, -40, 0]}
-                      fov={20}
-                      transparent
-                      lanyardWidth={2}
-                    />
-                  </div>
-                </div>
+              {/* Stats */}
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4">
+                <Stat value="4+" label="Years Learning" />
+                <Stat value="10+" label="Projects Built" />
               </div>
-            ) : (
-              /* PANELS 02 - 05 */
-
-              <div className="flex h-full items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16">
-                <div className="grid w-full gap-16 lg:grid-cols-[0.25fr_1fr]">
-                  {/* SIDE */}
-
-                  <div className="about-content hidden lg:block">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
-                      About / {panel.number}
-                    </p>
-
-                    <div className="mt-8 h-px w-20 bg-black/20" />
-
-                    <p className="mt-6 max-w-[180px] text-xs leading-5 text-black/40">
-                      A closer look at how I approach digital work.
-                    </p>
-                  </div>
-
-                  {/* MAIN */}
-
-                  <div className="max-w-7xl">
-                    <p className="about-content mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-black/50">
-                      {panel.label}
-                    </p>
-
-                    <h2 className="about-content text-6xl font-semibold leading-[0.88] tracking-[-0.065em] text-black sm:text-8xl lg:text-[9rem]">
-                      {panel.title}
-                    </h2>
-
-                    <div className="about-content mt-14 flex max-w-4xl flex-col gap-10 border-t border-black/15 pt-8 sm:flex-row sm:items-start sm:justify-between">
-                      <p className="max-w-xl text-base leading-7 text-black/50 sm:text-lg">
-                        {panel.description}
-                      </p>
-
-                      <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40">
-                        Scroll to explore
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
-
-      {/* ------------------------------------------------ */}
-      {/* SCROLL INDICATOR */}
-      {/* ------------------------------------------------ */}
-
-      <div className="fixed bottom-8 right-6 z-[200] mix-blend-difference sm:right-10 lg:right-16">
-        <div className="flex items-center gap-4 text-white">
-          <span className="font-mono text-[9px] uppercase tracking-[0.25em]">
-            Scroll
-          </span>
-
-          <div className="h-px w-16 bg-white/30 sm:w-24" />
-
-          <span className="font-mono text-[12px]">↓</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function InfoCard({
+  icon,
+  number,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  number: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="group rounded-2xl border border-white/10 bg-white/[0.025] p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.045] sm:p-6">
+      <div className="mb-6 flex items-center justify-between sm:mb-8">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 sm:h-10 sm:w-10">
+          {icon}
+        </div>
+
+        <span className="text-xs text-white/25">{number}</span>
+      </div>
+
+      <h3 className="mb-2 text-base font-medium sm:text-lg">{title}</h3>
+
+      <p className="text-sm leading-6 text-white/40">{description}</p>
+    </div>
+  );
+}
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+      <div className="text-2xl font-medium tracking-tight sm:text-3xl">
+        {value}
+      </div>
+
+      <div className="mt-2 text-[10px] uppercase tracking-[0.12em] text-white/30 sm:text-xs sm:tracking-[0.15em]">
+        {label}
+      </div>
+    </div>
   );
 }
