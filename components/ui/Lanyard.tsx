@@ -214,6 +214,10 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
+  // Scroll-driven swing
+  const scrollVelocity = useRef(0);
+  const scrollImpulse = useRef(0);
+
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
@@ -229,8 +233,99 @@ function Band({
     }
   }, [hovered, dragged]);
 
+  useEffect(() => {
+    const handleWheel = (event) => {
+      // Ignore extremely tiny wheel movement
+      if (Math.abs(event.deltaY) < 0.5) return;
+
+      // Convert scroll into a smooth impulse.
+      // Positive = scroll down
+      // Negative = scroll up
+      const strength = THREE.MathUtils.clamp(
+        event.deltaY * 0.0012,
+        -0.12,
+        0.12,
+      );
+
+      scrollImpulse.current += strength;
+
+      // Prevent accumulated impulses from becoming too strong
+      scrollImpulse.current = THREE.MathUtils.clamp(
+        scrollImpulse.current,
+        -0.8,
+        0.8,
+      );
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
   useFrame((state, delta) => {
     if (dragged) {
+      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+      dir.copy(vec).sub(state.camera.position).normalize();
+      vec.add(dir.multiplyScalar(state.camera.position.length()));
+      [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
+
+      card.current?.setNextKinematicTranslation({
+        x: vec.x - dragged.x,
+        y: vec.y - dragged.y,
+        z: vec.z - dragged.z,
+      });
+    }
+
+    // -----------------------------------------
+    // SCROLL → LANYARD SWING
+    // -----------------------------------------
+    if (card.current && !dragged) {
+      // Smooth the incoming wheel impulse
+      scrollVelocity.current = THREE.MathUtils.lerp(
+        scrollVelocity.current,
+        scrollImpulse.current,
+        1 - Math.pow(0.001, delta),
+      );
+
+      // Slowly consume the impulse
+      scrollImpulse.current = THREE.MathUtils.lerp(
+        scrollImpulse.current,
+        0,
+        1 - Math.pow(0.02, delta),
+      );
+
+      if (Math.abs(scrollVelocity.current) > 0.0001) {
+        card.current.wakeUp();
+
+        // Push the card around its vertical axis.
+        // This uses Rapier physics, so the rope still behaves naturally.
+        const torque = THREE.MathUtils.clamp(
+          scrollVelocity.current * 0.008,
+          -0.005,
+          0.005,
+        );
+
+        card.current.applyTorqueImpulse({
+          x: 0,
+          y: -torque,
+          z: 0,
+        });
+
+        card.current.applyImpulse({
+          x: THREE.MathUtils.clamp(
+            scrollVelocity.current * 0.025,
+            -0.025,
+            0.025,
+          ),
+          y: 0,
+          z: 0,
+        });
+      }
+    }
+
+    if (fixed.current) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
