@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/common/Logo";
 
 const navItems = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
@@ -13,13 +12,78 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show navbar at the top
+      if (currentScrollY <= 20) {
+        setShowNavbar(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // Don't hide navbar while mobile menu is open
+      if (menuOpen) {
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // Scrolling down → hide
+      if (currentScrollY > lastScrollY) {
+        setShowNavbar(false);
+      }
+
+      // Scrolling up → show
+      if (currentScrollY < lastScrollY) {
+        setShowNavbar(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 w-full">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 w-full transition-transform duration-500 ease-out ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <nav className="w-full border-b border-black/10 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 w-full items-center justify-between px-5 sm:px-8 lg:px-10">
           {/* Logo */}
-          <Logo />
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label="Go to home"
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }
+            }}
+            className="cursor-pointer"
+          >
+            <Logo />
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 md:flex">
@@ -49,7 +113,10 @@ export default function Navbar() {
             type="button"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => {
+              setMenuOpen((open) => !open);
+              setShowNavbar(true);
+            }}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 md:hidden"
           >
             <span className="relative block h-4 w-5">
