@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative min-h-screen overflow-hidden bg-transparent px-5 py-20 text-white sm:px-6 sm:py-24 md:px-12 lg:px-20"
+      className="relative min-h-screen overflow-visible bg-transparent px-5 py-20 text-white sm:px-6 sm:py-24 md:px-12 lg:px-20"
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
@@ -31,10 +31,10 @@ export default function About() {
         </div>
 
         {/* Main Content */}
-        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-          {/* LEFT */}
-          <div>
-            <p className="max-w-3xl text-2xl font-light leading-[1.2] tracking-tight text-white/90 sm:text-3xl md:text-4xl lg:text-5xl">
+        <div className="relative">
+          {/* Main Content */}
+          <div className="relative z-10 max-w-3xl">
+            <p className="text-2xl font-light leading-[1.2] tracking-tight text-white/90 sm:text-3xl md:text-4xl lg:text-5xl">
               I build digital experiences that combine{" "}
               <span className="text-white/40">
                 thoughtful design, clean code,
@@ -75,48 +75,45 @@ export default function About() {
             </div>
           </div>
 
-          {/* RIGHT */}
-          <div className="relative">
-            {/* Lanyard - Desktop / Large Tablet Only */}
-            <div className="relative hidden w-full -translate-y-20 overflow-visible lg:block">
-              <Lanyard
-                position={[0, 0, 15]}
-                gravity={[0, -40, 0]}
-                frontImage="/id2.jpeg"
-                backImage="/icon.png"
-                imageFit="cover"
-                lanyardWidth={3}
-              />
-            </div>
+          {/* Lanyard */}
+          <div className="pointer-events-none left-80 absolute top-[-80px] z-30 hidden h-[700px] w-full lg:block">
+            <Lanyard
+              position={[0, 0, 15]}
+              gravity={[0, -40, 0]}
+              frontImage="/id2.jpeg"
+              backImage="/icon.png"
+              imageFit="cover"
+              lanyardWidth={2}
+            />
+          </div>
 
-            {/* Info Cards */}
-            <div className="flex flex-col gap-3 sm:gap-4 lg:mt-4">
-              <InfoCard
-                icon={<Code2 size={20} />}
-                number="01"
-                title="Development"
-                description="Building responsive and scalable web applications with modern technologies."
-              />
+          {/* Info Cards */}
+          <div className="relative z-20 mt-16 max-w-xl space-y-4 lg:ml-auto lg:mt-[-120px]">
+            <InfoCard
+              icon={<Code2 size={20} />}
+              number="01"
+              title="Development"
+              description="Building responsive and scalable web applications with modern technologies."
+            />
 
-              <InfoCard
-                icon={<Layers3 size={20} />}
-                number="02"
-                title="Full-Stack"
-                description="Working across frontend, backend, databases, and the systems that connect them."
-              />
+            <InfoCard
+              icon={<Layers3 size={20} />}
+              number="02"
+              title="Full-Stack"
+              description="Working across frontend, backend, databases, and the systems that connect them."
+            />
 
-              <InfoCard
-                icon={<Sparkles size={20} />}
-                number="03"
-                title="Experience"
-                description="Creating interfaces that are clean, purposeful, and enjoyable to use."
-              />
+            <InfoCard
+              icon={<Sparkles size={20} />}
+              number="03"
+              title="Experience"
+              description="Creating interfaces that are clean, purposeful, and enjoyable to use."
+            />
 
-              {/* Stats */}
-              <div className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4">
-                <Stat value="4+" label="Years Learning" />
-                <Stat value="10+" label="Projects Built" />
-              </div>
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <Stat value="4+" label="Years Learning" />
+              <Stat value="10+" label="Projects Built" />
             </div>
           </div>
         </div>
