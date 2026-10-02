@@ -76,7 +76,7 @@ export default function About() {
           </div>
 
           {/* Lanyard */}
-          <div className="pointer-events-none left-80 absolute top-[-80px] z-30 hidden h-[700px] w-full lg:block">
+          <div className="pointer-events-none left-80 right-[-80px] absolute top-[-80px] z-30 hidden h-[700px] w-full lg:block">
             <Lanyard
               position={[0, 0, 15]}
               gravity={[0, -40, 0]}
