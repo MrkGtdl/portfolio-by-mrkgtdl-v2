@@ -1,9 +1,10 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,76 +12,191 @@ const projects = [
   {
     number: "01",
     title: "NEXORA",
-    slug: "nexora",
     category: "Web Experience",
+    year: "2026",
+    description:
+      "A modern digital experience built around clear communication, responsive layouts, and polished interaction.",
+    stack: ["Next.js", "TypeScript", "GSAP"],
+    variant: "nexora",
   },
   {
     number: "02",
     title: "SMILECARE",
-    slug: "smilecare",
     category: "Healthcare",
+    year: "2026",
+    description:
+      "A clean healthcare website designed to make information easy to find while creating a trustworthy digital experience.",
+    stack: ["WordPress", "Gutenberg", "UI/UX"],
+    variant: "smilecare",
   },
   {
     number: "03",
     title: "NOVATECH",
-    slug: "novatech",
     category: "Technology",
-  },
-  {
-    number: "04",
-    title: "VELORA",
-    slug: "velora",
-    category: "Digital Product",
-  },
-  {
-    number: "05",
-    title: "VIEW ALL",
-    category: "Explore",
-    isViewAll: true,
+    year: "2026",
+    description:
+      "A structured technology website combining strong content hierarchy with a modern responsive interface.",
+    stack: ["WordPress", "GenerateBlocks", "CSS"],
+    variant: "novatech",
   },
 ];
 
+function ProjectPreview({ variant }: { variant: string }) {
+  if (variant === "smilecare") {
+    return (
+      <div className="absolute inset-0 bg-[#e9e9e6] p-3 text-black sm:p-4">
+        <div className="h-full overflow-hidden rounded-md bg-[#f7f7f5] shadow-xl">
+          <div className="flex h-6 items-center justify-between border-b border-black/10 px-3">
+            <div className="h-1.5 w-10 rounded-full bg-black/70" />
+
+            <div className="hidden gap-2 sm:flex">
+              <span className="h-1 w-5 rounded-full bg-black/15" />
+              <span className="h-1 w-5 rounded-full bg-black/15" />
+              <span className="h-1 w-5 rounded-full bg-black/15" />
+            </div>
+          </div>
+
+          <div className="grid h-[calc(100%-24px)] grid-cols-2">
+            <div className="flex flex-col justify-center p-4">
+              <div className="mb-2 h-1 w-8 rounded-full bg-black/20" />
+              <div className="h-3 w-4/5 rounded bg-black sm:h-4" />
+              <div className="mt-1.5 h-3 w-3/5 rounded bg-black sm:h-4" />
+              <div className="mt-3 h-4 w-12 rounded-full bg-black sm:h-5 sm:w-14" />
+            </div>
+
+            <div className="flex items-center justify-center">
+              <div className="h-12 w-12 rounded-full bg-black/[0.06] sm:h-16 sm:w-16" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "novatech") {
+    return (
+      <div className="absolute inset-0 bg-[#0d0d0d] p-3 sm:p-4">
+        <div className="h-full overflow-hidden rounded-md border border-white/10 bg-[#111111]">
+          <div className="flex h-6 items-center gap-1.5 border-b border-white/10 px-3">
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+          </div>
+
+          <div className="grid h-[calc(100%-24px)] grid-cols-[0.3fr_1fr]">
+            <div className="border-r border-white/10 p-2.5">
+              <div className="mb-3 h-1 w-7 rounded-full bg-white/30" />
+
+              <div className="space-y-1.5">
+                <div className="h-1 w-full rounded bg-white/10" />
+                <div className="h-1 w-4/5 rounded bg-white/10" />
+                <div className="h-1 w-3/4 rounded bg-white/10" />
+                <div className="h-1 w-full rounded bg-white/10" />
+              </div>
+            </div>
+
+            <div className="p-3">
+              <div className="h-1.5 w-14 rounded bg-white/20" />
+
+              <div className="mt-3 grid grid-cols-3 gap-1.5">
+                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
+                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
+                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
+              </div>
+
+              <div className="mt-1.5 h-10 rounded border border-white/10 bg-white/[0.02]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 bg-[#111111] p-3 sm:p-4">
+      <div className="h-full overflow-hidden rounded-md border border-white/10 bg-[#151515]">
+        <div className="flex h-6 items-center justify-between border-b border-white/10 px-3">
+          <div className="h-1.5 w-9 rounded-full bg-white/30" />
+
+          <div className="hidden gap-2 sm:flex">
+            <span className="h-1 w-5 rounded-full bg-white/10" />
+            <span className="h-1 w-5 rounded-full bg-white/10" />
+            <span className="h-1 w-5 rounded-full bg-white/10" />
+          </div>
+        </div>
+
+        <div className="flex h-[calc(100%-24px)] flex-col justify-center p-3 sm:p-4">
+          <div className="h-1 w-8 rounded-full bg-white/20" />
+
+          <div className="mt-2.5 h-4 w-3/4 rounded bg-white/80 sm:h-5" />
+
+          <div className="mt-1.5 h-4 w-1/2 rounded bg-white/20 sm:h-5" />
+
+          <div className="mt-3 grid grid-cols-3 gap-1.5">
+            <div className="h-7 rounded bg-white/[0.035]" />
+            <div className="h-7 rounded bg-white/[0.035]" />
+            <div className="h-7 rounded bg-white/[0.035]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-
-    if (!section || !track) return;
-
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      // DESKTOP / TABLET
-      mm.add("(min-width: 768px)", () => {
-        const updateScroll = () => {
-          const totalWidth = track.scrollWidth - window.innerWidth;
-
-          return Math.max(totalWidth, 0);
-        };
-
-        gsap.to(track, {
-          x: () => -updateScroll(),
-          ease: "none",
-
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${updateScroll()}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
+      gsap.from(".projects-eyebrow", {
+        y: 18,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 82%",
+          once: true,
+        },
       });
 
-      return () => {
-        mm.revert();
-      };
-    }, section);
+      gsap.from(".projects-title", {
+        y: 45,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 78%",
+          once: true,
+        },
+      });
+
+      gsap.from(".project-row", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".project-list",
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      gsap.from(".projects-footer", {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".projects-footer",
+          start: "top 88%",
+          once: true,
+        },
+      });
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
@@ -89,276 +205,138 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden bg-transparent text-white md:h-screen"
+      className="relative overflow-hidden bg-transparent px-5 py-24 text-white sm:px-6 sm:py-32 lg:px-10 lg:py-36"
     >
-      {/* SECTION HEADER */}
-      <div className="absolute left-5 right-5 top-6 z-20 flex items-center justify-between sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-16 lg:right-16">
-        <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
-          Selected Projects
+      <div className="mx-auto max-w-6xl">
+        {/* HEADER */}
+        <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-white/10 pb-5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+            Selected Work
+          </span>
+
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+            03 Projects
+          </span>
+        </div>
+
+        <div className="overflow-hidden">
+          <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-white sm:text-[13vw] lg:text-[10vw]">
+            PROJECTS
+          </h2>
+        </div>
+
+        <p className="mt-7 max-w-xl text-sm leading-6 text-white/40 sm:text-base sm:leading-7">
+          A selection of websites and digital experiences built with a focus on
+          clean interfaces, responsive development, and thoughtful interaction.
         </p>
 
-        <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
-          <span className="md:hidden">Swipe →</span>
-          <span className="hidden md:inline">Scroll →</span>
-        </p>
-      </div>
-
-      {/* PROJECT TRACK */}
-      <div
-        ref={trackRef}
-        className="
-          flex
-          flex-col
-          items-center
-          gap-5
-          px-5
-          pb-20
-          pt-24
-          md:h-screen
-          md:w-max
-          md:flex-row
-          md:items-center
-          md:gap-8
-          md:px-[5vw]
-          md:pb-0
-          md:pt-0
-        "
-      >
-        {projects.map((project) => {
-          const isViewAll = project.isViewAll;
-
-          const href = isViewAll ? "/projects" : `/projects/${project.slug}`;
-
-          return (
+        {/* PROJECT LIST */}
+        <div className="project-list mt-20 sm:mt-28 lg:mt-32">
+          {projects.map((project) => (
             <Link
               key={project.number}
-              href={href}
-              aria-label={
-                isViewAll
-                  ? "View all projects"
-                  : `View ${project.title} project`
-              }
-              className={`
-                project-panel
-                group
-                relative
-                flex
-                h-[68vh]
-                min-h-[460px]
-                w-full
-                max-w-[520px]
-                shrink-0
-                flex-col
-                overflow-hidden
-                rounded-[1.5rem]
-                border
-                border-white/10
-                outline-none
-                transition-transform
-                duration-500
-                focus-visible:ring-2
-                focus-visible:ring-white/40
-
-                sm:h-[70vh]
-                sm:rounded-[2rem]
-
-                md:h-[80vh]
-                md:w-[86vw]
-                md:max-w-none
-                lg:w-[82vw]
-              `}
-              style={{
-                backgroundColor: isViewAll ? "#ffffff" : "#111111",
-                color: isViewAll ? "#000000" : "#ffffff",
-              }}
+              href={`/projects/${project.title.toLowerCase()}`}
+              className="project-row group relative block border-t border-white/10 py-8 sm:py-10 lg:py-12"
             >
-              {/* CARD BACKGROUND */}
-              <div className="pointer-events-none absolute inset-0">
-                {!isViewAll && (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.035] via-transparent to-transparent" />
-
-                    <div className="absolute -right-32 -top-32 h-[24rem] w-[24rem] rounded-full bg-white/[0.025] blur-3xl transition-transform duration-700 group-hover:scale-110 md:-right-40 md:-top-40 md:h-[32rem] md:w-[32rem]" />
-                  </>
-                )}
-
-                {isViewAll && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-black/[0.04] via-transparent to-black/[0.02]" />
-                )}
-              </div>
-
               {/* TOP META */}
-              <div className="relative z-10 flex items-start justify-between p-5 sm:p-7 md:p-10">
-                <p
-                  className={`font-mono text-[9px] uppercase tracking-[0.25em] sm:text-[10px] sm:tracking-[0.3em] ${
-                    isViewAll ? "text-black/40" : "text-white/35"
-                  }`}
-                >
-                  {project.category}
-                </p>
-
-                <p
-                  className={`font-mono text-[9px] uppercase tracking-[0.25em] sm:text-[10px] sm:tracking-[0.3em] ${
-                    isViewAll ? "text-black/30" : "text-white/30"
-                  }`}
-                >
-                  {project.number}
-                </p>
-              </div>
-
-              {/* MAIN VISUAL */}
-              <div
-                className={`
-                  relative
-                  mx-5
-                  mt-1
-                  flex
-                  flex-1
-                  items-center
-                  justify-center
-                  overflow-hidden
-                  rounded-[1.25rem]
-                  border
-                  sm:mx-7
-                  sm:rounded-[1.5rem]
-                  md:mx-10
-
-                  ${
-                    isViewAll
-                      ? "border-black/10 bg-black/[0.03]"
-                      : "border-white/[0.06] bg-[#181818]"
-                  }
-                `}
-              >
-                {/* LARGE BACKGROUND TEXT */}
-                <span
-                  className={`
-                    select-none
-                    whitespace-nowrap
-                    text-[22vw]
-                    font-semibold
-                    leading-none
-                    tracking-[-0.09em]
-                    transition-transform
-                    duration-700
-                    group-hover:scale-105
-
-                    sm:text-[18vw]
-
-                    md:text-[12vw]
-                    lg:text-[10vw]
-
-                    ${isViewAll ? "text-black/[0.045]" : "text-white/[0.035]"}
-                  `}
-                >
-                  {isViewAll ? "PROJECTS" : project.title}
+              <div className="mb-5 flex items-center justify-between">
+                <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/25">
+                  {project.number} / {project.category}
                 </span>
 
-                {/* CENTER BUTTON */}
-                <div
-                  className={`
-                    absolute
-                    flex
-                    h-20
-                    w-20
-                    items-center
-                    justify-center
-                    rounded-full
-                    border
-                    backdrop-blur-sm
-                    transition-all
-                    duration-500
-                    group-hover:scale-110
+                <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/20">
+                  {project.year}
+                </span>
+              </div>
 
-                    sm:h-24
-                    sm:w-24
+              {/* MAIN ROW */}
+              <div className="relative flex flex-col gap-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+                <div className="min-w-0">
+                  <div className="flex items-start gap-4">
+                    <span className="pt-2 font-mono text-[10px] text-white/20">
+                      {project.number}
+                    </span>
 
-                    ${
-                      isViewAll
-                        ? "border-black/10 bg-black/[0.04]"
-                        : "border-white/10 bg-white/[0.025]"
-                    }
-                  `}
-                >
-                  <span
-                    className={`
-                      font-mono
-                      text-[8px]
-                      uppercase
-                      tracking-[0.18em]
-                      sm:text-[9px]
-                      sm:tracking-[0.2em]
+                    <div>
+                      <h3 className="text-[14vw] font-semibold leading-[0.78] tracking-[-0.08em] transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
+                        {project.title}
+                      </h3>
 
-                      ${isViewAll ? "text-black/50" : "text-white/40"}
-                    `}
-                  >
-                    {isViewAll ? "Open ↗" : "View"}
-                  </span>
+                      <p className="mt-4 max-w-lg text-sm leading-6 text-white/35 transition-colors duration-500 group-hover:text-white/55 sm:text-base">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* STACK */}
+                  <div className="mt-6 flex flex-wrap gap-2 pl-8">
+                    {project.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/30 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/50"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* PREVIEW */}
+                <div className="relative hidden w-[280px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#111111] opacity-50 transition-all duration-500 ease-out group-hover:w-[340px] group-hover:opacity-100 lg:block">
+                  <div className="aspect-[1.45/1]">
+                    <div className="absolute inset-0 scale-[1.03] transition-transform duration-700 ease-out group-hover:scale-100">
+                      <ProjectPreview variant={project.variant} />
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+                </div>
+
+                {/* MOBILE PREVIEW */}
+                <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111111] lg:hidden">
+                  <div className="aspect-[16/8]">
+                    <ProjectPreview variant={project.variant} />
+                  </div>
                 </div>
               </div>
 
-              {/* BOTTOM */}
-              <div className="relative z-10 flex items-end justify-between gap-4 p-5 sm:gap-6 sm:p-7 md:p-10">
-                <div className="min-w-0">
-                  <p
-                    className={`
-                      mb-2
-                      font-mono
-                      text-[8px]
-                      uppercase
-                      tracking-[0.25em]
-                      sm:text-[9px]
-                      sm:tracking-[0.3em]
+              {/* ACTION */}
+              <div className="mt-7 flex items-center justify-between pl-8">
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/25 transition-colors duration-300 group-hover:text-white/60">
+                  View Case Study
+                </span>
 
-                      ${isViewAll ? "text-black/30" : "text-white/25"}
-                    `}
-                  >
-                    {isViewAll ? "Explore Everything" : "Selected Project"}
-                  </p>
-
-                  <h2
-                    className={`
-                      truncate
-                      text-5xl
-                      font-semibold
-                      leading-none
-                      tracking-[-0.07em]
-                      transition-transform
-                      duration-500
-                      group-hover:translate-x-1
-
-                      sm:text-6xl
-
-                      md:text-7xl
-                      lg:text-[7vw]
-
-                      ${isViewAll ? "text-black" : "text-white"}
-                    `}
-                  >
-                    {project.title}
-                  </h2>
-                </div>
-
-                {/* DESKTOP CTA */}
-                <div className="hidden shrink-0 pb-1 sm:block">
-                  <span
-                    className={`
-                      font-mono
-                      text-[9px]
-                      uppercase
-                      tracking-[0.25em]
-                      md:text-[10px]
-
-                      ${isViewAll ? "text-black/40" : "text-white/35"}
-                    `}
-                  >
-                    {isViewAll ? "View All Projects ↗" : "Explore ↗"}
-                  </span>
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white group-hover:text-black">
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={1.5}
+                    className="transition-transform duration-500 group-hover:rotate-45"
+                  />
                 </div>
               </div>
             </Link>
-          );
-        })}
+          ))}
+
+          <div className="border-t border-white/10" />
+        </div>
+
+        {/* VIEW ALL */}
+        <div className="projects-footer mt-10">
+          <Link
+            href="/projects"
+            className="group flex items-center justify-between border-b border-white/10 pb-5"
+          >
+            <span className="text-lg font-medium tracking-tight text-white/40 transition-colors duration-300 group-hover:text-white sm:text-xl">
+              View all projects
+            </span>
+
+            <ArrowUpRight
+              size={22}
+              strokeWidth={1.5}
+              className="transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );

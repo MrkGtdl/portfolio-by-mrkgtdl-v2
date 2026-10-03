@@ -1,29 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import Loader from "@/components/ui/Loader";
-import Navbar from "@/components/layout/Navbar";
 import Home from "@/components/sections/Home";
-import Projects from "@/components/sections/Projects";
 import About from "@/components/sections/About";
+import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 
 export default function Page() {
   const [heroReady, setHeroReady] = useState(false);
 
+  useEffect(() => {
+    const handleLoaderComplete = () => {
+      setHeroReady(true);
+    };
+
+    window.addEventListener("portfolio:loader-complete", handleLoaderComplete);
+
+    return () => {
+      window.removeEventListener(
+        "portfolio:loader-complete",
+        handleLoaderComplete,
+      );
+    };
+  }, []);
+
   return (
-    <>
-      {!heroReady && <Loader onComplete={() => setHeroReady(true)} />}
-
-      <Navbar />
-
-      <main>
-        <Home startAnimation={heroReady} />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
-    </>
+    <main>
+      <Home startAnimation={heroReady} />
+      <About />
+      <Projects />
+      <Contact />
+    </main>
   );
 }

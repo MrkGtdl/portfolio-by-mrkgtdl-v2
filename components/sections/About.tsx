@@ -1,165 +1,275 @@
 "use client";
 
-import { ArrowUpRight, Code2, Layers3, Sparkles } from "lucide-react";
-import Lanyard from "@/components/ui/Lanyard";
+import Link from "next/link";
+import { useLayoutEffect, useRef } from "react";
+import { ArrowUpRight, Database, LayoutTemplate, Server } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import Section from "@/components/ui/Section";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const focusAreas = [
+  {
+    number: "01",
+    icon: LayoutTemplate,
+    title: "Frontend Development",
+  },
+  {
+    number: "02",
+    icon: Server,
+    title: "Full-Stack Development",
+  },
+  {
+    number: "03",
+    icon: Database,
+    title: "WordPress",
+  },
+];
 
 export default function About() {
-  return (
-    <section
-      id="about"
-      className="relative min-h-screen overflow-visible bg-transparent px-5 py-20 text-white sm:px-6 sm:py-24 md:px-12 lg:px-20"
-    >
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-white/[0.025] blur-[100px] sm:h-[400px] sm:w-[400px] lg:h-[500px] lg:w-[500px]" />
-      </div>
+  const sectionRef = useRef<HTMLElement>(null);
 
-      <div className="relative mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mb-14 flex items-end justify-between border-b border-white/10 pb-5 sm:mb-16 md:mb-20 md:pb-6">
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (reduceMotion) {
+        gsap.set(
+          [
+            ".about-header",
+            ".about-intro",
+            ".about-description",
+            ".about-cta",
+            ".about-profile",
+            ".about-focus-item",
+            ".about-footer",
+          ],
+          {
+            clearProps: "all",
+          },
+        );
+
+        return;
+      }
+
+      gsap.from(".about-header", {
+        y: 24,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 82%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-intro", {
+        y: 45,
+        opacity: 0,
+        duration: 0.9,
+        delay: 0.05,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".about-intro",
+          start: "top 86%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-description", {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        delay: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".about-description",
+          start: "top 88%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-cta", {
+        y: 16,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".about-cta",
+          start: "top 90%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-profile", {
+        x: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".about-profile",
+          start: "top 86%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-focus-item", {
+        y: 25,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".about-profile",
+          start: "top 86%",
+          once: true,
+        },
+      });
+
+      gsap.from(".about-footer", {
+        y: 16,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".about-footer",
+          start: "top 90%",
+          once: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <Section
+      id="about"
+      className="relative overflow-hidden bg-transparent text-white"
+      containerClassName="relative"
+    >
+      <div ref={sectionRef} className="relative">
+        {/* HEADER */}
+        <div className="about-header mb-12 flex items-end justify-between border-t border-white/10 pt-5 sm:mb-14">
           <div>
-            <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/40 sm:mb-3 sm:text-xs sm:tracking-[0.3em]">
-              01 — About Me
+            <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
+              01 — About
             </p>
 
-            <h2 className="text-4xl font-medium tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Who I am
+            <h2 className="text-4xl font-medium tracking-[-0.04em] sm:text-5xl md:text-6xl lg:text-[4.5rem]">
+              A little about me
             </h2>
           </div>
 
-          <span className="hidden text-sm text-white/30 sm:block">/ 2026</span>
+          <span className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-white/20 sm:block">
+            2026
+          </span>
         </div>
 
-        {/* Main Content */}
-        <div className="relative">
-          {/* Main Content */}
-          <div className="relative z-10 max-w-3xl">
-            <p className="text-2xl font-light leading-[1.2] tracking-tight text-white/90 sm:text-3xl md:text-4xl lg:text-5xl">
-              I build digital experiences that combine{" "}
-              <span className="text-white/40">
-                thoughtful design, clean code,
-              </span>{" "}
-              and meaningful functionality.
+        {/* MAIN */}
+        <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
+          {/* INTRO */}
+          <div>
+            <p className="about-intro max-w-4xl text-3xl font-light leading-[1.08] tracking-[-0.05em] text-white/90 sm:text-4xl md:text-5xl lg:text-[3.5rem]">
+              I&apos;m a web developer focused on building{" "}
+              <span className="text-white/35">
+                modern, responsive, and purposeful digital experiences.
+              </span>
             </p>
 
-            <div className="mt-9 max-w-2xl space-y-5 text-sm leading-6 text-white/50 sm:mt-12 sm:space-y-6 sm:text-base sm:leading-7">
-              <p>
-                I’m a full-stack web developer focused on building modern,
-                responsive, and scalable web applications.
-              </p>
+            <p className="about-description mt-7 max-w-2xl text-sm leading-7 text-white/40 sm:mt-8 sm:text-base sm:leading-8">
+              I enjoy turning ideas into functional digital products, combining
+              thoughtful interface design with clean and maintainable
+              development.
+            </p>
 
-              <p>
-                I enjoy turning ideas into functional digital products—from
-                polished interfaces and interactive experiences to reliable
-                backend systems.
-              </p>
-
-              <p>
-                My goal is simple: create websites and applications that look
-                refined, feel intuitive, and work the way they should.
-              </p>
-            </div>
-
-            {/* CTA */}
-            <div className="mt-8 sm:mt-10">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-white px-5 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-white/90 sm:px-6"
+            <div className="about-cta">
+              <Link
+                href="/about"
+                className="group mt-7 inline-flex items-center gap-3 border border-white/15 bg-white px-5 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:mt-8 sm:px-6"
               >
-                Let’s work together
+                View Full Profile
                 <ArrowUpRight
                   size={16}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
                   className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* Lanyard */}
-          <div className="pointer-events-none left-80 right-[-80px] absolute top-[-80px] z-30 hidden h-[700px] w-full lg:block">
-            <Lanyard
-              position={[0, 0, 15]}
-              gravity={[0, -40, 0]}
-              frontImage="/id2.jpeg"
-              backImage="/icon.png"
-              imageFit="cover"
-              lanyardWidth={2}
-            />
-          </div>
-
-          {/* Info Cards */}
-          <div className="relative z-20 mt-16 max-w-xl space-y-4 lg:ml-auto lg:mt-[-120px]">
-            <InfoCard
-              icon={<Code2 size={20} />}
-              number="01"
-              title="Development"
-              description="Building responsive and scalable web applications with modern technologies."
-            />
-
-            <InfoCard
-              icon={<Layers3 size={20} />}
-              number="02"
-              title="Full-Stack"
-              description="Working across frontend, backend, databases, and the systems that connect them."
-            />
-
-            <InfoCard
-              icon={<Sparkles size={20} />}
-              number="03"
-              title="Experience"
-              description="Creating interfaces that are clean, purposeful, and enjoyable to use."
-            />
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <Stat value="4+" label="Years Learning" />
-              <Stat value="10+" label="Projects Built" />
+          {/* PROFILE */}
+          <div className="about-profile lg:pt-1">
+            <div className="border-t border-white/10 pt-5">
+              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 sm:text-[10px]">
+                Focus Areas
+              </p>
             </div>
+
+            <div className="mt-6">
+              {focusAreas.map((area) => {
+                const Icon = area.icon;
+
+                return (
+                  <div
+                    key={area.number}
+                    className="about-focus-item group flex items-center justify-between border-b border-white/10 py-4 transition-colors duration-300 hover:border-white/20 sm:py-5"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Icon
+                        size={17}
+                        strokeWidth={1.3}
+                        aria-hidden="true"
+                        className="text-white/30 transition-colors duration-300 group-hover:text-white/70"
+                      />
+
+                      <span className="text-sm text-white/60 transition-colors duration-300 group-hover:text-white sm:text-base">
+                        {area.title}
+                      </span>
+                    </div>
+
+                    <span className="font-mono text-[9px] text-white/20">
+                      {area.number}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <p className="mt-7 max-w-md text-sm leading-6 text-white/30">
+              More about my background, development approach, technologies, and
+              current focus can be found on my full profile.
+            </p>
+          </div>
+        </div>
+
+        {/* BOTTOM LINE */}
+        <div className="about-footer mt-16 border-t border-white/10 pt-5 sm:mt-20">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+              Profile Summary
+            </span>
+
+            <Link
+              href="/about"
+              className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/20 transition-colors hover:text-white"
+            >
+              View Full Profile ↗
+            </Link>
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-function InfoCard({
-  icon,
-  number,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  number: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="group rounded-2xl border border-white/10 bg-white/[0.025] p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.045] sm:p-6">
-      <div className="mb-6 flex items-center justify-between sm:mb-8">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 sm:h-10 sm:w-10">
-          {icon}
-        </div>
-
-        <span className="text-xs text-white/25">{number}</span>
-      </div>
-
-      <h3 className="mb-2 text-base font-medium sm:text-lg">{title}</h3>
-
-      <p className="text-sm leading-6 text-white/40">{description}</p>
-    </div>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
-      <div className="text-2xl font-medium tracking-tight sm:text-3xl">
-        {value}
-      </div>
-
-      <div className="mt-2 text-[10px] uppercase tracking-[0.12em] text-white/30 sm:text-xs sm:tracking-[0.15em]">
-        {label}
-      </div>
-    </div>
+    </Section>
   );
 }

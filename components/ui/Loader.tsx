@@ -14,7 +14,7 @@ export default function Loader({ onComplete }: LoaderProps) {
     let value = 0;
 
     const interval = setInterval(() => {
-      value += Math.random() * 8;
+      value += Math.random() * 12 + 4;
 
       if (value >= 100) {
         value = 100;
@@ -23,11 +23,11 @@ export default function Loader({ onComplete }: LoaderProps) {
         setTimeout(() => {
           onComplete?.();
           setDone(true);
-        }, 500);
+        }, 250);
       }
 
       setProgress(Math.floor(value));
-    }, 80);
+    }, 60);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -36,7 +36,7 @@ export default function Loader({ onComplete }: LoaderProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#0a0a0a] transition-all duration-700 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#0a0a0a] transition-all duration-500 ${
         progress === 100 ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
@@ -65,7 +65,7 @@ export default function Loader({ onComplete }: LoaderProps) {
             strokeLinecap="round"
             strokeDasharray="289"
             strokeDashoffset={289 - (289 * progress) / 100}
-            className="transition-all duration-200"
+            className="transition-all duration-150"
           />
         </svg>
 

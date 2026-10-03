@@ -1,307 +1,189 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
 const projects = [
   {
     number: "01",
-    slug: "nexora",
     title: "NEXORA",
     category: "Web Experience",
     year: "2026",
     description:
-      "A modern digital experience focused on immersive interaction, visual clarity, and a refined user journey.",
-    tags: ["Next.js", "GSAP", "TypeScript"],
+      "A modern digital experience focused on clear communication, responsive layouts, and polished interaction.",
+    stack: ["Next.js", "TypeScript", "GSAP"],
   },
   {
     number: "02",
-    slug: "smilecare",
     title: "SMILECARE",
-    category: "Healthcare",
+    category: "Healthcare Website",
     year: "2026",
     description:
-      "A clean and approachable healthcare platform designed around trust, accessibility, and effortless navigation.",
-    tags: ["WordPress", "Gutenberg", "UI/UX"],
+      "A clean healthcare website designed around accessibility, clarity, and a trustworthy digital experience.",
+    stack: ["WordPress", "Gutenberg", "UI/UX"],
   },
   {
     number: "03",
-    slug: "novatech",
     title: "NOVATECH",
-    category: "Technology",
+    category: "Technology Website",
     year: "2026",
     description:
-      "A technology-focused website combining structured content with a modern visual system and responsive interactions.",
-    tags: ["WordPress", "GenerateBlocks", "CSS"],
+      "A structured technology website combining strong content hierarchy with a modern responsive interface.",
+    stack: ["WordPress", "GenerateBlocks", "CSS"],
   },
   {
     number: "04",
-    slug: "velora",
     title: "VELORA",
-    category: "Digital Product",
+    category: "E-commerce Concept",
     year: "2026",
     description:
-      "A digital product concept built around simplicity, smooth interactions, and a focused product experience.",
-    tags: ["React", "Tailwind", "Framer Motion"],
-  },
-  {
-    number: "05",
-    slug: "aurelis",
-    title: "AURELIS",
-    category: "Creative Platform",
-    year: "2026",
-    description:
-      "An experimental interface exploring typography, motion, and cinematic presentation.",
-    tags: ["Next.js", "Motion", "Creative UI"],
-  },
-  {
-    number: "06",
-    slug: "kinetiq",
-    title: "KINETIQ",
-    category: "Interactive Experience",
-    year: "2026",
-    description:
-      "An interaction-driven concept where movement and interface behavior become part of the experience.",
-    tags: ["React", "GSAP", "WebGL"],
-  },
-  {
-    number: "07",
-    slug: "monarch",
-    title: "MONARCH",
-    category: "Digital Experience",
-    year: "2026",
-    description:
-      "A refined digital experience combining bold typography, structured layouts, and immersive transitions.",
-    tags: ["Next.js", "GSAP", "Tailwind"],
-  },
-  {
-    number: "08",
-    slug: "lumera",
-    title: "LUMERA",
-    category: "Brand Experience",
-    year: "2026",
-    description:
-      "A visual-first experience designed around elegant composition, motion, and strong brand presence.",
-    tags: ["React", "Framer Motion", "UI/UX"],
-  },
-  {
-    number: "09",
-    slug: "vertex",
-    title: "VERTEX",
-    category: "Technology",
-    year: "2026",
-    description:
-      "A modern technology interface focused on clarity, performance, and scalable digital experiences.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-  },
-  {
-    number: "10",
-    slug: "orbital",
-    title: "ORBITAL",
-    category: "Interactive Product",
-    year: "2026",
-    description:
-      "An experimental product interface built around movement, interaction, and immersive visual storytelling.",
-    tags: ["React", "GSAP", "WebGL"],
-  },
-  {
-    number: "11",
-    slug: "arcova",
-    title: "ARCOVA",
-    category: "Creative Website",
-    year: "2026",
-    description:
-      "A cinematic website concept combining minimal layouts with expressive typography and subtle motion.",
-    tags: ["Next.js", "Motion", "Creative UI"],
-  },
-  {
-    number: "12",
-    slug: "syntra",
-    title: "SYNTRA",
-    category: "Digital Product",
-    year: "2026",
-    description:
-      "A futuristic product experience focused on interaction, usability, and a clean visual system.",
-    tags: ["React", "Tailwind", "GSAP"],
+      "A refined e-commerce concept exploring product presentation, responsive layouts, and focused user interaction.",
+    stack: ["Next.js", "Tailwind CSS", "TypeScript"],
   },
 ];
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#0a0a0a] text-white">
+    <main className="min-h-screen bg-transparent text-white">
       {/* HEADER */}
-      <header className="px-5 pb-14 pt-6 sm:px-8 sm:pb-20 sm:pt-8 md:px-10 lg:px-16">
-        <div className="flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-white sm:gap-3 sm:text-[10px] sm:tracking-[0.25em]"
-          >
-            <ArrowLeft
-              size={12}
-              strokeWidth={1.5}
-              className="transition-transform duration-300 group-hover:-translate-x-1 sm:h-[13px] sm:w-[13px]"
-            />
+      <section className="mx-auto max-w-6xl px-5 pb-20 pt-32 sm:px-6 sm:pb-28 sm:pt-36 lg:px-10 lg:pb-36">
+        <Link
+          href="/"
+          className="group mb-14 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/30 transition-colors hover:text-white sm:mb-20"
+        >
+          <ArrowLeft
+            size={14}
+            strokeWidth={1.5}
+            className="transition-transform duration-300 group-hover:-translate-x-1"
+          />
+          Back Home
+        </Link>
 
-            <span>Back Home</span>
-          </Link>
+        <div className="flex items-center justify-between border-b border-white/10 pb-5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+            Project Archive
+          </span>
 
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25 sm:text-[10px] sm:tracking-[0.25em]">
-            2026 / Projects
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+            {projects.length.toString().padStart(2, "0")} Projects
           </span>
         </div>
-      </header>
 
-      {/* HERO */}
-      <section className="px-5 pb-20 sm:px-8 sm:pb-24 md:px-10 lg:px-16 lg:pb-32">
-        <div className="max-w-6xl">
-          <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:mb-8 sm:text-[10px] sm:tracking-[0.35em]">
-            Selected Work
-          </p>
-
-          <h1 className="text-[20vw] font-semibold leading-[0.78] tracking-[-0.1em] sm:text-[16vw] md:text-[13vw] lg:text-[11vw]">
+        <div className="mt-8 overflow-hidden">
+          <h1 className="text-[19vw] font-semibold leading-[0.78] tracking-[-0.1em] sm:text-[15vw] lg:text-[11vw]">
             PROJECTS
           </h1>
-
-          <div className="mt-8 flex flex-col justify-between gap-6 border-t border-white/10 pt-6 sm:mt-10 sm:gap-8 md:flex-row">
-            <p className="max-w-xl text-sm leading-6 text-white/40 sm:text-base sm:leading-7">
-              A collection of digital experiences, interfaces, and products
-              built with a focus on interaction, performance, and visual
-              clarity.
-            </p>
-
-            <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/25 sm:text-[10px]">
-              {String(projects.length).padStart(2, "0")} Projects
-            </p>
-          </div>
         </div>
+
+        <p className="mt-8 max-w-2xl text-sm leading-7 text-white/40 sm:text-base sm:leading-8">
+          A collection of web projects, concepts, and digital experiences
+          exploring modern interface design, responsive development, and
+          thoughtful interaction.
+        </p>
       </section>
 
-      {/* ALL PROJECTS */}
-      <section className="px-5 sm:px-8 md:px-10 lg:px-16">
+      {/* PROJECT LIST */}
+      <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 sm:pb-32 lg:px-10 lg:pb-40">
         <div className="border-t border-white/10">
           {projects.map((project) => (
             <Link
               key={project.number}
-              href={`/projects/${project.slug}`}
-              className="group block border-b border-white/10 py-10 transition-colors duration-500 hover:bg-white/[0.015] sm:py-14 md:py-16 lg:py-20"
+              href={`/projects/${project.title.toLowerCase()}`}
+              className="group block border-b border-white/10 py-8 transition-colors duration-500 hover:bg-white/[0.015] sm:py-10 lg:py-12"
             >
-              {/* TOP INFO */}
-              <div className="mb-6 flex items-center justify-between sm:mb-8">
-                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/30 sm:text-[10px] sm:tracking-[0.3em]">
-                  Project / {project.number}
-                </span>
+              {/* META */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[10px] text-white/20">
+                    {project.number}
+                  </span>
 
-                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20 sm:text-[10px] sm:tracking-[0.3em]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/30">
+                    {project.category}
+                  </span>
+                </div>
+
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/20">
                   {project.year}
                 </span>
               </div>
 
-              {/* VISUAL */}
-              <div className="relative mb-7 aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#111111] sm:mb-10 sm:aspect-[16/8] sm:rounded-[1.5rem] md:rounded-[2rem]">
-                {/* TOP GRADIENT */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.035] via-transparent to-transparent" />
-
-                {/* GLOW */}
-                <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/[0.025] blur-3xl transition-transform duration-1000 group-hover:scale-125 sm:-right-32 sm:-top-32 sm:h-96 sm:w-96" />
-
-                <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-white/[0.02] blur-3xl sm:-bottom-40 sm:h-96 sm:w-96" />
-
-                {/* PROJECT NAME */}
-                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                  <span className="select-none whitespace-nowrap text-[24vw] font-semibold leading-none tracking-[-0.09em] text-white/[0.035] transition-transform duration-1000 ease-out group-hover:scale-105 sm:text-[16vw] md:text-[14vw] lg:text-[11vw]">
-                    {project.title}
-                  </span>
-                </div>
-
-                {/* CENTER ARROW */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black sm:h-20 sm:w-20">
-                    <ArrowUpRight
-                      size={17}
-                      strokeWidth={1.5}
-                      className="transition-transform duration-500 group-hover:rotate-45 sm:h-5 sm:w-5"
-                    />
-                  </div>
-                </div>
-
-                {/* CATEGORY */}
-                <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
-                  <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-white/50 backdrop-blur-md sm:px-4 sm:py-2 sm:text-[9px] sm:tracking-[0.2em]">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* PROJECT INFO */}
-              <div className="grid gap-7 md:gap-8 lg:grid-cols-[1fr_0.45fr]">
-                {/* TITLE */}
+              {/* CONTENT */}
+              <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_0.55fr_auto] lg:items-end lg:gap-12">
                 <div>
-                  <div className="flex items-start gap-3 sm:gap-5">
-                    <span className="pt-1.5 font-mono text-[9px] text-white/20 sm:pt-2 sm:text-[10px]">
-                      {project.number}
-                    </span>
-
-                    <h2 className="min-w-0 break-words text-[16vw] font-semibold leading-[0.82] tracking-[-0.08em] sm:text-7xl md:text-8xl lg:text-[8vw]">
-                      {project.title}
-                    </h2>
-                  </div>
+                  <h2 className="text-[13vw] font-semibold leading-[0.8] tracking-[-0.08em] transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[9vw] lg:text-[6vw]">
+                    {project.title}
+                  </h2>
                 </div>
 
-                {/* DESCRIPTION */}
-                <div className="flex flex-col justify-end">
-                  <p className="max-w-md text-sm leading-6 text-white/40">
+                <div>
+                  <p className="max-w-md text-sm leading-6 text-white/35 transition-colors duration-500 group-hover:text-white/50 sm:text-base sm:leading-7">
                     {project.description}
                   </p>
 
-                  {/* TAGS */}
-                  <div className="mt-5 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2">
-                    {project.tags.map((tag) => (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
                       <span
-                        key={tag}
-                        className="rounded-full border border-white/10 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.12em] text-white/30 sm:px-3 sm:text-[9px] sm:tracking-[0.15em]"
+                        key={item}
+                        className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/25 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/45"
                       >
-                        {tag}
+                        {item}
                       </span>
                     ))}
                   </div>
+                </div>
 
-                  {/* VIEW PROJECT */}
-                  <div className="group/link mt-6 flex w-fit items-center gap-2 border-b border-white/20 pb-2 font-mono text-[9px] uppercase tracking-[0.2em] text-white/50 sm:mt-8 sm:gap-3 sm:text-[10px] sm:tracking-[0.25em]">
-                    View Project
+                {/* ARROW */}
+                <div className="flex items-end justify-end">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white group-hover:text-black sm:h-14 sm:w-14">
                     <ArrowUpRight
-                      size={12}
+                      size={18}
                       strokeWidth={1.5}
-                      className="transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 sm:h-[13px] sm:w-[13px]"
+                      className="transition-transform duration-500 group-hover:rotate-45"
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* MOBILE ACTION */}
+              <div className="mt-7 flex items-center justify-between lg:hidden">
+                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                  View Case Study
+                </span>
+
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/20">
+                  {project.category}
+                </span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16">
-        <div className="border-t border-white/10 pt-7 sm:pt-8">
-          <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.25em] text-white/25 sm:mb-8 sm:text-[10px] sm:tracking-[0.3em]">
-            Have a project in mind?
-          </p>
+      {/* FOOTER CTA */}
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 sm:py-28 lg:px-10 lg:py-32">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">
+                More Work
+              </span>
 
-          <Link
-            href="/#contact"
-            className="group flex items-end justify-between gap-4"
-          >
-            <h2 className="text-[13vw] font-semibold leading-[0.8] tracking-[-0.08em] sm:text-7xl md:text-8xl lg:text-[12vw]">
-              LET&apos;S TALK
-            </h2>
+              <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-tight tracking-[-0.04em] text-white/70 sm:text-4xl lg:text-5xl">
+                More projects and experiments are being built.
+              </h2>
+            </div>
 
-            <ArrowUpRight
-              size={32}
-              strokeWidth={1}
-              className="mb-1 shrink-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2 sm:mb-2 sm:h-12 sm:w-12 md:h-16 md:w-16"
-            />
-          </Link>
+            <Link
+              href="/#contact"
+              className="group flex w-fit items-center gap-4 border-b border-white/15 pb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/40 transition-colors hover:border-white hover:text-white"
+            >
+              Get in touch
+              <ArrowUpRight
+                size={15}
+                strokeWidth={1.5}
+                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </Link>
+          </div>
         </div>
       </section>
     </main>
