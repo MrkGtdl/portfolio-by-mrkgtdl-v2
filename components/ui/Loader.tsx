@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export default function Loader() {
+type LoaderProps = {
+  onComplete?: () => void;
+};
+
+export default function Loader({ onComplete }: LoaderProps) {
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
 
@@ -17,6 +21,7 @@ export default function Loader() {
         clearInterval(interval);
 
         setTimeout(() => {
+          onComplete?.();
           setDone(true);
         }, 500);
       }
@@ -25,7 +30,7 @@ export default function Loader() {
     }, 80);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [onComplete]);
 
   if (done) return null;
 

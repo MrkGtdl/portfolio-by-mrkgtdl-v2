@@ -4,13 +4,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/common/Logo";
 
+type NavbarProps = {
+  onHomeClick: () => void;
+};
+
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onHomeClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
 
@@ -66,18 +70,11 @@ export default function Navbar() {
             role="button"
             tabIndex={0}
             aria-label="Go to home"
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
-            }}
+            onClick={onHomeClick}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
+                e.preventDefault();
+                onHomeClick();
               }
             }}
             className="cursor-pointer"
