@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type LoaderProps = {
   onComplete?: () => void;
@@ -70,7 +71,14 @@ export default function Loader({ onComplete }: LoaderProps) {
         </svg>
 
         {/* Logo */}
-        <img src="/icon2.png" alt="Logo" className="h-34 w-34 object-contain" />
+        <Image
+          src="/icon2.png"
+          alt="Logo"
+          width={136}
+          height={136}
+          priority
+          className="h-34 w-34 object-contain"
+        />
       </div>
 
       {/* Percentage */}

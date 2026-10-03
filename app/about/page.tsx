@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   ArrowUpRight,
   Code2,
-  Database,
   GitBranch,
   Globe2,
   Layers3,
