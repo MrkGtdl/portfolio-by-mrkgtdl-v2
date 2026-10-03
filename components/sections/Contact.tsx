@@ -144,12 +144,12 @@ export default function Contact() {
             className="space-y-8"
             aria-label="Contact form"
           >
-            <div className="grid gap-8 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
               {/* NAME */}
-              <div className="group border-b border-white/10 pb-3 transition-colors focus-within:border-white/40">
+              <div className="group">
                 <label
                   htmlFor="contact-name"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/25"
+                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
                 >
                   Your Name
                 </label>
@@ -161,15 +161,15 @@ export default function Contact() {
                   autoComplete="name"
                   placeholder="John Doe"
                   required
-                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/15 sm:text-base"
+                  className="h-14 w-full rounded-sm border border-white/10 bg-white px-4 text-sm text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
                 />
               </div>
 
               {/* EMAIL */}
-              <div className="group border-b border-white/10 pb-3 transition-colors focus-within:border-white/40">
+              <div className="group">
                 <label
                   htmlFor="contact-email"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/25"
+                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
                 >
                   Your Email
                 </label>
@@ -181,16 +181,16 @@ export default function Contact() {
                   autoComplete="email"
                   placeholder="john@example.com"
                   required
-                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/15 sm:text-base"
+                  className="h-14 w-full rounded-sm border border-white/10 bg-white px-4 text-sm text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
                 />
               </div>
             </div>
 
             {/* MESSAGE */}
-            <div className="group border-b border-white/10 pb-3 transition-colors focus-within:border-white/40">
+            <div className="group">
               <label
                 htmlFor="contact-message"
-                className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/25"
+                className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
               >
                 Tell me about your project
               </label>
@@ -198,10 +198,10 @@ export default function Contact() {
               <textarea
                 id="contact-message"
                 name="message"
-                rows={5}
+                rows={6}
                 placeholder="Tell me a little about your idea..."
                 required
-                className="w-full resize-none bg-transparent text-sm text-white outline-none placeholder:text-white/15 sm:text-base"
+                className="w-full resize-none rounded-sm border border-white/10 bg-white px-4 py-4 text-sm leading-7 text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
               />
             </div>
 

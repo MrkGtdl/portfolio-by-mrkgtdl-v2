@@ -2,77 +2,78 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
-const projects = {
-  nexora: {
-    title: "NEXORA",
-    category: "Web Experience",
-    year: "2026",
-    description:
-      "A modern digital experience focused on clear communication, responsive layouts, and polished interaction.",
-    overview:
-      "NEXORA is a modern web experience designed around a clear visual hierarchy, responsive layouts, and a focused user journey. The project explores how a strong interface can communicate information without unnecessary visual complexity.",
-    role: "Design & Development",
-    timeline: "2026",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
-    features: [
-      "Responsive interface across desktop, tablet, and mobile",
-      "Reusable component-based architecture",
-      "Smooth interaction and scroll-based motion",
-      "Structured content hierarchy",
-      "Performance-conscious frontend implementation",
-    ],
-    theme: "dark",
-  },
-
-  smilecare: {
-    title: "SMILECARE",
-    category: "Healthcare Website",
-    year: "2026",
-    description:
-      "A clean healthcare website designed to make information easy to find while creating a trustworthy digital experience.",
-    overview:
-      "SMILECARE is a healthcare website concept focused on accessibility, clarity, and trust. The interface was structured to make important information easy to discover while maintaining a clean and approachable visual system.",
-    role: "Web Design & Development",
-    timeline: "2026",
-    stack: ["WordPress", "Gutenberg", "GenerateBlocks", "CSS"],
-    features: [
-      "Responsive healthcare-focused layout",
-      "Clear navigation and content hierarchy",
-      "Reusable Gutenberg-based sections",
-      "Accessible typography and spacing",
-      "Mobile-first responsive implementation",
-    ],
-    theme: "light",
-  },
-
-  novatech: {
-    title: "NOVATECH",
-    category: "Technology Website",
-    year: "2026",
-    description:
-      "A structured technology website combining strong content hierarchy with a modern responsive interface.",
-    overview:
-      "NOVATECH is a technology-focused website concept built around structured content, clear navigation, and a modern visual language. The goal was to create a professional digital presence without sacrificing usability.",
-    role: "Web Design & Development",
-    timeline: "2026",
-    stack: ["WordPress", "GenerateBlocks", "CSS", "JavaScript"],
-    features: [
-      "Structured technology-focused content",
-      "Responsive page layouts",
-      "Reusable website sections",
-      "Clear information hierarchy",
-      "Clean and maintainable styling",
-    ],
-    theme: "dark",
-  },
-};
-
-type ProjectSlug = keyof typeof projects;
+import { projects, getProject } from "@/data/projects";
 
 export function generateStaticParams() {
-  return Object.keys(projects).map((slug) => ({
-    slug,
+  return projects.map((project) => ({
+    slug: project.slug,
   }));
+}
+
+function ProjectVisual({ theme }: { theme: "dark" | "light" }) {
+  if (theme === "light") {
+    return (
+      <div className="absolute inset-0 bg-[#e9e9e6] p-5 sm:p-8 lg:p-12">
+        <div className="h-full overflow-hidden rounded-xl bg-[#f7f7f5] shadow-2xl">
+          <div className="flex h-10 items-center justify-between border-b border-black/10 px-5">
+            <div className="h-2 w-20 rounded-full bg-black/70" />
+
+            <div className="hidden gap-5 sm:flex">
+              <span className="h-1.5 w-10 rounded-full bg-black/10" />
+              <span className="h-1.5 w-10 rounded-full bg-black/10" />
+              <span className="h-1.5 w-10 rounded-full bg-black/10" />
+            </div>
+          </div>
+
+          <div className="grid h-[calc(100%-40px)] grid-cols-2">
+            <div className="flex flex-col justify-center p-6 sm:p-12">
+              <div className="mb-4 h-2 w-16 rounded-full bg-black/15" />
+
+              <div className="h-8 w-full max-w-[420px] rounded bg-black sm:h-12" />
+
+              <div className="mt-2 h-8 w-3/4 max-w-[320px] rounded bg-black sm:h-12" />
+
+              <div className="mt-7 h-9 w-28 rounded-full bg-black" />
+            </div>
+
+            <div className="flex items-center justify-center">
+              <div className="h-32 w-32 rounded-full bg-black/[0.06] sm:h-52 sm:w-52 lg:h-64 lg:w-64" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 bg-[#111111] p-5 sm:p-8 lg:p-12">
+      <div className="h-full overflow-hidden rounded-xl border border-white/10 bg-[#151515]">
+        <div className="flex h-10 items-center justify-between border-b border-white/10 px-5">
+          <div className="h-2 w-20 rounded-full bg-white/25" />
+
+          <div className="hidden gap-5 sm:flex">
+            <span className="h-1.5 w-10 rounded-full bg-white/10" />
+            <span className="h-1.5 w-10 rounded-full bg-white/10" />
+            <span className="h-1.5 w-10 rounded-full bg-white/10" />
+          </div>
+        </div>
+
+        <div className="flex h-[calc(100%-40px)] flex-col justify-center p-6 sm:p-12">
+          <div className="h-2 w-16 rounded-full bg-white/20" />
+
+          <div className="mt-5 h-10 w-3/4 max-w-[500px] rounded bg-white/80 sm:h-16" />
+
+          <div className="mt-3 h-10 w-1/2 max-w-[350px] rounded bg-white/15 sm:h-16" />
+
+          <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
+            <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
+            <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
+            <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default async function ProjectPage({
@@ -82,16 +83,20 @@ export default async function ProjectPage({
 }) {
   const { slug } = await params;
 
-  if (!(slug in projects)) {
+  const project = getProject(slug);
+
+  if (!project) {
     notFound();
   }
 
-  const project = projects[slug as ProjectSlug];
+  const currentIndex = projects.findIndex((item) => item.slug === project.slug);
+
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
     <main className="min-h-screen bg-transparent text-white">
       {/* BACK */}
-      <div className="mx-auto max-w-6xl px-5 pt-32 sm:px-6 lg:px-10 lg:pt-36">
+      <div className="mx-auto max-w-7xl px-5 pt-32 sm:px-6 lg:px-8 lg:pt-36">
         <Link
           href="/#projects"
           className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35 transition-colors hover:text-white"
@@ -106,7 +111,7 @@ export default async function ProjectPage({
       </div>
 
       {/* HERO */}
-      <section className="mx-auto max-w-6xl px-5 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-10 lg:pb-36">
+      <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8 lg:pb-36 lg:pt-20">
         <div className="flex items-center justify-between border-b border-white/10 pb-5">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
             {project.category}
@@ -148,85 +153,25 @@ export default async function ProjectPage({
         </div>
       </section>
 
-      {/* MAIN PROJECT VISUAL */}
-      <section className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
+      {/* MAIN VISUAL */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div
           className={`relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 sm:rounded-[1.5rem] ${
             project.theme === "light" ? "bg-[#e9e9e6]" : "bg-[#111111]"
           }`}
         >
-          {project.theme === "light" ? (
-            <div className="absolute inset-0 p-5 sm:p-8 lg:p-12">
-              <div className="h-full overflow-hidden rounded-xl bg-[#f7f7f5] shadow-2xl">
-                <div className="flex h-10 items-center justify-between border-b border-black/10 px-5">
-                  <div className="h-2 w-20 rounded-full bg-black/70" />
-
-                  <div className="hidden gap-5 sm:flex">
-                    <span className="h-1.5 w-10 rounded-full bg-black/10" />
-                    <span className="h-1.5 w-10 rounded-full bg-black/10" />
-                    <span className="h-1.5 w-10 rounded-full bg-black/10" />
-                  </div>
-                </div>
-
-                <div className="grid h-[calc(100%-40px)] grid-cols-2">
-                  <div className="flex flex-col justify-center p-6 sm:p-12">
-                    <div className="mb-4 h-2 w-16 rounded-full bg-black/15" />
-
-                    <div className="h-8 w-full max-w-[420px] rounded bg-black sm:h-12" />
-
-                    <div className="mt-2 h-8 w-3/4 max-w-[320px] rounded bg-black sm:h-12" />
-
-                    <div className="mt-7 h-9 w-28 rounded-full bg-black" />
-                  </div>
-
-                  <div className="flex items-center justify-center">
-                    <div className="h-32 w-32 rounded-full bg-black/[0.06] sm:h-52 sm:w-52 lg:h-64 lg:w-64" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="absolute inset-0 p-5 sm:p-8 lg:p-12">
-              <div className="h-full overflow-hidden rounded-xl border border-white/10 bg-[#151515]">
-                <div className="flex h-10 items-center justify-between border-b border-white/10 px-5">
-                  <div className="h-2 w-20 rounded-full bg-white/25" />
-
-                  <div className="hidden gap-5 sm:flex">
-                    <span className="h-1.5 w-10 rounded-full bg-white/10" />
-                    <span className="h-1.5 w-10 rounded-full bg-white/10" />
-                    <span className="h-1.5 w-10 rounded-full bg-white/10" />
-                  </div>
-                </div>
-
-                <div className="flex h-[calc(100%-40px)] flex-col justify-center p-6 sm:p-12">
-                  <div className="h-2 w-16 rounded-full bg-white/20" />
-
-                  <div className="mt-5 h-10 w-3/4 max-w-[500px] rounded bg-white/80 sm:h-16" />
-
-                  <div className="mt-3 h-10 w-1/2 max-w-[350px] rounded bg-white/15 sm:h-16" />
-
-                  <div className="mt-10 grid grid-cols-3 gap-3 max-w-xl">
-                    <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
-                    <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
-                    <div className="h-20 rounded-lg border border-white/10 bg-white/[0.035]" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          <ProjectVisual theme={project.theme} />
         </div>
       </section>
 
-      {/* PROJECT INFORMATION */}
-      <section className="mx-auto grid max-w-6xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-10 lg:py-40">
-        {/* LABEL */}
+      {/* OVERVIEW */}
+      <section className="mx-auto grid max-w-7xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-8 lg:py-40">
         <div>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
             01 / Overview
           </span>
         </div>
 
-        {/* CONTENT */}
         <div>
           <h2 className="max-w-3xl text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
             Building a clear digital experience around the needs of the user.
@@ -236,7 +181,7 @@ export default async function ProjectPage({
             {project.overview}
           </p>
 
-          {/* STACK */}
+          {/* TECHNOLOGIES */}
           <div className="mt-12 border-t border-white/10 pt-6">
             <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
               Technologies
@@ -258,7 +203,7 @@ export default async function ProjectPage({
 
       {/* FEATURES */}
       <section className="border-y border-white/10">
-        <div className="mx-auto grid max-w-6xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-10 lg:py-36">
+        <div className="mx-auto grid max-w-7xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-8 lg:py-36">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
               02 / What I Built
@@ -286,8 +231,8 @@ export default async function ProjectPage({
         </div>
       </section>
 
-      {/* SECONDARY VISUALS */}
-      <section className="mx-auto max-w-6xl px-5 py-24 sm:px-6 sm:py-32 lg:px-10 lg:py-40">
+      {/* INTERFACE */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
         <div className="mb-10 flex items-end justify-between border-b border-white/10 pb-5">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
             03 / Interface
@@ -344,8 +289,8 @@ export default async function ProjectPage({
         </div>
       </section>
 
-      {/* PROJECT LINK */}
-      <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-6 sm:pb-32 lg:px-10 lg:pb-40">
+      {/* EXTERNAL LINK */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-6 sm:pb-32 lg:px-8 lg:pb-40">
         <div className="border-t border-white/10 pt-8">
           <a href="#" className="group flex items-center justify-between">
             <div>
@@ -371,15 +316,15 @@ export default async function ProjectPage({
 
       {/* NEXT PROJECT */}
       <section className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 sm:py-28 lg:px-10 lg:py-32">
-          <Link href="/projects/smilecare" className="group block">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+          <Link href={`/projects/${nextProject.slug}`} className="group block">
             <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">
               Next Project
             </span>
 
             <div className="mt-5 flex items-end justify-between gap-6">
-              <h2 className="text-[14vw] font-semibold leading-[0.8] tracking-[-0.09em] transition-transform duration-500 group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
-                SMILECARE
+              <h2 className="text-[14vw] font-semibold leading-[0.8] tracking-[-0.09em] transition-transform duration-500 group-hover:translate-x-1 sm:text-[10vw] lg:text-[7vw]">
+                {nextProject.title}
               </h2>
 
               <ArrowUpRight

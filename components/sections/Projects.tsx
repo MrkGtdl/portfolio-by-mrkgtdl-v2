@@ -5,41 +5,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-  {
-    number: "01",
-    title: "NEXORA",
-    category: "Web Experience",
-    year: "2026",
-    description:
-      "A modern digital experience built around clear communication, responsive layouts, and polished interaction.",
-    stack: ["Next.js", "TypeScript", "GSAP"],
-    variant: "nexora",
-  },
-  {
-    number: "02",
-    title: "SMILECARE",
-    category: "Healthcare",
-    year: "2026",
-    description:
-      "A clean healthcare website designed to make information easy to find while creating a trustworthy digital experience.",
-    stack: ["WordPress", "Gutenberg", "UI/UX"],
-    variant: "smilecare",
-  },
-  {
-    number: "03",
-    title: "NOVATECH",
-    category: "Technology",
-    year: "2026",
-    description:
-      "A structured technology website combining strong content hierarchy with a modern responsive interface.",
-    stack: ["WordPress", "GenerateBlocks", "CSS"],
-    variant: "novatech",
-  },
-];
 
 function ProjectPreview({ variant }: { variant: string }) {
   if (variant === "smilecare") {
@@ -235,7 +203,7 @@ export default function Projects() {
           {projects.map((project) => (
             <Link
               key={project.number}
-              href={`/projects/${project.title.toLowerCase()}`}
+              href={`/projects/${project.slug}`}
               className="project-row group relative block border-t border-white/10 py-8 sm:py-10 lg:py-12"
             >
               {/* TOP META */}

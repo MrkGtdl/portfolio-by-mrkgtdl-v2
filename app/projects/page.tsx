@@ -1,44 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
-const projects = [
-  {
-    number: "01",
-    title: "NEXORA",
-    category: "Web Experience",
-    year: "2026",
-    description:
-      "A modern digital experience focused on clear communication, responsive layouts, and polished interaction.",
-    stack: ["Next.js", "TypeScript", "GSAP"],
-  },
-  {
-    number: "02",
-    title: "SMILECARE",
-    category: "Healthcare Website",
-    year: "2026",
-    description:
-      "A clean healthcare website designed around accessibility, clarity, and a trustworthy digital experience.",
-    stack: ["WordPress", "Gutenberg", "UI/UX"],
-  },
-  {
-    number: "03",
-    title: "NOVATECH",
-    category: "Technology Website",
-    year: "2026",
-    description:
-      "A structured technology website combining strong content hierarchy with a modern responsive interface.",
-    stack: ["WordPress", "GenerateBlocks", "CSS"],
-  },
-  {
-    number: "04",
-    title: "VELORA",
-    category: "E-commerce Concept",
-    year: "2026",
-    description:
-      "A refined e-commerce concept exploring product presentation, responsive layouts, and focused user interaction.",
-    stack: ["Next.js", "Tailwind CSS", "TypeScript"],
-  },
-];
+import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   return (
@@ -85,8 +48,8 @@ export default function ProjectsPage() {
         <div className="border-t border-white/10">
           {projects.map((project) => (
             <Link
-              key={project.number}
-              href={`/projects/${project.title.toLowerCase()}`}
+              key={project.slug}
+              href={`/projects/${project.slug}`}
               className="group block border-b border-white/10 py-8 transition-colors duration-500 hover:bg-white/[0.015] sm:py-10 lg:py-12"
             >
               {/* META */}
