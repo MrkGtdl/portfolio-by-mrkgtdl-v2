@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
@@ -10,8 +10,10 @@ import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectPreview({ variant }: { variant: string }) {
-  if (variant === "smilecare") {
+type ProjectTheme = "dark" | "light";
+
+function ProjectPreview({ theme }: { theme: ProjectTheme }) {
+  if (theme === "light") {
     return (
       <div className="absolute inset-0 bg-[#e9e9e6] p-3 text-black sm:p-4">
         <div className="h-full overflow-hidden rounded-md bg-[#f7f7f5] shadow-xl">
@@ -35,45 +37,6 @@ function ProjectPreview({ variant }: { variant: string }) {
 
             <div className="flex items-center justify-center">
               <div className="h-12 w-12 rounded-full bg-black/[0.06] sm:h-16 sm:w-16" />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (variant === "novatech") {
-    return (
-      <div className="absolute inset-0 bg-[#0d0d0d] p-3 sm:p-4">
-        <div className="h-full overflow-hidden rounded-md border border-white/10 bg-[#111111]">
-          <div className="flex h-6 items-center gap-1.5 border-b border-white/10 px-3">
-            <span className="h-1 w-1 rounded-full bg-white/20" />
-            <span className="h-1 w-1 rounded-full bg-white/20" />
-            <span className="h-1 w-1 rounded-full bg-white/20" />
-          </div>
-
-          <div className="grid h-[calc(100%-24px)] grid-cols-[0.3fr_1fr]">
-            <div className="border-r border-white/10 p-2.5">
-              <div className="mb-3 h-1 w-7 rounded-full bg-white/30" />
-
-              <div className="space-y-1.5">
-                <div className="h-1 w-full rounded bg-white/10" />
-                <div className="h-1 w-4/5 rounded bg-white/10" />
-                <div className="h-1 w-3/4 rounded bg-white/10" />
-                <div className="h-1 w-full rounded bg-white/10" />
-              </div>
-            </div>
-
-            <div className="p-3">
-              <div className="h-1.5 w-14 rounded bg-white/20" />
-
-              <div className="mt-3 grid grid-cols-3 gap-1.5">
-                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
-                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
-                <div className="h-8 rounded border border-white/10 bg-white/[0.025]" />
-              </div>
-
-              <div className="mt-1.5 h-10 rounded border border-white/10 bg-white/[0.02]" />
             </div>
           </div>
         </div>
@@ -112,6 +75,7 @@ function ProjectPreview({ variant }: { variant: string }) {
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeProject, setActiveProject] = useState<string | null>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -120,69 +84,91 @@ export default function Projects() {
       ).matches;
 
       if (reduceMotion) {
-        gsap.set(
-          [
-            ".projects-eyebrow",
-            ".projects-title",
-            ".project-row",
-            ".projects-footer",
-          ],
-          {
-            clearProps: "all",
-          },
-        );
-
         return;
       }
 
-      gsap.from(".projects-eyebrow", {
-        y: 18,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 82%",
-          once: true,
-        },
-      });
+      /*
+       * Important:
+       * We intentionally do NOT animate opacity here.
+       * The content must remain visible even if ScrollTrigger
+       * initializes late or fails to calculate its position.
+       */
 
-      gsap.from(".projects-title", {
-        y: 45,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 78%",
-          once: true,
+      gsap.fromTo(
+        ".projects-eyebrow",
+        { y: 18 },
+        {
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 82%",
+            once: true,
+          },
         },
-      });
+      );
 
-      gsap.from(".project-row", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".project-list",
-          start: "top 80%",
-          once: true,
+      gsap.fromTo(
+        ".projects-title",
+        { y: 45 },
+        {
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 78%",
+            once: true,
+          },
         },
-      });
+      );
 
-      gsap.from(".projects-footer", {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".projects-footer",
-          start: "top 88%",
-          once: true,
+      gsap.fromTo(
+        ".projects-description",
+        { y: 20 },
+        {
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 72%",
+            once: true,
+          },
         },
-      });
+      );
+
+      gsap.fromTo(
+        ".project-row",
+        { y: 30 },
+        {
+          y: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".project-list",
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      gsap.fromTo(
+        ".projects-footer",
+        { y: 20 },
+        {
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".projects-footer",
+            start: "top 88%",
+            once: true,
+          },
+        },
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -192,136 +178,152 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden bg-transparent px-5 py-24 text-white sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative overflow-hidden bg-transparent px-5 py-24 text-primary sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
-        <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-white/10 pb-5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
+        <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-border pb-5">
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-muted">
             Selected Work
           </span>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
-            03 Projects
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-muted">
+            {projects.length.toString().padStart(2, "0")} Projects
           </span>
         </div>
 
         {/* TITLE */}
         <div className="overflow-hidden">
-          <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-white sm:text-[13vw] lg:text-[10vw]">
+          <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-primary sm:text-[13vw] lg:text-[10vw]">
             PROJECTS
           </h2>
         </div>
 
-        <p className="mt-7 max-w-xl text-sm leading-6 text-white/40 sm:text-base sm:leading-7">
+        <p className="projects-description mt-7 max-w-xl text-sm leading-6 text-secondary sm:text-base sm:leading-7">
           A selection of websites and digital experiences built with a focus on
           clean interfaces, responsive development, and thoughtful interaction.
         </p>
 
         {/* PROJECT LIST */}
         <div className="project-list mt-20 sm:mt-28 lg:mt-32">
-          {projects.map((project) => (
-            <Link
-              key={project.number}
-              href={`/projects/${project.slug}`}
-              className="project-row group relative block border-t border-white/10 py-8 sm:py-10 lg:py-12"
-            >
-              {/* TOP META */}
-              <div className="mb-5 flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/25">
-                  {project.number} / {project.category}
-                </span>
+          {projects.map((project) => {
+            const isActive = activeProject === project.slug;
+            const hasActiveProject = activeProject !== null;
+            const isInactive = hasActiveProject && !isActive;
 
-                <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/20">
-                  {project.year}
-                </span>
-              </div>
+            return (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}`}
+                onMouseEnter={() => setActiveProject(project.slug)}
+                onMouseLeave={() => setActiveProject(null)}
+                className={[
+                  "project-row group relative block border-t border-border py-8",
+                  "transition-[filter,opacity] duration-500 ease-out",
+                  "sm:py-10 lg:py-12",
+                  isInactive
+                    ? "lg:blur-[2px] lg:opacity-40"
+                    : "blur-0 opacity-100",
+                ].join(" ")}
+              >
+                {/* TOP META */}
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-muted">
+                    {project.number} / {project.category}
+                  </span>
 
-              {/* MAIN ROW */}
-              <div className="relative flex flex-col gap-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
-                <div className="min-w-0">
-                  <div className="flex items-start gap-4">
-                    <span className="pt-2 font-mono text-[10px] text-white/20">
-                      {project.number}
-                    </span>
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-muted">
+                    {project.year}
+                  </span>
+                </div>
 
-                    <div>
-                      <h3 className="text-[14vw] font-semibold leading-[0.78] tracking-[-0.08em] transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
-                        {project.title}
-                      </h3>
-
-                      <p className="mt-4 max-w-lg text-sm leading-6 text-white/35 transition-colors duration-500 group-hover:text-white/55 sm:text-base">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* STACK */}
-                  <div className="mt-6 flex flex-wrap gap-2 pl-8">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/30 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/50"
-                      >
-                        {item}
+                {/* MAIN ROW */}
+                <div className="relative flex flex-col gap-6 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+                  {/* CONTENT */}
+                  <div className="min-w-0">
+                    <div className="flex items-start gap-4">
+                      <span className="pt-2 font-mono text-[10px] font-medium text-muted">
+                        {project.number}
                       </span>
-                    ))}
-                  </div>
-                </div>
 
-                {/* PREVIEW */}
-                <div className="relative hidden w-[280px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#111111] opacity-50 transition-all duration-500 ease-out group-hover:w-[340px] group-hover:opacity-100 lg:block">
-                  <div className="aspect-[1.45/1]">
-                    <div className="absolute inset-0 scale-[1.03] transition-transform duration-700 ease-out group-hover:scale-100">
-                      <ProjectPreview variant={project.variant} />
+                      <div>
+                        <h3 className="text-[14vw] font-semibold leading-[0.78] tracking-[-0.08em] text-primary transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
+                          {project.title}
+                        </h3>
+
+                        <p className="mt-4 max-w-lg text-sm leading-6 text-secondary transition-colors duration-500 group-hover:text-primary sm:text-base">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* STACK */}
+                    <div className="mt-6 flex flex-wrap gap-2 pl-8">
+                      {project.stack.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-border px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-muted transition-colors duration-300 group-hover:border-accent/40 group-hover:text-accent"
+                        >
+                          {item}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
-                </div>
+                  {/* DESKTOP PREVIEW */}
+                  <div className="relative hidden w-[280px] shrink-0 overflow-hidden rounded-xl border border-border bg-[#111111] opacity-50 transition-all duration-500 ease-out group-hover:w-[340px] group-hover:border-accent/30 group-hover:opacity-100 lg:block">
+                    <div className="aspect-[1.45/1]">
+                      <div className="absolute inset-0 scale-[1.03] transition-transform duration-700 ease-out group-hover:scale-100">
+                        <ProjectPreview theme={project.theme} />
+                      </div>
+                    </div>
 
-                {/* MOBILE PREVIEW */}
-                <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111111] lg:hidden">
-                  <div className="aspect-[16/8]">
-                    <ProjectPreview variant={project.variant} />
+                    <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+                  </div>
+
+                  {/* MOBILE PREVIEW */}
+                  <div className="relative overflow-hidden rounded-xl border border-border bg-[#111111] lg:hidden">
+                    <div className="aspect-[16/8]">
+                      <ProjectPreview theme={project.theme} />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* ACTION */}
-              <div className="mt-7 flex items-center justify-between pl-8">
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/25 transition-colors duration-300 group-hover:text-white/60">
-                  View Case Study
-                </span>
+                {/* ACTION */}
+                <div className="mt-7 flex items-center justify-between pl-8">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-muted transition-colors duration-300 group-hover:text-accent">
+                    View Case Study
+                  </span>
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white group-hover:text-black">
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={1.5}
-                    className="transition-transform duration-500 group-hover:rotate-45"
-                  />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-primary transition-all duration-500 group-hover:border-accent group-hover:bg-accent group-hover:text-primary">
+                    <ArrowUpRight
+                      size={15}
+                      strokeWidth={1.5}
+                      className="transition-transform duration-500 group-hover:rotate-45"
+                    />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
 
-          <div className="border-t border-white/10" />
+          <div className="border-t border-border" />
         </div>
 
         {/* VIEW ALL */}
         <div className="projects-footer mt-10">
           <Link
             href="/projects"
-            className="group flex items-center justify-between border-b border-white/10 pb-5"
+            className="group flex items-center justify-between border-b border-border pb-5"
           >
-            <span className="text-lg font-medium tracking-tight text-white/40 transition-colors duration-300 group-hover:text-white sm:text-xl">
+            <span className="text-lg font-medium tracking-tight text-secondary transition-colors duration-300 group-hover:text-primary sm:text-xl">
               View all projects
             </span>
 
             <ArrowUpRight
               size={22}
               strokeWidth={1.5}
-              className="transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-1.5"
+              className="text-secondary transition-all duration-500 group-hover:-translate-y-1.5 group-hover:translate-x-1.5 group-hover:text-accent"
             />
           </Link>
         </div>

@@ -24,25 +24,21 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Always show navbar at the top
       if (currentScrollY <= 20) {
         setShowNavbar(true);
         lastScrollY = currentScrollY;
         return;
       }
 
-      // Don't hide navbar while mobile menu is open
       if (menuOpen) {
         lastScrollY = currentScrollY;
         return;
       }
 
-      // Scrolling down → hide
       if (currentScrollY > lastScrollY) {
         setShowNavbar(false);
       }
 
-      // Scrolling up → show
       if (currentScrollY < lastScrollY) {
         setShowNavbar(true);
       }
@@ -81,9 +77,7 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
               <Logo />
             </button>
           ) : (
-            <Link href="/" aria-label="Go to home">
-              <Logo />
-            </Link>
+            <Logo />
           )}
 
           {/* Desktop Navigation */}

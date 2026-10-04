@@ -3,11 +3,27 @@
 :root {
   --background: #1f1f1e;
   --foreground: #ffffff;
+
+  --primary: #ffffff;
+  --secondary: #a1a1aa;
+  --muted: #52525b;
+  --accent: #b91c1c;
+  --accent-hover: #991b1b;
+
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border: var(--border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -17,8 +33,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background: #1f1f1e;
-  color: #ffffff;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 body {
