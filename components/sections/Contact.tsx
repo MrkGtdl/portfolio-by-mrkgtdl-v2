@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { FormEvent, useState } from "react";
+import { ArrowUpRight, Check, Loader2 } from "lucide-react";
 
-const CONTACT_EMAIL = "your@email.com";
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 const SOCIAL_LINKS = {
   github: "https://github.com/yourusername",
@@ -11,228 +11,295 @@ const SOCIAL_LINKS = {
 };
 
 export default function Contact() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setStatus("sending");
 
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
+    const payload = {
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      company: String(formData.get("company") ?? "").trim(),
+      inquiry: String(formData.get("inquiry") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+    };
 
-    if (!name || !email || !message) {
-      return;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to send message.");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setStatus("error");
     }
-
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    );
-
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   }
 
   return (
     <section
       id="contact"
-      aria-labelledby="contact-heading"
-      className="relative z-30 overflow-hidden bg-[#e8e8e5] px-5 py-24 text-[#1f1e1f] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative z-10 isolate min-h-screen bg-[#e8e8e5] px-5 py-24 text-[#1f1e1f] md:px-8 md:py-32"
     >
-      {/* BACKGROUND */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1f1e1f]/[0.025] blur-[120px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-[1600px]">
-        {/* TOP LABEL */}
-        <div className="mb-16 flex items-center justify-between border-t border-[#1f1e1f]/15 pt-5 sm:mb-20">
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-20 max-w-5xl md:mb-28">
+          <p className="mb-6 text-xs font-medium uppercase tracking-[0.22em] text-[#666663]">
             Contact
-          </span>
-
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/35 sm:text-[10px]">
-            06 / 06
-          </span>
-        </div>
-
-        {/* HEADING */}
-        <div className="mb-20 max-w-[1200px] sm:mb-28">
-          <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
-            Open to opportunities
           </p>
 
-          <h2
-            id="contact-heading"
-            className="text-[17vw] font-semibold leading-[0.78] tracking-[-0.1em] text-[#1f1e1f] sm:text-[13vw] md:text-[11vw] lg:text-[9vw]"
-          >
-            LET&apos;S
+          <h2 className="text-[clamp(3.5rem,10vw,9rem)] font-medium leading-[0.82] tracking-[-0.07em]">
+            LET&apos;S WORK
             <br />
-            WORK
-            <br />
-            <span className="text-[#1f1e1f]/25">TOGETHER.</span>
+            TOGETHER.
           </h2>
+
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-[#555553] md:text-lg">
+            I&apos;m open to junior and entry-level web development
+            opportunities, freelance projects, and meaningful collaborations. If
+            you&apos;re hiring or have a project in mind, I&apos;d be happy to
+            hear from you.
+          </p>
         </div>
 
-        {/* CONTENT */}
-        <div className="grid gap-16 border-t border-[#1f1e1f]/15 pt-10 lg:grid-cols-[0.7fr_1fr] lg:gap-24">
-          {/* LEFT */}
+        <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+          {/* Contact Information */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="max-w-md text-sm leading-7 text-[#1f1e1f]/55 sm:text-base sm:leading-8">
-                Open to web development opportunities, freelance projects, and
-                collaborations. If you have an idea or project in mind, feel
-                free to get in touch.
+              <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#777774]">
+                Direct Contact
               </p>
+
+              <a
+                href="mailto:mrkgtdl6@gmail.com"
+                className="group inline-flex items-center gap-2 text-lg font-medium tracking-tight transition-opacity hover:opacity-60 md:text-xl"
+              >
+                mrkgtdl6@gmail.com
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={1.8}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
             </div>
 
-            {/* CONTACT INFO */}
-            <div className="mt-12 space-y-7 lg:mt-0">
-              {/* EMAIL */}
-              <div>
-                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
-                  Email
-                </p>
+            <div className="mt-12 lg:mt-0">
+              <p className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-[#777774]">
+                Elsewhere
+              </p>
 
+              <div className="flex flex-col items-start gap-3">
                 <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-2 text-sm text-[#1f1e1f]/65 transition-colors hover:text-[#1f1e1f] sm:text-base"
+                  href={SOCIAL_LINKS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60"
                 >
-                  {CONTACT_EMAIL}
-
+                  GitHub
                   <ArrowUpRight
-                    size={14}
-                    strokeWidth={1.3}
-                    aria-hidden="true"
+                    size={15}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
                 </a>
-              </div>
 
-              {/* SOCIAL */}
-              <div>
-                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
-                  Social
-                </p>
-
-                <div className="flex gap-5">
-                  <a
-                    href={SOCIAL_LINKS.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#1f1e1f]/50 transition-colors hover:text-[#1f1e1f]"
-                  >
-                    GitHub
-                  </a>
-
-                  <a
-                    href={SOCIAL_LINKS.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#1f1e1f]/50 transition-colors hover:text-[#1f1e1f]"
-                  >
-                    LinkedIn
-                  </a>
-                </div>
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60"
+                >
+                  LinkedIn
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
               </div>
             </div>
           </div>
 
-          {/* FORM */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-8"
-            aria-label="Contact form"
-          >
-            <div className="grid gap-6 sm:grid-cols-2">
-              {/* NAME */}
-              <div className="group">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="relative z-10 w-full">
+            <div className="border-t border-[#b8b8b4]">
+              {/* Name */}
+              <div className="border-b border-[#b8b8b4] py-6">
                 <label
-                  htmlFor="contact-name"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
+                  htmlFor="name"
+                  className="mb-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#777774]"
                 >
-                  Your Name
+                  Name
                 </label>
 
                 <input
-                  id="contact-name"
+                  id="name"
                   name="name"
                   type="text"
                   autoComplete="name"
-                  placeholder="John Doe"
                   required
-                  className="h-14 w-full rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 text-sm text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
+                  placeholder="Your name"
+                  className="w-full bg-transparent text-lg outline-none placeholder:text-[#a1a19d]"
                 />
               </div>
 
-              {/* EMAIL */}
-              <div className="group">
+              {/* Email */}
+              <div className="border-b border-[#b8b8b4] py-6">
                 <label
-                  htmlFor="contact-email"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
+                  htmlFor="email"
+                  className="mb-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#777774]"
                 >
-                  Your Email
+                  Email
                 </label>
 
                 <input
-                  id="contact-email"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="john@example.com"
                   required
-                  className="h-14 w-full rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 text-sm text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
+                  placeholder="you@example.com"
+                  className="w-full bg-transparent text-lg outline-none placeholder:text-[#a1a19d]"
+                />
+              </div>
+
+              {/* Company */}
+              <div className="border-b border-[#b8b8b4] py-6">
+                <label
+                  htmlFor="company"
+                  className="mb-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#777774]"
+                >
+                  Company / Organization
+                  <span className="ml-2 normal-case tracking-normal text-[#999995]">
+                    Optional
+                  </span>
+                </label>
+
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  autoComplete="organization"
+                  placeholder="Company or organization"
+                  className="w-full bg-transparent text-lg outline-none placeholder:text-[#a1a19d]"
+                />
+              </div>
+
+              {/* Inquiry */}
+              <div className="border-b border-[#b8b8b4] py-6">
+                <label
+                  htmlFor="inquiry"
+                  className="mb-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#777774]"
+                >
+                  Inquiry Type
+                </label>
+
+                <select
+                  id="inquiry"
+                  name="inquiry"
+                  required
+                  defaultValue=""
+                  className="w-full cursor-pointer appearance-none bg-transparent text-lg outline-none"
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+
+                  <option value="Job Opportunity">Job Opportunity</option>
+
+                  <option value="Freelance Project">Freelance Project</option>
+
+                  <option value="Collaboration">Collaboration</option>
+
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div className="border-b border-[#b8b8b4] py-6">
+                <label
+                  htmlFor="message"
+                  className="mb-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#777774]"
+                >
+                  Message
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={6}
+                  placeholder="Tell me a little about the opportunity, project, or inquiry."
+                  className="w-full resize-none bg-transparent text-lg leading-relaxed outline-none placeholder:text-[#a1a19d]"
                 />
               </div>
             </div>
 
-            {/* MESSAGE */}
-            <div className="group">
-              <label
-                htmlFor="contact-message"
-                className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
-              >
-                Tell me about your project
-              </label>
+            {/* Status */}
+            <div className="mt-6 min-h-6 text-sm">
+              {status === "success" && (
+                <p className="flex items-center gap-2 text-[#333331]">
+                  <Check size={16} strokeWidth={2} />
+                  Your message has been sent successfully.
+                </p>
+              )}
 
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={6}
-                placeholder="Tell me a little about your idea..."
-                required
-                className="w-full resize-none rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 py-4 text-sm leading-7 text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
-              />
+              {status === "error" && (
+                <p className="text-[#8a2f2f]">
+                  Something went wrong. Please try again or contact me directly.
+                </p>
+              )}
             </div>
 
-            {/* SUBMIT */}
+            {/* Submit */}
             <button
               type="submit"
-              className="group flex w-full items-center justify-between border border-[#1f1e1f]/20 bg-transparent px-5 py-5 text-[#1f1e1f] transition-all duration-500 hover:bg-[#1f1e1f] hover:text-[#e8e8e5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1f1e1f]/30 sm:px-7"
+              disabled={status === "sending"}
+              className="group mt-6 inline-flex items-center gap-3 border border-[#1f1e1f] bg-[#1f1e1f] px-6 py-4 text-sm font-medium uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-transparent hover:text-[#1f1e1f] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <span className="font-mono text-[9px] uppercase tracking-[0.25em]">
-                Send Message
-              </span>
-
-              <ArrowUpRight
-                size={18}
-                strokeWidth={1.3}
-                aria-hidden="true"
-                className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
+              {status === "sending" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Sending...
+                </>
+              ) : status === "success" ? (
+                <>
+                  <Check size={16} />
+                  Sent
+                </>
+              ) : (
+                <>
+                  Send Inquiry
+                  <ArrowUpRight
+                    size={17}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </>
+              )}
             </button>
+
+            <p className="mt-5 max-w-md text-xs leading-relaxed text-[#777774]">
+              I typically respond to inquiries within a reasonable timeframe.
+              Please include enough detail so I can understand how I can help.
+            </p>
           </form>
-        </div>
-
-        {/* FOOTER LINE */}
-        <div className="mt-24 flex flex-col gap-3 border-t border-[#1f1e1f]/15 pt-5 sm:mt-32 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
-            Available for selected projects &amp; opportunities
-          </span>
-
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
-            © 2026
-          </span>
         </div>
       </div>
     </section>
