@@ -6,8 +6,6 @@ import { ArrowUpRight, Database, LayoutTemplate, Server } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import Section from "@/components/ui/Section";
-
 gsap.registerPlugin(ScrollTrigger);
 
 const focusAreas = [
@@ -153,12 +151,11 @@ export default function About() {
   }, []);
 
   return (
-    <Section
+    <section
       id="about"
-      className="relative overflow-hidden bg-transparent text-white"
-      containerClassName="relative"
+      className="relative overflow-hidden bg-transparent px-5 py-24 text-white sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
-      <div ref={sectionRef} className="relative">
+      <div ref={sectionRef} className="relative mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
         <div className="about-header mb-12 flex items-end justify-between border-t border-white/10 pt-5 sm:mb-14">
           <div>
@@ -270,6 +267,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

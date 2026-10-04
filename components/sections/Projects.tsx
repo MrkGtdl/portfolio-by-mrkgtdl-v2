@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -95,9 +96,7 @@ function ProjectPreview({ variant }: { variant: string }) {
 
         <div className="flex h-[calc(100%-24px)] flex-col justify-center p-3 sm:p-4">
           <div className="h-1 w-8 rounded-full bg-white/20" />
-
           <div className="mt-2.5 h-4 w-3/4 rounded bg-white/80 sm:h-5" />
-
           <div className="mt-1.5 h-4 w-1/2 rounded bg-white/20 sm:h-5" />
 
           <div className="mt-3 grid grid-cols-3 gap-1.5">
@@ -116,6 +115,26 @@ export default function Projects() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (reduceMotion) {
+        gsap.set(
+          [
+            ".projects-eyebrow",
+            ".projects-title",
+            ".project-row",
+            ".projects-footer",
+          ],
+          {
+            clearProps: "all",
+          },
+        );
+
+        return;
+      }
+
       gsap.from(".projects-eyebrow", {
         y: 18,
         opacity: 0,
@@ -173,9 +192,9 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden bg-transparent px-5 py-24 text-white sm:px-6 sm:py-32 lg:px-10 lg:py-36"
+      className="relative overflow-hidden bg-transparent px-5 py-24 text-white sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
         <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-white/10 pb-5">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/35">
@@ -187,6 +206,7 @@ export default function Projects() {
           </span>
         </div>
 
+        {/* TITLE */}
         <div className="overflow-hidden">
           <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-white sm:text-[13vw] lg:text-[10vw]">
             PROJECTS

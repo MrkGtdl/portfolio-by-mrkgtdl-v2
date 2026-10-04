@@ -3,7 +3,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
-import Section from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
 
 type HomeProps = {
@@ -71,28 +70,38 @@ export default function Home({ startAnimation }: HomeProps) {
   }, [startAnimation]);
 
   return (
-    <Section id="home" className="relative flex min-h-[100svh] overflow-hidden">
-      <div ref={heroRef} className="flex min-h-[100svh] w-full flex-col">
+    <section
+      id="home"
+      className="relative flex min-h-[100svh] overflow-hidden bg-transparent px-5 py-24 text-white sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+    >
+      <div
+        ref={heroRef}
+        className="relative mx-auto flex min-h-[100svh] w-full max-w-[1600px] flex-col"
+      >
+        {/* HERO CONTENT */}
         <div className="flex flex-1 items-center">
-          <div className="w-full max-w-5xl">
-            <p className="hero-eyebrow mb-5 translate-y-3 opacity-0 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+          <div className="w-full">
+            {/* EYEBROW */}
+            <p className="hero-eyebrow mb-5 translate-y-3 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500 opacity-0">
               Kenneth · Web Developer
             </p>
 
+            {/* HEADING */}
             <div className="overflow-hidden">
-              <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-white sm:text-7xl lg:text-[7.5rem]">
+              <h1 className="text-[15vw] font-semibold leading-[0.84] tracking-[-0.09em] text-white sm:text-[11vw] lg:text-[8.5vw]">
                 <span className="hero-line block translate-y-[70px] opacity-0">
                   I build
                 </span>
 
-                <span className="hero-line block translate-y-[70px] opacity-0 text-neutral-400">
+                <span className="hero-line block translate-y-[70px] text-neutral-400 opacity-0">
                   modern websites.
                 </span>
               </h1>
             </div>
 
-            <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-              <p className="hero-description max-w-xl translate-y-[18px] opacity-0 text-base leading-7 text-neutral-400 sm:text-lg">
+            {/* DESCRIPTION + ACTIONS */}
+            <div className="mt-10 flex flex-col gap-8 sm:mt-12 sm:flex-row sm:items-end sm:justify-between lg:mt-14">
+              <p className="hero-description max-w-xl translate-y-[18px] text-base leading-7 text-neutral-400 opacity-0 sm:text-lg sm:leading-8">
                 I create responsive, modern, and interactive websites with a
                 focus on clean interfaces, thoughtful user experience, and
                 maintainable frontend development.
@@ -109,7 +118,8 @@ export default function Home({ startAnimation }: HomeProps) {
           </div>
         </div>
 
-        <div className="hero-meta flex translate-y-[10px] items-center justify-between border-t border-white/10 pb-5 pt-4 text-xs uppercase tracking-[0.18em] text-neutral-600 opacity-0 sm:pb-6">
+        {/* HERO META */}
+        <div className="hero-meta flex translate-y-[10px] items-center justify-between border-t border-white/10 pb-5 pt-5 text-[10px] uppercase tracking-[0.18em] text-neutral-600 opacity-0 sm:pb-6 sm:pt-6">
           <span>Available for opportunities</span>
 
           <span className="flex items-center gap-3">
@@ -118,6 +128,6 @@ export default function Home({ startAnimation }: HomeProps) {
           </span>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
