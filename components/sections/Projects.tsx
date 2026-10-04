@@ -78,6 +78,12 @@ export default function Projects() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
   useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const mm = gsap.matchMedia();
+
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -87,6 +93,10 @@ export default function Projects() {
         return;
       }
 
+      /*
+       * PROJECT REVEALS
+       */
+
       gsap.fromTo(
         ".projects-eyebrow",
         { y: 18 },
@@ -95,7 +105,7 @@ export default function Projects() {
           duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: section,
             start: "top 82%",
             once: true,
           },
@@ -110,7 +120,7 @@ export default function Projects() {
           duration: 0.9,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: section,
             start: "top 78%",
             once: true,
           },
@@ -125,7 +135,7 @@ export default function Projects() {
           duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: section,
             start: "top 72%",
             once: true,
           },
@@ -162,16 +172,47 @@ export default function Projects() {
           },
         },
       );
-    }, sectionRef);
 
-    return () => ctx.revert();
+      /*
+       * PROJECTS → CONTACT
+       *
+       * Projects scrolls normally until its ENTIRE
+       * section reaches the bottom of the viewport.
+       *
+       * At that exact point:
+       *
+       *   Projects = pinned
+       *   pinSpacing = false
+       *   Contact = allowed to scroll over it
+       *
+       * Desktop / tablet only.
+       */
+
+      mm.add("(min-width: 768px)", () => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "bottom bottom",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+      });
+    }, section);
+
+    return () => {
+      mm.revert();
+      ctx.revert();
+      ScrollTrigger.refresh();
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className="relative z-20 overflow-hidden bg-[#f5f5f2] px-5 py-24 text-[#171717] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative z-10 overflow-hidden bg-[#f5f5f2] px-5 py-24 text-[#171717] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
