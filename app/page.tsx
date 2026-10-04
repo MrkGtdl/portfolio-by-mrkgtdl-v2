@@ -26,7 +26,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main>
+    <main className="relative w-full overflow-visible">
       <Home startAnimation={heroReady} />
       <About />
       <Projects />

@@ -36,24 +36,11 @@ export default function About() {
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
-      if (reduceMotion) {
-        gsap.set(
-          [
-            ".about-header",
-            ".about-intro",
-            ".about-description",
-            ".about-cta",
-            ".about-profile",
-            ".about-stack-item",
-            ".about-footer",
-          ],
-          {
-            clearProps: "all",
-          },
-        );
+      if (reduceMotion) return;
 
-        return;
-      }
+      /*
+       * ABOUT REVEALS
+       */
 
       gsap.from(".about-header", {
         y: 20,
@@ -142,17 +129,67 @@ export default function About() {
           once: true,
         },
       });
+
+      /*
+       * DESKTOP / TABLET PIN
+       *
+       * Mobile stays completely normal.
+       * The pinned interaction only exists from 768px upward.
+       */
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        /*
+         * Keep About fixed while Projects naturally
+         * moves over it.
+         */
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+
+        /*
+         * Very subtle overscroll.
+         *
+         * This is intentionally minimal so About
+         * doesn't feel like it's being dragged.
+         *
+         * Because it is scrubbed, it automatically
+         * reverses when scrolling upward.
+         */
+        gsap.to(section, {
+          scale: 0.985,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "bottom bottom",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.refresh();
+    };
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="relative overflow-hidden bg-transparent px-5 pt-16 pb-24 text-white sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
+      className="relative z-10 overflow-visible bg-transparent px-5 pt-16 pb-24 text-white sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
     >
-      <div ref={sectionRef} className="relative mx-auto w-full max-w-[1600px]">
+      <div className="relative mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
         <div className="about-header mb-14 flex items-end justify-between border-t border-white/10 pt-5 sm:mb-20">
           <div>

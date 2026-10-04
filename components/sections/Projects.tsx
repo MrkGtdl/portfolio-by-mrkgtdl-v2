@@ -178,7 +178,7 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative overflow-hidden bg-transparent px-5 py-24 text-primary sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative z-20 overflow-hidden bg-[#1f1f1e] px-5 py-24 text-primary sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
