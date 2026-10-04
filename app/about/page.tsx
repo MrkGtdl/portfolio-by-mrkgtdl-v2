@@ -29,28 +29,28 @@ const strengths = [
     icon: Monitor,
     title: "Frontend Development",
     description:
-      "Building responsive interfaces with a focus on structure, usability, accessibility, and polished interaction.",
+      "Building responsive interfaces with React, Next.js, and modern CSS, with attention to layout, usability, and behavior across screen sizes.",
   },
   {
     number: "02",
     icon: Server,
     title: "Full-Stack Development",
     description:
-      "Working across application logic, APIs, data flow, and the frontend systems that connect everything together.",
+      "Working across frontend interfaces, application logic, APIs, and data flow to build complete web applications.",
   },
   {
     number: "03",
     icon: Layers3,
     title: "WordPress Development",
     description:
-      "Creating structured, responsive WordPress websites using Gutenberg, GenerateBlocks, and custom styling.",
+      "Building structured WordPress websites with Gutenberg, GenerateBlocks, and custom styling for flexible content and responsive layouts.",
   },
   {
     number: "04",
     icon: Wrench,
     title: "Problem Solving",
     description:
-      "Breaking down requirements into practical solutions while keeping the codebase understandable and maintainable.",
+      "Breaking requirements into smaller problems, choosing practical solutions, and keeping the implementation understandable as the project grows.",
   },
 ];
 
@@ -59,25 +59,25 @@ const workflow = [
     number: "01",
     title: "Understand",
     description:
-      "Clarify the goal, users, requirements, and constraints before writing unnecessary code.",
+      "Start with the goal, requirements, content, and constraints before deciding how the project should be built.",
   },
   {
     number: "02",
     title: "Structure",
     description:
-      "Plan the interface, components, content hierarchy, and technical approach.",
+      "Plan the page hierarchy, components, content, and technical approach before adding unnecessary complexity.",
   },
   {
     number: "03",
     title: "Build",
     description:
-      "Develop the solution with reusable components, responsive behavior, and maintainable code.",
+      "Develop the interface and functionality with reusable components, responsive layouts, and clear code.",
   },
   {
     number: "04",
     title: "Refine",
     description:
-      "Test across screen sizes, improve interactions, remove unnecessary complexity, and polish the final experience.",
+      "Test different screen sizes, fix inconsistencies, improve interactions, and remove things that do not add value.",
   },
 ];
 
@@ -118,8 +118,8 @@ export default function AboutPage() {
           </h1>
 
           <p className="mt-12 max-w-3xl text-xl font-light leading-[1.25] tracking-tight text-white/70 sm:text-2xl md:text-3xl">
-            I&apos;m a web developer who enjoys turning ideas into useful,
-            responsive, and well-structured digital experiences.
+            I&apos;m a web developer focused on building websites and web
+            applications that are clear, responsive, and practical to use.
           </p>
         </header>
 
@@ -129,26 +129,29 @@ export default function AboutPage() {
 
           <div className="max-w-4xl space-y-6 text-base leading-8 text-white/45 sm:text-lg">
             <p>
-              My work sits between design and development. I care about how a
-              product looks, but also about how it behaves, how its code is
-              organized, and how easily it can evolve over time.
+              I work across both frontend development and WordPress, depending
+              on what a project needs. I enjoy building interfaces, connecting
+              the pieces behind them, and making sure the result works well
+              across different screen sizes.
             </p>
 
             <p>
-              I&apos;m particularly interested in modern web development,
-              responsive interfaces, content-driven websites, and practical
-              digital products that solve a clear problem.
+              My current work is mainly centered around React, Next.js,
+              TypeScript, and WordPress. I also use tools such as Tailwind CSS,
+              Gutenberg, GenerateBlocks, and Git as part of my development
+              workflow.
             </p>
 
             <p>
-              I approach each project as an opportunity to understand the
-              problem first, then choose the simplest technical solution that
-              can deliver a strong result.
+              I prefer to understand the problem first and then build from
+              there. That usually means keeping the structure simple, using
+              reusable components where they make sense, and avoiding complexity
+              that the project does not need.
             </p>
           </div>
         </section>
 
-        {/* STRENGTHS */}
+        {/* WHAT I DO */}
         <section className="mt-28 border-t border-white/10 pt-6 sm:mt-40">
           <SectionLabel number="03" label="What I Do" />
 
@@ -225,9 +228,9 @@ export default function AboutPage() {
             </div>
 
             <p className="mt-8 max-w-2xl text-sm leading-7 text-white/30">
-              This represents the technologies I currently work with or use
-              while building and learning through projects. The specific stack
-              depends on the requirements of each project.
+              These are the technologies I currently work with across personal,
+              portfolio, concept, and client-style projects. The stack can
+              change depending on the requirements of a project.
             </p>
           </div>
         </section>
@@ -240,13 +243,13 @@ export default function AboutPage() {
             <ExperienceItem
               year="2026"
               title="Web Development Projects"
-              description="Building portfolio, concept, and client-style projects across modern frontend development and WordPress."
+              description="Building portfolio, concept, and client-style projects across React, Next.js, WordPress, and modern frontend development."
             />
 
             <ExperienceItem
               year="2025"
               title="Independent Development"
-              description="Developing practical web projects while expanding skills across frontend, full-stack development, and CMS workflows."
+              description="Developing practical web projects while building experience across frontend development, full-stack concepts, and WordPress workflows."
             />
           </div>
         </section>
@@ -257,8 +260,8 @@ export default function AboutPage() {
 
           <div className="max-w-3xl">
             <p className="text-2xl font-light leading-[1.2] tracking-tight text-white/75 sm:text-3xl">
-              Continuously improving how I design, build, and ship modern web
-              experiences.
+              Getting better at building, structuring, and shipping web projects
+              from idea to working product.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
