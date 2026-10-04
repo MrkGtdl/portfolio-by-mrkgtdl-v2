@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ArrowUpRight, Check, Loader2 } from "lucide-react";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
@@ -12,6 +12,16 @@ const SOCIAL_LINKS = {
 
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
+
+  useEffect(() => {
+    if (status !== "success") return;
+
+    const timer = setTimeout(() => {
+      setStatus("idle");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [status]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

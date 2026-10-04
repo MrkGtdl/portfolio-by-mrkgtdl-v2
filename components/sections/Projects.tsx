@@ -173,21 +173,6 @@ export default function Projects() {
         },
       );
 
-      /*
-       * PROJECTS → CONTACT
-       *
-       * Projects scrolls normally until its ENTIRE
-       * section reaches the bottom of the viewport.
-       *
-       * At that exact point:
-       *
-       *   Projects = pinned
-       *   pinSpacing = false
-       *   Contact = allowed to scroll over it
-       *
-       * Desktop / tablet only.
-       */
-
       mm.add("(min-width: 768px)", () => {
         ScrollTrigger.create({
           trigger: section,
