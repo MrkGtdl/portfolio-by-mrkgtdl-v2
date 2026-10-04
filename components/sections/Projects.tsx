@@ -212,28 +212,28 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative z-10 overflow-hidden bg-[#f5f5f2] px-5 py-24 text-[#171717] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative z-10 overflow-hidden bg-[#1f1e1f] px-5 py-24 text-[#e8e8e5] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
-        <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-black/10 pb-5">
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-black/40">
+        <div className="projects-eyebrow mb-6 flex items-center justify-between border-b border-white/10 pb-5">
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
             Selected Work
           </span>
 
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-black/40">
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
             {projects.length.toString().padStart(2, "0")} Projects
           </span>
         </div>
 
         {/* TITLE */}
         <div className="overflow-hidden">
-          <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-[#171717] sm:text-[13vw] lg:text-[10vw]">
+          <h2 className="projects-title text-[17vw] font-semibold leading-[0.8] tracking-[-0.09em] text-[#e8e8e5] sm:text-[13vw] lg:text-[10vw]">
             PROJECTS
           </h2>
         </div>
 
-        <p className="projects-description mt-7 max-w-xl text-sm leading-6 text-black/55 sm:text-base sm:leading-7">
+        <p className="projects-description mt-7 max-w-xl text-sm leading-6 text-white/55 sm:text-base sm:leading-7">
           A selection of websites and digital experiences built with a focus on
           clean interfaces, responsive development, and thoughtful interaction.
         </p>
@@ -252,7 +252,7 @@ export default function Projects() {
                 onMouseEnter={() => setActiveProject(project.slug)}
                 onMouseLeave={() => setActiveProject(null)}
                 className={[
-                  "project-row group relative block border-t border-black/10 py-8",
+                  "project-row group relative block border-t border-white/10 py-8",
                   "transition-[filter,opacity] duration-500 ease-out",
                   "sm:py-10 lg:py-12",
                   isInactive
@@ -262,11 +262,11 @@ export default function Projects() {
               >
                 {/* TOP META */}
                 <div className="mb-5 flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-black/40">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">
                     {project.number} / {project.category}
                   </span>
 
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-black/40">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">
                     {project.year}
                   </span>
                 </div>
@@ -276,16 +276,16 @@ export default function Projects() {
                   {/* CONTENT */}
                   <div className="min-w-0">
                     <div className="flex items-start gap-4">
-                      <span className="pt-2 font-mono text-[10px] font-medium text-black/35">
+                      <span className="pt-2 font-mono text-[10px] font-medium text-white/35">
                         {project.number}
                       </span>
 
                       <div>
-                        <h3 className="text-[14vw] font-semibold leading-[0.78] tracking-[-0.08em] text-[#171717] transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
+                        <h3 className="text-[14vw] font-semibold leading-[0.78] tracking-[-0.08em] text-[#e8e8e5] transition-transform duration-500 ease-out group-hover:translate-x-2 sm:text-[10vw] lg:text-[7vw]">
                           {project.title}
                         </h3>
 
-                        <p className="mt-4 max-w-lg text-sm leading-6 text-black/55 transition-colors duration-500 group-hover:text-black/75 sm:text-base">
+                        <p className="mt-4 max-w-lg text-sm leading-6 text-white/55 transition-colors duration-500 group-hover:text-white/75 sm:text-base">
                           {project.description}
                         </p>
                       </div>
@@ -296,7 +296,7 @@ export default function Projects() {
                       {project.stack.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-black/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-black/40 transition-colors duration-300 group-hover:border-black/25 group-hover:text-black/70"
+                          className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/40 transition-colors duration-300 group-hover:border-white/25 group-hover:text-white/70"
                         >
                           {item}
                         </span>
@@ -305,18 +305,18 @@ export default function Projects() {
                   </div>
 
                   {/* DESKTOP PREVIEW */}
-                  <div className="relative hidden w-[280px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-[#111111] opacity-50 transition-all duration-500 ease-out group-hover:w-[340px] group-hover:border-black/20 group-hover:opacity-100 lg:block">
+                  <div className="relative hidden w-[280px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#111111] opacity-50 transition-all duration-500 ease-out group-hover:w-[340px] group-hover:border-white/20 group-hover:opacity-100 lg:block">
                     <div className="aspect-[1.45/1]">
                       <div className="absolute inset-0 scale-[1.03] transition-transform duration-700 ease-out group-hover:scale-100">
                         <ProjectPreview theme={project.theme} />
                       </div>
                     </div>
 
-                    <div className="absolute inset-0 bg-white/5 transition-opacity duration-500 group-hover:opacity-0" />
+                    <div className="absolute inset-0 bg-black/5 transition-opacity duration-500 group-hover:opacity-0" />
                   </div>
 
                   {/* MOBILE PREVIEW */}
-                  <div className="relative overflow-hidden rounded-xl border border-black/10 bg-[#111111] lg:hidden">
+                  <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111111] lg:hidden">
                     <div className="aspect-[16/8]">
                       <ProjectPreview theme={project.theme} />
                     </div>
@@ -325,11 +325,11 @@ export default function Projects() {
 
                 {/* ACTION */}
                 <div className="mt-7 flex items-center justify-between pl-8">
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-black/40 transition-colors duration-300 group-hover:text-black/75">
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-white/40 transition-colors duration-300 group-hover:text-white/75">
                     View Case Study
                   </span>
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-[#171717] transition-all duration-500 group-hover:border-black/30 group-hover:bg-[#171717] group-hover:text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[#e8e8e5] transition-all duration-500 group-hover:border-white/30 group-hover:bg-[#e8e8e5] group-hover:text-[#1f1e1f]">
                     <ArrowUpRight
                       size={15}
                       strokeWidth={1.5}
@@ -341,23 +341,23 @@ export default function Projects() {
             );
           })}
 
-          <div className="border-t border-black/10" />
+          <div className="border-t border-white/10" />
         </div>
 
         {/* VIEW ALL */}
         <div className="projects-footer mt-10">
           <Link
             href="/projects"
-            className="group flex items-center justify-between border-b border-black/10 pb-5"
+            className="group flex items-center justify-between border-b border-white/10 pb-5"
           >
-            <span className="text-lg font-medium tracking-tight text-black/55 transition-colors duration-300 group-hover:text-[#171717] sm:text-xl">
+            <span className="text-lg font-medium tracking-tight text-white/55 transition-colors duration-300 group-hover:text-[#e8e8e5] sm:text-xl">
               View all projects
             </span>
 
             <ArrowUpRight
               size={22}
               strokeWidth={1.5}
-              className="text-black/45 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:translate-x-1.5 group-hover:text-[#171717]"
+              className="text-white/45 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:translate-x-1.5 group-hover:text-[#e8e8e5]"
             />
           </Link>
         </div>

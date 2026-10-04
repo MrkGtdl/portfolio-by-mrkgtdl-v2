@@ -38,10 +38,6 @@ export default function About() {
 
       if (reduceMotion) return;
 
-      /*
-       * ABOUT REVEALS
-       */
-
       gsap.from(".about-header", {
         y: 20,
         opacity: 0,
@@ -130,20 +126,9 @@ export default function About() {
         },
       });
 
-      /*
-       * DESKTOP / TABLET PIN
-       *
-       * Mobile stays completely normal.
-       * The pinned interaction only exists from 768px upward.
-       */
-
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        /*
-         * Keep About fixed while Projects naturally
-         * moves over it.
-         */
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
@@ -154,15 +139,6 @@ export default function About() {
           invalidateOnRefresh: true,
         });
 
-        /*
-         * Very subtle overscroll.
-         *
-         * This is intentionally minimal so About
-         * doesn't feel like it's being dragged.
-         *
-         * Because it is scrubbed, it automatically
-         * reverses when scrolling upward.
-         */
         gsap.to(section, {
           scale: 0.985,
           ease: "none",
@@ -187,36 +163,33 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-10 overflow-visible bg-[#0a0a0a] px-5 pt-16 pb-24 text-white sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
+      className="relative z-10 overflow-visible bg-[#e8e8e5] px-5 pt-16 pb-24 text-[#1f1e1f] sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
     >
       <div className="relative mx-auto w-full max-w-[1600px]">
-        {/* HEADER */}
-        <div className="about-header mb-14 flex items-end justify-between border-t border-white/10 pt-5 sm:mb-20">
+        <div className="about-header mb-14 flex items-end justify-between border-t border-[#1f1e1f]/15 pt-5 sm:mb-20">
           <div>
-            <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
+            <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
               01 — About
             </p>
 
-            <h2 className="text-4xl font-medium tracking-[-0.05em] sm:text-5xl md:text-6xl lg:text-[4.5rem]">
+            <h2 className="text-4xl font-medium tracking-[-0.05em] text-[#1f1e1f] sm:text-5xl md:text-6xl lg:text-[4.5rem]">
               A little about me
             </h2>
           </div>
 
-          <span className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-white/20 sm:block">
+          <span className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-[#1f1e1f]/35 sm:block">
             2026
           </span>
         </div>
 
-        {/* MAIN */}
         <div className="grid gap-16 lg:grid-cols-[1.3fr_0.7fr] lg:gap-24">
-          {/* INTRO */}
           <div>
-            <p className="about-intro max-w-5xl text-3xl font-light leading-[1.06] tracking-[-0.055em] text-white/90 sm:text-4xl md:text-5xl lg:text-[3.7rem]">
+            <p className="about-intro max-w-5xl text-3xl font-light leading-[1.06] tracking-[-0.055em] text-[#1f1e1f] sm:text-4xl md:text-5xl lg:text-[3.7rem]">
               I build websites and web applications{" "}
-              <span className="text-white/30">from the ground up.</span>
+              <span className="text-[#1f1e1f]/30">from the ground up.</span>
             </p>
 
-            <p className="about-description mt-8 max-w-2xl text-sm leading-7 text-white/40 sm:mt-10 sm:text-base sm:leading-8">
+            <p className="about-description mt-8 max-w-2xl text-sm leading-7 text-[#1f1e1f]/55 sm:mt-10 sm:text-base sm:leading-8">
               I work mainly with React, Next.js, TypeScript, and WordPress,
               building interfaces and the functionality behind them.
             </p>
@@ -224,7 +197,7 @@ export default function About() {
             <div className="about-cta">
               <Link
                 href="/about"
-                className="group mt-8 inline-flex items-center gap-3 border border-white/15 bg-white px-5 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-6"
+                className="group mt-8 inline-flex items-center gap-3 border border-[#1f1e1f] bg-[#1f1e1f] px-5 py-3 text-sm font-medium text-[#e8e8e5] transition-all duration-300 hover:bg-[#2b2a2b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1f1e1f]/30 sm:px-6"
               >
                 View Full Profile
                 <ArrowUpRight
@@ -239,8 +212,8 @@ export default function About() {
 
           {/* STACK */}
           <div className="about-profile lg:pt-2">
-            <div className="border-t border-white/10 pt-5">
-              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 sm:text-[10px]">
+            <div className="border-t border-[#1f1e1f]/15 pt-5">
+              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
                 Current Stack
               </p>
             </div>
@@ -249,13 +222,13 @@ export default function About() {
               {stack.map((item) => (
                 <div
                   key={item.number}
-                  className="about-stack-item group flex items-center justify-between border-b border-white/10 py-5 transition-colors duration-300 hover:border-white/25"
+                  className="about-stack-item group flex items-center justify-between border-b border-[#1f1e1f]/15 py-5 transition-colors duration-300 hover:border-[#1f1e1f]/35"
                 >
-                  <span className="text-sm text-white/55 transition-colors duration-300 group-hover:text-white sm:text-base">
+                  <span className="text-sm text-[#1f1e1f]/65 transition-colors duration-300 group-hover:text-[#1f1e1f] sm:text-base">
                     {item.title}
                   </span>
 
-                  <span className="font-mono text-[9px] text-white/20">
+                  <span className="font-mono text-[9px] text-[#1f1e1f]/35">
                     {item.number}
                   </span>
                 </div>
@@ -263,11 +236,11 @@ export default function About() {
             </div>
 
             <div className="mt-8">
-              <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+              <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
                 More
               </p>
 
-              <p className="mt-3 max-w-sm text-sm leading-6 text-white/30">
+              <p className="mt-3 max-w-sm text-sm leading-6 text-[#1f1e1f]/50">
                 Background, experience, workflow, and the technologies I use are
                 covered on my full profile.
               </p>
@@ -275,16 +248,15 @@ export default function About() {
           </div>
         </div>
 
-        {/* FOOTER */}
-        <div className="about-footer mt-20 border-t border-white/10 pt-5 sm:mt-28">
+        <div className="about-footer mt-20 border-t border-[#1f1e1f]/15 pt-5 sm:mt-28">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+            <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
               Profile / Overview
             </span>
 
             <Link
               href="/about"
-              className="group inline-flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.25em] text-white/20 transition-colors hover:text-white"
+              className="group inline-flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35 transition-colors hover:text-[#1f1e1f]"
             >
               Full Profile
               <ArrowUpRight

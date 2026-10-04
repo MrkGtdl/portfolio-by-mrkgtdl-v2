@@ -38,49 +38,49 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="relative z-30 overflow-hidden bg-[#0a0a0a] px-5 py-24 text-white sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
+      className="relative z-30 overflow-hidden bg-[#e8e8e5] px-5 py-24 text-[#1f1e1f] sm:px-8 sm:py-32 md:px-10 md:py-40 lg:px-16"
     >
       {/* BACKGROUND */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.025] blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1f1e1f]/[0.025] blur-[120px]" />
       </div>
 
       <div className="relative mx-auto max-w-[1600px]">
         {/* TOP LABEL */}
-        <div className="mb-16 flex items-center justify-between border-t border-white/10 pt-5 sm:mb-20">
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
+        <div className="mb-16 flex items-center justify-between border-t border-[#1f1e1f]/15 pt-5 sm:mb-20">
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
             Contact
           </span>
 
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20 sm:text-[10px]">
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/35 sm:text-[10px]">
             06 / 06
           </span>
         </div>
 
         {/* HEADING */}
         <div className="mb-20 max-w-[1200px] sm:mb-28">
-          <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 sm:text-[10px]">
+          <p className="mb-6 font-mono text-[9px] uppercase tracking-[0.3em] text-[#1f1e1f]/45 sm:text-[10px]">
             Open to opportunities
           </p>
 
           <h2
             id="contact-heading"
-            className="text-[17vw] font-semibold leading-[0.78] tracking-[-0.1em] sm:text-[13vw] md:text-[11vw] lg:text-[9vw]"
+            className="text-[17vw] font-semibold leading-[0.78] tracking-[-0.1em] text-[#1f1e1f] sm:text-[13vw] md:text-[11vw] lg:text-[9vw]"
           >
             LET&apos;S
             <br />
             WORK
             <br />
-            <span className="text-white/25">TOGETHER.</span>
+            <span className="text-[#1f1e1f]/25">TOGETHER.</span>
           </h2>
         </div>
 
         {/* CONTENT */}
-        <div className="grid gap-16 border-t border-white/10 pt-10 lg:grid-cols-[0.7fr_1fr] lg:gap-24">
+        <div className="grid gap-16 border-t border-[#1f1e1f]/15 pt-10 lg:grid-cols-[0.7fr_1fr] lg:gap-24">
           {/* LEFT */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="max-w-md text-sm leading-7 text-white/40 sm:text-base sm:leading-8">
+              <p className="max-w-md text-sm leading-7 text-[#1f1e1f]/55 sm:text-base sm:leading-8">
                 Open to web development opportunities, freelance projects, and
                 collaborations. If you have an idea or project in mind, feel
                 free to get in touch.
@@ -91,13 +91,13 @@ export default function Contact() {
             <div className="mt-12 space-y-7 lg:mt-0">
               {/* EMAIL */}
               <div>
-                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
                   Email
                 </p>
 
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white sm:text-base"
+                  className="inline-flex items-center gap-2 text-sm text-[#1f1e1f]/65 transition-colors hover:text-[#1f1e1f] sm:text-base"
                 >
                   {CONTACT_EMAIL}
 
@@ -111,7 +111,7 @@ export default function Contact() {
 
               {/* SOCIAL */}
               <div>
-                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+                <p className="mb-2 font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
                   Social
                 </p>
 
@@ -120,7 +120,7 @@ export default function Contact() {
                     href={SOCIAL_LINKS.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-white"
+                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#1f1e1f]/50 transition-colors hover:text-[#1f1e1f]"
                   >
                     GitHub
                   </a>
@@ -129,7 +129,7 @@ export default function Contact() {
                     href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-white"
+                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#1f1e1f]/50 transition-colors hover:text-[#1f1e1f]"
                   >
                     LinkedIn
                   </a>
@@ -149,7 +149,7 @@ export default function Contact() {
               <div className="group">
                 <label
                   htmlFor="contact-name"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
+                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
                 >
                   Your Name
                 </label>
@@ -161,7 +161,7 @@ export default function Contact() {
                   autoComplete="name"
                   placeholder="John Doe"
                   required
-                  className="h-14 w-full rounded-sm border border-white/10 bg-white px-4 text-sm text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
+                  className="h-14 w-full rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 text-sm text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
                 />
               </div>
 
@@ -169,7 +169,7 @@ export default function Contact() {
               <div className="group">
                 <label
                   htmlFor="contact-email"
-                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
+                  className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
                 >
                   Your Email
                 </label>
@@ -181,7 +181,7 @@ export default function Contact() {
                   autoComplete="email"
                   placeholder="john@example.com"
                   required
-                  className="h-14 w-full rounded-sm border border-white/10 bg-white px-4 text-sm text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
+                  className="h-14 w-full rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 text-sm text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
                 />
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function Contact() {
             <div className="group">
               <label
                 htmlFor="contact-message"
-                className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-white/30"
+                className="mb-3 block font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/45"
               >
                 Tell me about your project
               </label>
@@ -201,14 +201,14 @@ export default function Contact() {
                 rows={6}
                 placeholder="Tell me a little about your idea..."
                 required
-                className="w-full resize-none rounded-sm border border-white/10 bg-white px-4 py-4 text-sm leading-7 text-black outline-none transition-all duration-300 placeholder:text-black/30 hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/20 sm:text-base"
+                className="w-full resize-none rounded-sm border border-[#1f1e1f]/15 bg-[#1f1e1f] px-4 py-4 text-sm leading-7 text-[#e8e8e5] outline-none transition-all duration-300 placeholder:text-[#e8e8e5]/30 hover:border-[#1f1e1f]/30 focus:border-[#1f1e1f] focus:ring-2 focus:ring-[#1f1e1f]/15 sm:text-base"
               />
             </div>
 
             {/* SUBMIT */}
             <button
               type="submit"
-              className="group flex w-full items-center justify-between border border-white/10 px-5 py-5 transition-all duration-500 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-7"
+              className="group flex w-full items-center justify-between border border-[#1f1e1f]/20 bg-transparent px-5 py-5 text-[#1f1e1f] transition-all duration-500 hover:bg-[#1f1e1f] hover:text-[#e8e8e5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1f1e1f]/30 sm:px-7"
             >
               <span className="font-mono text-[9px] uppercase tracking-[0.25em]">
                 Send Message
@@ -225,12 +225,12 @@ export default function Contact() {
         </div>
 
         {/* FOOTER LINE */}
-        <div className="mt-24 flex flex-col gap-3 border-t border-white/10 pt-5 sm:mt-32 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+        <div className="mt-24 flex flex-col gap-3 border-t border-[#1f1e1f]/15 pt-5 sm:mt-32 sm:flex-row sm:items-center sm:justify-between">
+          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
             Available for selected projects &amp; opportunities
           </span>
 
-          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/20">
+          <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#1f1e1f]/35">
             © 2026
           </span>
         </div>
