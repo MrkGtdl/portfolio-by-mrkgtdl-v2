@@ -96,57 +96,63 @@ export default async function ProjectPage({
   return (
     <main className="min-h-screen bg-transparent text-white">
       {/* BACK */}
-      <div className="mx-auto max-w-7xl px-5 pt-32 sm:px-6 lg:px-8 lg:pt-36">
-        <Link
-          href="/#projects"
-          className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft
-            size={14}
-            strokeWidth={1.5}
-            className="transition-transform duration-300 group-hover:-translate-x-1"
-          />
-          Back to Projects
-        </Link>
+      <div className="px-5 pt-32 sm:px-8 md:px-10 lg:px-16 lg:pt-36">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35 transition-colors hover:text-white"
+          >
+            <ArrowLeft
+              size={14}
+              strokeWidth={1.5}
+              className="transition-transform duration-300 group-hover:-translate-x-1"
+            />
+            Back to Projects
+          </Link>
+        </div>
       </div>
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8 lg:pb-36 lg:pt-20">
-        <div className="flex items-center justify-between border-b border-white/10 pb-5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
-            {project.category}
-          </span>
+      <section className="px-5 pb-20 pt-16 sm:px-8 sm:pb-28 sm:pt-20 md:px-10 lg:px-16 lg:pb-36 lg:pt-20">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <div className="flex items-center justify-between border-b border-white/10 pb-5">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
+              {project.category}
+            </span>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
-            {project.year}
-          </span>
-        </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+              {project.year}
+            </span>
+          </div>
 
-        <div className="pt-12 sm:pt-16 lg:pt-20">
-          <h1 className="text-[19vw] font-semibold leading-[0.78] tracking-[-0.1em] sm:text-[15vw] lg:text-[11vw]">
-            {project.title}
-          </h1>
+          <div className="pt-12 sm:pt-16 lg:pt-20">
+            <h1 className="text-[18vw] font-semibold leading-[0.78] tracking-[-0.1em] sm:text-[14vw] lg:text-[10vw]">
+              {project.title}
+            </h1>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.45fr] lg:items-end">
-            <p className="max-w-2xl text-base leading-7 text-white/45 sm:text-lg sm:leading-8">
-              {project.description}
-            </p>
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.45fr] lg:items-end">
+              <p className="max-w-2xl text-base leading-7 text-white/45 sm:text-lg sm:leading-8">
+                {project.description}
+              </p>
 
-            <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-5 lg:border-t-0 lg:border-l lg:pl-8">
-              <div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
-                  Role
-                </span>
+              <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-5 lg:border-t-0 lg:border-l lg:pl-8">
+                <div>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                    Role
+                  </span>
 
-                <p className="mt-2 text-sm text-white/60">{project.role}</p>
-              </div>
+                  <p className="mt-2 text-sm text-white/60">{project.role}</p>
+                </div>
 
-              <div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
-                  Year
-                </span>
+                <div>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                    Year
+                  </span>
 
-                <p className="mt-2 text-sm text-white/60">{project.timeline}</p>
+                  <p className="mt-2 text-sm text-white/60">
+                    {project.timeline}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -154,48 +160,52 @@ export default async function ProjectPage({
       </section>
 
       {/* MAIN VISUAL */}
-      <section className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div
-          className={`relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 sm:rounded-[1.5rem] ${
-            project.theme === "light" ? "bg-[#e9e9e6]" : "bg-[#111111]"
-          }`}
-        >
-          <ProjectVisual theme={project.theme} />
+      <section className="px-5 sm:px-8 md:px-10 lg:px-16">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <div
+            className={`relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 sm:rounded-[1.5rem] ${
+              project.theme === "light" ? "bg-[#e9e9e6]" : "bg-[#111111]"
+            }`}
+          >
+            <ProjectVisual theme={project.theme} />
+          </div>
         </div>
       </section>
 
       {/* OVERVIEW */}
-      <section className="mx-auto grid max-w-7xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-8 lg:py-40">
-        <div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
-            01 / Overview
-          </span>
-        </div>
-
-        <div>
-          <h2 className="max-w-3xl text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
-            Building a clear digital experience around the needs of the user.
-          </h2>
-
-          <p className="mt-8 max-w-2xl text-sm leading-7 text-white/40 sm:text-base sm:leading-8">
-            {project.overview}
-          </p>
-
-          {/* TECHNOLOGIES */}
-          <div className="mt-12 border-t border-white/10 pt-6">
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
-              Technologies
+      <section className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-40">
+        <div className="mx-auto grid w-full max-w-[1600px] gap-16 lg:grid-cols-[0.35fr_1fr]">
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+              01 / Overview
             </span>
+          </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.stack.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-white/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/45"
-                >
-                  {item}
-                </span>
-              ))}
+          <div>
+            <h2 className="max-w-3xl text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
+              Building a clear digital experience around the needs of the user.
+            </h2>
+
+            <p className="mt-8 max-w-2xl text-sm leading-7 text-white/40 sm:text-base sm:leading-8">
+              {project.overview}
+            </p>
+
+            {/* TECHNOLOGIES */}
+            <div className="mt-12 border-t border-white/10 pt-6">
+              <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                Technologies
+              </span>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.stack.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/45"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -203,83 +213,87 @@ export default async function ProjectPage({
 
       {/* FEATURES */}
       <section className="border-y border-white/10">
-        <div className="mx-auto grid max-w-7xl gap-16 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-[0.35fr_1fr] lg:px-8 lg:py-36">
-          <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
-              02 / What I Built
-            </span>
-          </div>
+        <div className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-36">
+          <div className="mx-auto grid w-full max-w-[1600px] gap-16 lg:grid-cols-[0.35fr_1fr]">
+            <div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+                02 / What I Built
+              </span>
+            </div>
 
-          <div>
-            <div className="divide-y divide-white/10 border-t border-white/10">
-              {project.features.map((feature, index) => (
-                <div
-                  key={feature}
-                  className="grid grid-cols-[45px_1fr] gap-5 py-6 sm:grid-cols-[60px_1fr] sm:py-7"
-                >
-                  <span className="font-mono text-[10px] text-white/20">
-                    0{index + 1}
-                  </span>
+            <div>
+              <div className="divide-y divide-white/10 border-t border-white/10">
+                {project.features.map((feature, index) => (
+                  <div
+                    key={feature}
+                    className="grid grid-cols-[45px_1fr] gap-5 py-6 sm:grid-cols-[60px_1fr] sm:py-7"
+                  >
+                    <span className="font-mono text-[10px] text-white/20">
+                      0{index + 1}
+                    </span>
 
-                  <p className="text-base leading-7 text-white/55 sm:text-lg">
-                    {feature}
-                  </p>
-                </div>
-              ))}
+                    <p className="text-base leading-7 text-white/55 sm:text-lg">
+                      {feature}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* INTERFACE */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
-        <div className="mb-10 flex items-end justify-between border-b border-white/10 pb-5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
-            03 / Interface
-          </span>
+      <section className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-40">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <div className="mb-10 flex items-end justify-between border-b border-white/10 pb-5">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+              03 / Interface
+            </span>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20">
-            Selected Views
-          </span>
-        </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20">
+              Selected Views
+            </span>
+          </div>
 
-        <div className="grid gap-5 lg:grid-cols-2">
-          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#111111]">
-            <div className="h-full w-full bg-gradient-to-br from-white/[0.06] via-transparent to-transparent p-5 sm:p-8">
-              <div className="h-full rounded-xl border border-white/10 bg-[#151515] p-5 sm:p-8">
-                <div className="h-2 w-16 rounded-full bg-white/20" />
+          <div className="grid gap-5 lg:grid-cols-2">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#111111]">
+              <div className="h-full w-full bg-gradient-to-br from-white/[0.06] via-transparent to-transparent p-5 sm:p-8">
+                <div className="h-full rounded-xl border border-white/10 bg-[#151515] p-5 sm:p-8">
+                  <div className="h-2 w-16 rounded-full bg-white/20" />
 
-                <div className="mt-8 h-8 w-3/4 rounded bg-white/10 sm:h-12" />
+                  <div className="mt-8 h-8 w-3/4 rounded bg-white/10 sm:h-12" />
 
-                <div className="mt-3 h-8 w-1/2 rounded bg-white/[0.05] sm:h-12" />
+                  <div className="mt-3 h-8 w-1/2 rounded bg-white/[0.05] sm:h-12" />
 
-                <div className="mt-10 grid grid-cols-2 gap-3">
-                  <div className="h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
-                  <div className="h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
+                  <div className="mt-10 grid grid-cols-2 gap-3">
+                    <div className="h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
+                    <div className="h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#111111]">
-            <div className="h-full w-full bg-gradient-to-br from-white/[0.04] via-transparent to-transparent p-5 sm:p-8">
-              <div className="h-full rounded-xl border border-white/10 bg-[#151515] p-5 sm:p-8">
-                <div className="grid grid-cols-[0.3fr_1fr] gap-4">
-                  <div className="space-y-2 border-r border-white/10 pr-4">
-                    <div className="h-2 w-10 rounded-full bg-white/20" />
-                    <div className="h-1.5 w-full rounded-full bg-white/10" />
-                    <div className="h-1.5 w-4/5 rounded-full bg-white/10" />
-                    <div className="h-1.5 w-3/4 rounded-full bg-white/10" />
-                  </div>
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#111111]">
+              <div className="h-full w-full bg-gradient-to-br from-white/[0.04] via-transparent to-transparent p-5 sm:p-8">
+                <div className="h-full rounded-xl border border-white/10 bg-[#151515] p-5 sm:p-8">
+                  <div className="grid grid-cols-[0.3fr_1fr] gap-4">
+                    <div className="space-y-2 border-r border-white/10 pr-4">
+                      <div className="h-2 w-10 rounded-full bg-white/20" />
+                      <div className="h-1.5 w-full rounded-full bg-white/10" />
+                      <div className="h-1.5 w-4/5 rounded-full bg-white/10" />
+                      <div className="h-1.5 w-3/4 rounded-full bg-white/10" />
+                    </div>
 
-                  <div>
-                    <div className="h-2 w-20 rounded-full bg-white/20" />
+                    <div>
+                      <div className="h-2 w-20 rounded-full bg-white/20" />
 
-                    <div className="mt-7 h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
+                      <div className="mt-7 h-20 rounded-lg border border-white/10 bg-white/[0.025]" />
 
-                    <div className="mt-3 grid grid-cols-2 gap-3">
-                      <div className="h-14 rounded-lg border border-white/10 bg-white/[0.02]" />
-                      <div className="h-14 rounded-lg border border-white/10 bg-white/[0.02]" />
+                      <div className="mt-3 grid grid-cols-2 gap-3">
+                        <div className="h-14 rounded-lg border border-white/10 bg-white/[0.02]" />
+                        <div className="h-14 rounded-lg border border-white/10 bg-white/[0.02]" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -290,50 +304,57 @@ export default async function ProjectPage({
       </section>
 
       {/* EXTERNAL LINK */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-6 sm:pb-32 lg:px-8 lg:pb-40">
-        <div className="border-t border-white/10 pt-8">
-          <a href="#" className="group flex items-center justify-between">
-            <div>
-              <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
-                External Link
-              </span>
+      <section className="px-5 pb-24 sm:px-8 sm:pb-32 md:px-10 lg:px-16 lg:pb-40">
+        <div className="mx-auto w-full max-w-[1600px]">
+          <div className="border-t border-white/10 pt-8">
+            <a href="#" className="group flex items-center justify-between">
+              <div>
+                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                  External Link
+                </span>
 
-              <p className="mt-2 text-2xl font-medium tracking-tight text-white/60 transition-colors duration-300 group-hover:text-white sm:text-3xl">
-                View Live Project
-              </p>
-            </div>
+                <p className="mt-2 text-2xl font-medium tracking-tight text-white/60 transition-colors duration-300 group-hover:text-white sm:text-3xl">
+                  View Live Project
+                </p>
+              </div>
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 transition-all duration-500 group-hover:bg-white group-hover:text-black">
-              <ArrowUpRight
-                size={20}
-                strokeWidth={1.5}
-                className="transition-transform duration-500 group-hover:rotate-45"
-              />
-            </div>
-          </a>
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 transition-all duration-500 group-hover:bg-white group-hover:text-black">
+                <ArrowUpRight
+                  size={20}
+                  strokeWidth={1.5}
+                  className="transition-transform duration-500 group-hover:rotate-45"
+                />
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* NEXT PROJECT */}
       <section className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-          <Link href={`/projects/${nextProject.slug}`} className="group block">
-            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">
-              Next Project
-            </span>
+        <div className="px-5 py-20 sm:px-8 sm:py-28 md:px-10 lg:px-16 lg:py-32">
+          <div className="mx-auto w-full max-w-[1600px]">
+            <Link
+              href={`/projects/${nextProject.slug}`}
+              className="group block"
+            >
+              <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">
+                Next Project
+              </span>
 
-            <div className="mt-5 flex items-end justify-between gap-6">
-              <h2 className="text-[14vw] font-semibold leading-[0.8] tracking-[-0.09em] transition-transform duration-500 group-hover:translate-x-1 sm:text-[10vw] lg:text-[7vw]">
-                {nextProject.title}
-              </h2>
+              <div className="mt-5 flex items-end justify-between gap-6">
+                <h2 className="text-[14vw] font-semibold leading-[0.8] tracking-[-0.09em] transition-transform duration-500 group-hover:translate-x-1 sm:text-[10vw] lg:text-[7vw]">
+                  {nextProject.title}
+                </h2>
 
-              <ArrowUpRight
-                size={28}
-                strokeWidth={1.5}
-                className="mb-2 shrink-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2"
-              />
-            </div>
-          </Link>
+                <ArrowUpRight
+                  size={28}
+                  strokeWidth={1.5}
+                  className="mb-2 shrink-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2"
+                />
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

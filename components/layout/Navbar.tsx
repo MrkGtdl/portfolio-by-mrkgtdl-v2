@@ -5,13 +5,13 @@ import Link from "next/link";
 import Logo from "@/components/common/Logo";
 
 type NavbarProps = {
-  onHomeClick: () => void;
+  onHomeClick?: () => void;
 };
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar({ onHomeClick }: NavbarProps) {
@@ -57,6 +57,11 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
     };
   }, [menuOpen]);
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setShowNavbar(true);
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 w-full transition-transform duration-500 ease-out ${
@@ -66,21 +71,20 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
       <nav className="w-full border-b border-black/10 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 w-full items-center justify-between px-5 sm:px-8 lg:px-10">
           {/* Logo */}
-          <div
-            role="button"
-            tabIndex={0}
-            aria-label="Go to home"
-            onClick={onHomeClick}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                onHomeClick();
-              }
-            }}
-            className="cursor-pointer"
-          >
-            <Logo />
-          </div>
+          {onHomeClick ? (
+            <button
+              type="button"
+              aria-label="Go to home"
+              onClick={onHomeClick}
+              className="cursor-pointer"
+            >
+              <Logo />
+            </button>
+          ) : (
+            <Link href="/" aria-label="Go to home">
+              <Logo />
+            </Link>
+          )}
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 md:flex">
@@ -98,7 +102,7 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <Link
-              href="#contact"
+              href="/#contact"
               className="inline-flex rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800"
             >
               Let&apos;s Talk
@@ -145,7 +149,7 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="block rounded-2xl px-4 py-3 text-sm text-neutral-600 transition-colors duration-300 hover:bg-black/5 hover:text-black"
               >
                 {item.label}
@@ -153,8 +157,8 @@ export default function Navbar({ onHomeClick }: NavbarProps) {
             ))}
 
             <Link
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
+              href="/#contact"
+              onClick={closeMenu}
               className="mt-2 block rounded-2xl bg-black px-4 py-3 text-center text-sm font-medium text-white"
             >
               Let&apos;s Talk
