@@ -2,20 +2,37 @@
 
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Button from "@/components/ui/Button";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type HomeProps = {
   startAnimation: boolean;
 };
 
 export default function Home({ startAnimation }: HomeProps) {
-  const heroRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
     if (!startAnimation) return;
 
+    const section = sectionRef.current;
+
+    if (!section) return;
+
     const ctx = gsap.context(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      /*
+       * ------------------------------------------------------------
+       * HERO INTRO
+       * ------------------------------------------------------------
+       */
+
       const tl = gsap.timeline({
         defaults: {
           ease: "power3.out",
@@ -64,20 +81,66 @@ export default function Home({ startAnimation }: HomeProps) {
           },
           "-=0.35",
         );
-    }, heroRef);
 
-    return () => ctx.revert();
+      if (reduceMotion) return;
+
+      /*
+       * ------------------------------------------------------------
+       * DESKTOP / TABLET PIN
+       *
+       * Same interaction pattern as About.
+       *
+       * Home stays fixed while About naturally
+       * moves over it.
+       *
+       * Mobile stays completely normal.
+       * ------------------------------------------------------------
+       */
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+
+        /*
+         * Very subtle scale while Home is being
+         * covered by the next section.
+         */
+        gsap.to(section, {
+          scale: 0.985,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "bottom bottom",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
+    }, section);
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.refresh();
+    };
   }, [startAnimation]);
 
   return (
     <section
+      ref={sectionRef}
       id="home"
-      className="relative min-h-[100svh] overflow-hidden bg-transparent px-5 pt-28 pb-8 text-primary sm:px-8 sm:pt-32 sm:pb-10 md:px-10 md:pt-36 lg:px-16 lg:pt-40"
+      className="relative z-0 min-h-[100svh] overflow-hidden bg-transparent px-5 pt-28 pb-8 text-primary sm:px-8 sm:pt-32 sm:pb-10 md:px-10 md:pt-36 lg:px-16 lg:pt-40"
     >
-      <div
-        ref={heroRef}
-        className="relative mx-auto flex min-h-[calc(100svh-9rem)] w-full max-w-[1600px] flex-col sm:min-h-[calc(100svh-10rem)] md:min-h-[calc(100svh-11rem)]"
-      >
+      <div className="relative mx-auto flex min-h-[calc(100svh-9rem)] w-full max-w-[1600px] flex-col sm:min-h-[calc(100svh-10rem)] md:min-h-[calc(100svh-11rem)]">
         {/* HERO CONTENT */}
         <div className="pt-[18vh] sm:pt-[20vh] lg:pt-[22vh]">
           <div className="w-full">

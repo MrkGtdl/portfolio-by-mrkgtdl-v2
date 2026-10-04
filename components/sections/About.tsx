@@ -187,7 +187,7 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-10 overflow-visible bg-transparent px-5 pt-16 pb-24 text-white sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
+      className="relative z-10 overflow-visible bg-[#0a0a0a] px-5 pt-16 pb-24 text-white sm:px-8 sm:pt-20 sm:pb-32 md:px-10 md:pt-24 md:pb-40 lg:px-16"
     >
       <div className="relative mx-auto w-full max-w-[1600px]">
         {/* HEADER */}
