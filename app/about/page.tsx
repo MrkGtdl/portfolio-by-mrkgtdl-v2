@@ -83,7 +83,7 @@ const workflow = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-transparent text-white">
+    <main className="min-h-screen bg-[#1f1e1f] text-[#e8e8e5]">
       <div className="mx-auto max-w-[1600px] px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16">
         {/* BACK */}
         <Link
@@ -111,7 +111,7 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <h1 className="mt-10 max-w-[1300px] text-[16vw] font-semibold leading-[0.8] tracking-[-0.09em] sm:text-[12vw] md:text-[10vw] lg:text-[8.5vw]">
+          <h1 className="mt-10 max-w-[1300px] text-[16vw] font-semibold leading-[0.84] tracking-[-0.025em] sm:text-[12vw] md:text-[10vw] lg:text-[8.5vw]">
             ABOUT
             <br />
             <span className="text-white/25">ME.</span>

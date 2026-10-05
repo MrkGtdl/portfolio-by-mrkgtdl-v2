@@ -151,7 +151,7 @@ export default function Home({ startAnimation }: HomeProps) {
 
             {/* HEADING */}
             <div className="overflow-hidden">
-              <h1 className="text-[15vw] font-semibold leading-[0.84] tracking-[-0.09em] text-[#e8e8e5] sm:text-[11vw] lg:text-[8.5vw]">
+              <h1 className="text-[15vw] font-semibold leading-[0.84] tracking-[0] text-[#e8e8e5] sm:text-[11vw] lg:text-[8.5vw]">
                 <span className="hero-line block translate-y-[70px] opacity-0">
                   I build
                 </span>
