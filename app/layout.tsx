@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import BackToTop from "@/components/ui/BackToTop";
 
 import Navbar from "@/components/layout/Navbar";
 import RouteTransition from "@/components/layout/RouteTransition";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
 
         {children}
+        <BackToTop />
       </body>
     </html>
   );

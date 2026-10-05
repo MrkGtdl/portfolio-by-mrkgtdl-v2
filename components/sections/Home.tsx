@@ -138,25 +138,25 @@ export default function Home({ startAnimation }: HomeProps) {
     <section
       ref={sectionRef}
       id="home"
-      className="relative z-0 min-h-[100svh] overflow-hidden bg-transparent px-5 pt-28 pb-8 text-primary sm:px-8 sm:pt-32 sm:pb-10 md:px-10 md:pt-36 lg:px-16 lg:pt-40"
+      className="relative z-0 min-h-[100svh] overflow-hidden bg-[#1f1e1f] px-5 pt-28 pb-8 text-[#e8e8e5] sm:px-8 sm:pt-32 sm:pb-10 md:px-10 md:pt-36 lg:px-16 lg:pt-40"
     >
       <div className="relative mx-auto flex min-h-[calc(100svh-9rem)] w-full max-w-[1600px] flex-col sm:min-h-[calc(100svh-10rem)] md:min-h-[calc(100svh-11rem)]">
         {/* HERO CONTENT */}
         <div className="pt-[18vh] sm:pt-[20vh] lg:pt-[22vh]">
           <div className="w-full">
             {/* EYEBROW */}
-            <p className="hero-eyebrow mb-5 translate-y-3 text-sm font-semibold uppercase tracking-[0.2em] text-secondary opacity-0">
+            <p className="hero-eyebrow mb-5 translate-y-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/40 opacity-0">
               Kenneth / Full-Stack Web Developer
             </p>
 
             {/* HEADING */}
             <div className="overflow-hidden">
-              <h1 className="text-[15vw] font-semibold leading-[0.84] tracking-[-0.09em] text-primary sm:text-[11vw] lg:text-[8.5vw]">
+              <h1 className="text-[15vw] font-semibold leading-[0.84] tracking-[-0.09em] text-[#e8e8e5] sm:text-[11vw] lg:text-[8.5vw]">
                 <span className="hero-line block translate-y-[70px] opacity-0">
                   I build
                 </span>
 
-                <span className="hero-line block translate-y-[70px] text-primary opacity-0">
+                <span className="hero-line block translate-y-[70px] text-[#e8e8e5] opacity-0">
                   modern websites.
                 </span>
               </h1>
@@ -164,7 +164,7 @@ export default function Home({ startAnimation }: HomeProps) {
 
             {/* DESCRIPTION + ACTIONS */}
             <div className="mt-8 flex flex-col gap-7 sm:mt-10 sm:flex-row sm:items-end sm:justify-between lg:mt-12">
-              <p className="hero-description max-w-xl translate-y-[18px] text-base leading-7 text-secondary opacity-0 sm:text-lg sm:leading-8">
+              <p className="hero-description max-w-xl translate-y-[18px] text-base leading-7 text-white/55 opacity-0 sm:text-lg sm:leading-8">
                 I build responsive and interactive web experiences using modern
                 frontend technologies, with a focus on clean interfaces,
                 thoughtful user experience, and maintainable code.
@@ -182,12 +182,12 @@ export default function Home({ startAnimation }: HomeProps) {
         </div>
 
         {/* HERO META */}
-        <div className="hero-meta mt-12 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-secondary opacity-0 sm:mt-14">
+        <div className="hero-meta mt-12 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-white/40 opacity-0 sm:mt-14">
           <span>Available for opportunities</span>
 
           <span className="flex items-center gap-3">
             Scroll to explore
-            <span className="inline-block h-1 w-px bg-muted" />
+            <span className="inline-block h-1 w-px bg-white/20" />
           </span>
         </div>
       </div>
