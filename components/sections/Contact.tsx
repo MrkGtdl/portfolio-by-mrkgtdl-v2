@@ -281,7 +281,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group mt-6 inline-flex items-center gap-3 border border-[#1f1e1f] bg-[#1f1e1f] px-6 py-4 text-sm font-medium uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-transparent hover:text-[#1f1e1f] disabled:cursor-not-allowed disabled:opacity-50"
+              className="group mt-6 rounded-full inline-flex items-center gap-3 border border-[#1f1e1f] bg-[#1f1e1f] px-6 py-4 text-sm font-medium uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-transparent hover:text-[#1f1e1f] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {status === "sending" ? (
                 <>
