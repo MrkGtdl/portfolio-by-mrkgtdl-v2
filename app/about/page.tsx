@@ -1,24 +1,57 @@
 import Link from "next/link";
 import {
+  ArrowDownRight,
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
+  Blocks,
   Code2,
+  Database,
   GitBranch,
   Globe2,
   Layers3,
   Monitor,
   Server,
-  Database,
-  ShieldCheck,
+  Sparkles,
   Wrench,
+  Check,
 } from "lucide-react";
 import ScrollZoom from "@/components/ScrollZoom";
 
-const technologyGroups = [
+const expertise = [
+  {
+    number: "01",
+    title: "Frontend Development",
+    description:
+      "Creating responsive, intuitive interfaces that make websites enjoyable and easy to use.",
+    icon: Monitor,
+    technologies: ["React", "Next.js", "TypeScript"],
+    className: "lg:col-span-2",
+  },
+  {
+    number: "02",
+    title: "Full-Stack Development",
+    description:
+      "Bringing the frontend and backend together to build complete, functional web applications.",
+    icon: Layers3,
+    technologies: ["Node.js", "PHP", "Laravel", "APIs"],
+    className: "lg:col-span-2",
+  },
+  {
+    number: "03",
+    title: "WordPress Development",
+    description:
+      "Building and customizing content-driven websites that are practical to manage and maintain.",
+    icon: Blocks,
+    technologies: ["WordPress", "Gutenberg", "GenerateBlocks"],
+    className: "lg:col-span-2",
+  },
+];
+
+const technologies = [
   {
     title: "Frontend",
-    description:
-      "Building responsive interfaces and interactive web experiences.",
+    icon: Monitor,
     items: [
       "React.js",
       "Next.js",
@@ -30,8 +63,7 @@ const technologyGroups = [
   },
   {
     title: "Backend & CMS",
-    description:
-      "Developing application functionality and configurable content systems.",
+    icon: Server,
     items: [
       "Node.js",
       "PHP",
@@ -42,506 +74,377 @@ const technologyGroups = [
     ],
   },
   {
-    title: "Database",
-    description: "Working with relational databases and application data.",
+    title: "Databases",
+    icon: Database,
     items: ["PostgreSQL", "MySQL", "SQL Server"],
   },
   {
-    title: "Tools & Practices",
-    description: "Supporting collaborative development and reliable delivery.",
+    title: "Tools",
+    icon: Wrench,
     items: ["Git", "Docker", "Linux", "CI/CD", "REST APIs", "Testing & QA"],
   },
 ];
 
-const strengths = [
+const values = [
   {
     number: "01",
-    icon: Monitor,
-    title: "Frontend Development",
+    title: "Purpose over complexity",
     description:
-      "Developing responsive interfaces and interactive web applications using React, Vue, TypeScript, JavaScript, and modern styling tools, with attention to usability and maintainable components.",
+      "I focus on solving the actual problem instead of adding complexity that a project does not need.",
   },
   {
     number: "02",
-    icon: Server,
-    title: "Backend Development",
+    title: "People first",
     description:
-      "Working with PHP, Laravel, Node.js, and RedwoodJS to implement application functionality, support business requirements, and connect frontend experiences with backend services.",
+      "A website should be intuitive, accessible, and useful for the people who interact with it.",
   },
   {
     number: "03",
-    icon: Database,
-    title: "Database & API Integration",
+    title: "Always improving",
     description:
-      "Working with PostgreSQL, MySQL, and SQL Server, including application data handling, relational data, and API integration.",
-  },
-  {
-    number: "04",
-    icon: Layers3,
-    title: "CMS Development",
-    description:
-      "Customizing content management workflows with Payload CMS and building or customizing websites with WordPress and its block-based editing tools.",
-  },
-  {
-    number: "05",
-    icon: ShieldCheck,
-    title: "System Reliability",
-    description:
-      "Contributing to bug fixing, system optimization, security remediation, testing, and deployment workflows to help keep applications reliable.",
-  },
-  {
-    number: "06",
-    icon: Wrench,
-    title: "Problem Solving",
-    description:
-      "Breaking requirements into manageable tasks, investigating issues, and implementing practical solutions that support application needs and code maintainability.",
+      "I keep learning, refining my approach, and looking for better ways to deliver quality work.",
   },
 ];
 
-const workflow = [
-  {
-    number: "01",
-    title: "Understand",
-    description:
-      "Review the requirements, expected behavior, constraints, and purpose of the feature before implementation.",
-  },
-  {
-    number: "02",
-    title: "Plan",
-    description:
-      "Identify the relevant components, application logic, data requirements, and technical approach.",
-  },
-  {
-    number: "03",
-    title: "Implement",
-    description:
-      "Build or improve functionality, integrate the necessary services, and manage changes with version control.",
-  },
-  {
-    number: "04",
-    title: "Validate",
-    description:
-      "Test expected behavior, investigate issues, and refine the implementation for consistency and reliability.",
-  },
-];
+const card =
+  "relative overflow-hidden rounded-2xl border border-white/[0.09] bg-[#252425]";
 
-const engineeringPractices = [
-  "Responsive UI development",
-  "Reusable component design",
-  "Application logic",
-  "REST API integration",
-  "Database integration",
-  "CMS customization",
-  "Bug fixing and debugging",
-  "Testing and quality assurance",
-  "System optimization",
-  "Version control with Git",
-  "Deployment and CI/CD workflows",
-  "Security remediation support",
-];
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45 sm:text-[11px]">
+      {children}
+    </p>
+  );
+}
 
 export default function AboutPage() {
   return (
     <ScrollZoom>
       <main className="min-h-screen overflow-hidden bg-[#1f1e1f] text-[#e8e8e5]">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-12 sm:px-8 sm:py-16 md:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1440px] px-5 py-7 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
           {/* Navigation */}
           <Link
             href="/"
-            className="group inline-flex min-h-11 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            className="group inline-flex min-h-11 items-center gap-2 text-sm text-white/55 transition-colors hover:text-white"
           >
             <ArrowLeft
-              size={15}
-              strokeWidth={1.4}
-              aria-hidden="true"
+              size={16}
               className="transition-transform duration-300 group-hover:-translate-x-1"
             />
             Back to Home
           </Link>
 
-          {/* Hero */}
-          <header className="mt-20 border-t border-white/15 pt-6 sm:mt-28 sm:pt-8">
-            <div className="flex items-end justify-between">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/50">
-                About Me
-              </p>
+          {/* Personal introduction */}
+          <section className="mt-12 grid grid-cols-1 gap-3 sm:mt-16 lg:mt-20 lg:grid-cols-5">
+            <article
+              data-scroll-zoom
+              className={`${card} flex min-h-[470px] flex-col justify-between p-6 sm:min-h-[540px] sm:p-10 lg:col-span-3 lg:p-12`}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:42px_42px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
+                <div className="absolute -right-24 -top-24 size-80 rounded-full bg-white/[0.045] blur-[100px]" />
+              </div>
 
-              <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-white/35 sm:block">
-                Profile / 01
+              <div className="relative flex items-center justify-between gap-3">
+                <Label>A little about me</Label>
+
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/10 px-3 py-2 text-[10px] text-white/65 sm:text-xs">
+                  <span className="size-1.5 rounded-full bg-emerald-400" />
+                  Open to opportunities
+                </span>
+              </div>
+
+              <div className="relative mt-16 sm:mt-20">
+                <p className="mb-4 text-sm text-white/45">
+                  Web Developer · Philippines
+                </p>
+
+                <h1 className="text-[clamp(3.8rem,9vw,7.5rem)] font-semibold leading-[0.88] tracking-[-0.075em]">
+                  Hi, I&apos;m
+                  <br />
+                  <span className="text-white/35">Kenneth.</span>
+                </h1>
+
+                <p className="mt-8 max-w-xl text-lg leading-snug tracking-tight text-white/90 sm:text-2xl">
+                  I build websites that bring ideas to life.
+                </p>
+
+                <p className="mt-4 max-w-xl text-sm leading-7 text-white/60 sm:text-base">
+                  I&apos;m a web developer who enjoys turning ideas into clean,
+                  functional, and user-friendly digital experiences. From
+                  responsive interfaces to the systems behind them, I focus on
+                  building websites that look good, work well, and solve real
+                  problems.
+                </p>
+
+                <Link
+                  href="/#contact"
+                  className="group mt-7 inline-flex min-h-12 items-center gap-3 rounded-xl bg-[#e8e8e5] px-5 py-3 text-sm font-medium text-[#1f1e1f] transition-colors hover:bg-white"
+                >
+                  Let&apos;s talk
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </Link>
+              </div>
+
+              <div className="relative mt-12 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-white/10 pt-5 text-xs text-white/45 sm:mt-14">
+                <span className="inline-flex items-center gap-2">
+                  <Code2 size={14} />
+                  Web Development
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Globe2 size={14} />
+                  Digital Experiences
+                </span>
+              </div>
+            </article>
+
+            {/* Personal statement */}
+            <article
+              data-scroll-zoom
+              className={`${card} flex min-h-[300px] flex-col justify-between p-6 sm:p-8 lg:col-span-2 lg:min-h-0`}
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <Label>What matters to me</Label>
+                  <Sparkles size={18} className="text-white/45" />
+                </div>
+
+                <h2 className="mt-8 max-w-sm text-3xl font-medium leading-tight tracking-tight sm:text-4xl">
+                  Good websites start with understanding people.
+                </h2>
+
+                <p className="mt-5 text-sm leading-7 text-white/55">
+                  I believe the best digital experiences balance thoughtful
+                  design, reliable functionality, and real user needs.
+                  Technology is the tool; making something useful is the goal.
+                </p>
+              </div>
+
+              <div className="mt-10 border-t border-white/10 pt-5">
+                <p className="text-xs text-white/40">My approach</p>
+                <p className="mt-2 text-sm font-medium text-white/80">
+                  Thoughtful. Practical. User-focused.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          {/* Areas of work */}
+          <section className="mt-20 sm:mt-28">
+            <div className="mb-7 flex items-end justify-between gap-4">
+              <div>
+                <Label>01 / What I do</Label>
+                <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                  A little bit of everything.
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
+                  Different parts of web development, working together to create
+                  complete digital experiences.
+                </p>
+              </div>
+
+              <span className="hidden text-xs text-white/30 sm:block">
+                MY EXPERTISE
               </span>
             </div>
 
-            <h1 className="mt-10 text-[19vw] font-semibold leading-[0.82] tracking-[-0.075em] sm:text-[13vw] md:text-[10vw] lg:text-[8.5rem]">
-              ABOUT
-              <br />
-              <span className="text-white/30">ME.</span>
-            </h1>
-
-            <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_0.65fr] lg:items-end lg:gap-16">
-              <p className="max-w-4xl text-2xl font-light leading-[1.2] tracking-[-0.04em] text-white/85 sm:text-3xl md:text-4xl lg:text-5xl">
-                I build web applications from user interface to backend
-                functionality.
-              </p>
-
-              <p className="max-w-xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
-                I&apos;m a Full Stack Web Developer with professional experience
-                in web application development, CMS customization, database
-                integration, and application support. I focus on building
-                practical solutions that meet requirements and support reliable,
-                maintainable applications.
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-2 border-l border-t border-white/15 sm:grid-cols-3">
-              <div className="border-b border-r border-white/15 p-4 sm:p-5">
-                <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/40">
-                  Focus
-                </p>
-                <p className="mt-3 text-sm text-white/80">
-                  Full Stack Development
-                </p>
-              </div>
-
-              <div className="border-b border-r border-white/15 p-4 sm:p-5">
-                <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/40">
-                  Core Areas
-                </p>
-                <p className="mt-3 text-sm text-white/80">
-                  Frontend / Backend / Data
-                </p>
-              </div>
-
-              <div className="col-span-2 border-b border-r border-white/15 p-4 sm:col-span-1 sm:p-5">
-                <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/40">
-                  Approach
-                </p>
-                <p className="mt-3 text-sm text-white/80">
-                  Practical & Maintainable
-                </p>
-              </div>
-            </div>
-          </header>
-
-          {/* Introduction */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="introduction-heading"
-            className="mt-24 grid gap-8 border-t border-white/15 pt-6 sm:mt-36 sm:gap-12 lg:grid-cols-[0.6fr_1.4fr] lg:gap-20"
-          >
-            <SectionLabel
-              number="01"
-              label="Introduction"
-              id="introduction-heading"
-            />
-
-            <div className="max-w-4xl space-y-6 text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
-              <p>
-                My work spans different parts of web application development,
-                from building user interfaces to implementing features,
-                integrating data, and supporting existing systems. I work with
-                technologies such as React, Vue, TypeScript, JavaScript, PHP,
-                Laravel, and RedwoodJS, depending on the requirements of a
-                project.
-              </p>
-
-              <p>
-                I also work with relational databases and content management
-                systems. My experience includes PostgreSQL, MySQL, SQL Server,
-                and Payload CMS, along with website development and
-                customization using WordPress.
-              </p>
-
-              <p>
-                Beyond implementation, I value debugging, testing, code
-                maintainability, version control, and reliable delivery. I aim
-                to understand the purpose behind a feature and contribute
-                solutions that fit the existing application rather than
-                introduce unnecessary complexity.
-              </p>
-            </div>
-          </section>
-
-          {/* Development areas */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="development-heading"
-            className="mt-24 border-t border-white/15 pt-6 sm:mt-36"
-          >
-            <SectionLabel
-              number="02"
-              label="Technical Capabilities"
-              id="development-heading"
-            />
-
-            <div className="mt-10 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-3">
-              {strengths.map((item) => {
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-6">
+              {expertise.map((item) => {
                 const Icon = item.icon;
 
                 return (
                   <article
+                    data-scroll-zoom
                     key={item.number}
-                    className="group border-b border-r border-white/15 p-6 transition-colors duration-300 hover:bg-white/[0.035] sm:p-8 lg:min-h-[280px] lg:p-9"
+                    className={`${card} group p-6 transition-colors duration-300 hover:border-white/[0.17] sm:p-8 ${item.className}`}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex size-10 items-center justify-center border border-white/15 text-white/70 transition-colors duration-300 group-hover:border-white/35 group-hover:text-white">
-                        <Icon size={18} strokeWidth={1.4} aria-hidden="true" />
+                    <div className="flex items-start justify-between">
+                      <div className="grid size-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
+                        <Icon size={20} className="text-white/75" />
                       </div>
 
-                      <span className="font-mono text-[10px] text-white/40">
+                      <span className="font-mono text-xs text-white/30">
                         {item.number}
                       </span>
                     </div>
 
-                    <h3 className="mt-8 text-xl font-medium tracking-tight">
+                    <h3 className="mt-8 text-xl font-medium tracking-tight sm:text-2xl">
                       {item.title}
                     </h3>
 
-                    <p className="mt-4 text-sm leading-7 text-white/60">
+                    <p className="mt-3 max-w-md text-sm leading-7 text-white/55">
                       {item.description}
                     </p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {item.technologies.map((technology) => (
+                        <span
+                          key={technology}
+                          className="rounded-lg border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 text-xs text-white/55"
+                        >
+                          {technology}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 flex items-center gap-2 text-xs text-white/35 transition-colors group-hover:text-white/65">
+                      <span>Part of what I do</span>
+                      <ArrowRight
+                        size={13}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </div>
                   </article>
                 );
               })}
             </div>
           </section>
 
-          {/* Development approach */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="approach-heading"
-            className="mt-24 grid gap-8 border-t border-white/15 pt-6 sm:mt-36 sm:gap-12 lg:grid-cols-[0.6fr_1.4fr] lg:gap-20"
-          >
-            <SectionLabel
-              number="03"
-              label="My Approach"
-              id="approach-heading"
-            />
+          {/* Work philosophy */}
+          <section className="mt-20 sm:mt-28">
+            <div className="mb-7">
+              <Label>02 / My approach</Label>
+              <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                How I like to work.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
+                Beyond writing code, I care about the thinking and decisions
+                that make a project successful.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2">
-              {workflow.map((item) => (
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+              {values.map((value) => (
                 <article
-                  key={item.number}
-                  className="border-b border-r border-white/15 p-6 sm:p-8"
+                  data-scroll-zoom
+                  key={value.number}
+                  className={`${card} p-6 sm:p-8`}
                 >
-                  <span className="font-mono text-[10px] text-white/40">
-                    {item.number}
+                  <span className="font-mono text-xs text-white/30">
+                    {value.number}
                   </span>
 
-                  <h3 className="mt-7 text-lg font-medium">{item.title}</h3>
+                  <h3 className="mt-8 text-xl font-medium tracking-tight">
+                    {value.title}
+                  </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/60">
-                    {item.description}
+                  <p className="mt-3 text-sm leading-7 text-white/55">
+                    {value.description}
                   </p>
                 </article>
               ))}
             </div>
           </section>
 
-          {/* Engineering practices */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="practices-heading"
-            className="mt-24 grid gap-8 border-t border-white/15 pt-6 sm:mt-36 sm:gap-12 lg:grid-cols-[0.6fr_1.4fr] lg:gap-20"
-          >
-            <SectionLabel
-              number="04"
-              label="Engineering Practices"
-              id="practices-heading"
-            />
-
-            <div>
-              <p className="max-w-3xl text-xl font-light leading-relaxed text-white/80 sm:text-2xl">
-                Beyond writing code, I focus on how applications behave, how
-                changes are maintained, and how features are delivered.
-              </p>
-
-              <ul className="mt-8 grid gap-0 border-t border-white/15 sm:grid-cols-2">
-                {engineeringPractices.map((item, index) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 border-b border-white/15 py-4 pr-4 text-sm text-white/65 sm:odd:border-r sm:odd:pr-6 sm:even:pl-6"
-                  >
-                    <span className="font-mono text-[10px] text-white/40">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
           {/* Technology stack */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="technology-heading"
-            className="mt-24 border-t border-white/15 pt-6 sm:mt-36"
-          >
-            <SectionLabel
-              number="05"
-              label="Technology Stack"
-              id="technology-heading"
-            />
+          <section className="mt-20 sm:mt-28">
+            <div className="mb-7">
+              <Label>03 / Technologies</Label>
+              <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
+                Tools I work with.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
+                The technologies I use to bring different ideas and projects to
+                life.
+              </p>
+            </div>
 
-            <div className="mt-10 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2">
-              {technologyGroups.map((group, index) => (
-                <article
-                  key={group.title}
-                  className="border-b border-r border-white/15 p-6 sm:p-8 lg:p-9"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-xl font-medium tracking-tight">
-                        {group.title}
-                      </h3>
-                      <p className="mt-3 max-w-sm text-sm leading-6 text-white/50">
-                        {group.description}
-                      </p>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {technologies.map((group) => {
+                const Icon = group.icon;
+
+                return (
+                  <article
+                    data-scroll-zoom
+                    key={group.title}
+                    className={`${card} p-5 sm:p-7`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
+                        <Icon size={18} className="text-white/65" />
+                      </div>
+                      <h3 className="text-base font-medium">{group.title}</h3>
                     </div>
 
-                    <span className="font-mono text-[10px] text-white/35">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {group.items.map((technology) => (
-                      <li
-                        key={technology}
-                        className="border border-white/15 px-3 py-2 font-mono text-[10px] tracking-wide text-white/65 transition-colors duration-300 hover:border-white/35 hover:text-white"
-                      >
-                        {technology}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-
-            <p className="mt-5 max-w-3xl text-xs leading-6 text-white/40">
-              This stack reflects technologies listed in my development
-              background. The depth of experience varies by technology and
-              project requirements.
-            </p>
-          </section>
-
-          {/* Current direction */}
-          <section
-            data-scroll-zoom
-            aria-labelledby="direction-heading"
-            className="mt-24 grid gap-8 border-t border-white/15 pt-6 sm:mt-36 sm:gap-12 lg:grid-cols-[0.6fr_1.4fr] lg:gap-20"
-          >
-            <SectionLabel
-              number="06"
-              label="Development Philosophy"
-              id="direction-heading"
-            />
-
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-light leading-[1.2] tracking-tight text-white/85 sm:text-3xl md:text-4xl">
-                Build with purpose. Solve the problem. Improve the
-                implementation.
-              </h2>
-
-              <p className="mt-5 text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
-                I aim to create web applications that balance functionality,
-                usability, and maintainability. Whether developing a new feature
-                or improving an existing system, I value clear requirements,
-                thoughtful implementation, and continuous refinement.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-2">
-                <FocusTag icon={Globe2} text="Web Applications" />
-                <FocusTag icon={Code2} text="Clean Code" />
-                <FocusTag icon={GitBranch} text="Version Control" />
-              </div>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-lg border border-white/[0.08] px-3 py-2 text-xs text-white/65 transition-colors hover:border-white/20 hover:text-white"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
 
           {/* Contact CTA */}
+          <section className="mt-20 sm:mt-28">
+            <article data-scroll-zoom className={`${card} p-6 sm:p-10 lg:p-12`}>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto] md:items-end">
+                <div>
+                  <Label>04 / Let&apos;s connect</Label>
 
-          <section
-            data-scroll-zoom
-            className="mt-24 border-t border-white/15 pt-10 sm:mt-36 sm:pt-12"
-          >
-            <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/50">
-                  Let&apos;s connect
-                </p>
+                  <h2 className="mt-5 max-w-2xl text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+                    Have an idea?
+                    <br />
+                    <span className="text-white/40">
+                      Let&apos;s make it happen.
+                    </span>
+                  </h2>
 
-                <h2 className="mt-5 text-4xl font-medium leading-[1.05] tracking-[-0.055em] sm:text-5xl md:text-6xl">
-                  Have a project?
-                  <br />
-                  Let&apos;s talk.
-                </h2>
+                  <p className="mt-5 max-w-lg text-sm leading-7 text-white/55">
+                    Whether it&apos;s a project, an opportunity, or an idea
+                    worth exploring, I&apos;d be happy to hear from you.
+                  </p>
+                </div>
+
+                <Link
+                  href="/#contact"
+                  className="group inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-xl bg-[#e8e8e5] px-5 py-3 text-sm font-medium text-[#1f1e1f] transition-colors hover:bg-white"
+                >
+                  Get in touch
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </Link>
               </div>
-
-              <Link
-                href="/#contact"
-                className="group inline-flex min-h-12 w-fit items-center gap-4 border border-white/20 bg-white px-6 py-4 text-sm font-medium text-[#1f1e1f] transition-colors duration-300 hover:bg-[#e8e8e5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#1f1e1f]"
-              >
-                Get in Touch
-                <ArrowUpRight
-                  size={17}
-                  strokeWidth={1.4}
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </Link>
-            </div>
+            </article>
           </section>
 
           {/* Footer */}
-          <footer className="mt-20 flex flex-col gap-3 border-t border-white/15 pt-5 sm:mt-28 sm:flex-row sm:items-center sm:justify-between">
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
-              Full Stack Web Developer
-            </span>
+          <footer className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-medium text-white/75">Kenneth</p>
+              <p className="mt-1 text-xs text-white/35">
+                Web Developer · Building useful digital experiences
+              </p>
+            </div>
 
             <Link
               href="/"
-              className="group inline-flex w-fit items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="group inline-flex w-fit items-center gap-2 text-xs text-white/45 transition-colors hover:text-white"
             >
               Back to Home
-              <ArrowUpRight
-                size={12}
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              <ArrowLeft
+                size={13}
+                className="transition-transform group-hover:-translate-x-1"
               />
             </Link>
           </footer>
         </div>
       </main>
     </ScrollZoom>
-  );
-}
-
-function SectionLabel({
-  number,
-  label,
-  id,
-}: {
-  number: string;
-  label: string;
-  id: string;
-}) {
-  return (
-    <div>
-      <h2
-        id={id}
-        className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/50"
-      >
-        {number} — {label}
-      </h2>
-    </div>
-  );
-}
-
-function FocusTag({ icon: Icon, text }: { icon: typeof Globe2; text: string }) {
-  return (
-    <span className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] text-white/60 sm:px-4">
-      <Icon size={13} strokeWidth={1.4} aria-hidden="true" />
-      {text}
-    </span>
   );
 }
