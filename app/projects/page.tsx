@@ -42,7 +42,7 @@ export default function ProjectsPage() {
             </h1>
           </div>
 
-          <p className="mt-7 max-w-xl text-sm leading-6 text-secondary sm:text-base sm:leading-7">
+          <p className="mt-7 max-w-xl text-sm leading-6 text-[#1f1e1f]/65 sm:text-base sm:leading-7">
             A collection of web projects, concepts, and digital experiences
             exploring modern interface design, responsive development, and
             thoughtful interaction.
@@ -75,11 +75,11 @@ export default function ProjectsPage() {
                 >
                   {/* META */}
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#1f1e1f]/65">
                       {project.number} / {project.category}
                     </span>
 
-                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#1f1e1f]/65">
                       {project.year}
                     </span>
                   </div>
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                     {/* LEFT */}
                     <div className="min-w-0">
                       <div className="flex items-start gap-4">
-                        <span className="pt-2 font-mono text-[10px] text-muted">
+                        <span className="pt-2 font-mono text-[10px] text-[#1f1e1f]/65">
                           {project.number}
                         </span>
 
@@ -98,7 +98,7 @@ export default function ProjectsPage() {
                             {project.title}
                           </h2>
 
-                          <p className="mt-4 max-w-xl text-sm leading-6 text-secondary transition-colors duration-500 group-hover:text-primary sm:text-base sm:leading-7">
+                          <p className="mt-4 max-w-xl text-sm leading-6 text-[#1f1e1f]/65 transition-colors duration-500 group-hover:text-primary sm:text-base sm:leading-7">
                             {project.description}
                           </p>
                         </div>
@@ -109,7 +109,7 @@ export default function ProjectsPage() {
                         {project.stack.map((item) => (
                           <span
                             key={item}
-                            className="rounded-full border border-border px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-muted transition-colors duration-300 group-hover:border-accent group-hover:text-accent"
+                            className="rounded-full border border-border px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-[#1f1e1f]/65 transition-colors duration-300 group-hover:border-accent group-hover:text-[#1f1e1f]/65"
                           >
                             {item}
                           </span>

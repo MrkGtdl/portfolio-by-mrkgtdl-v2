@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { projects } from "@/data/projects";
 
+const featuredProjects = projects.slice(0, 3);
+
 gsap.registerPlugin(ScrollTrigger);
 
 type ProjectTheme = "dark" | "light";
@@ -207,7 +209,8 @@ export default function Projects() {
           </span>
 
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
-            {projects.length.toString().padStart(2, "0")} Projects
+            {featuredProjects.length.toString().padStart(2, "0")} Featured
+            Projects
           </span>
         </div>
 
@@ -225,7 +228,7 @@ export default function Projects() {
 
         {/* PROJECT LIST */}
         <div className="project-list mt-20 sm:mt-28 lg:mt-32">
-          {projects.map((project) => {
+          {featuredProjects.map((project) => {
             const isActive = activeProject === project.slug;
             const hasActiveProject = activeProject !== null;
             const isInactive = hasActiveProject && !isActive;

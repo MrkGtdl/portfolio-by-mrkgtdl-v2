@@ -94,13 +94,13 @@ export default async function ProjectPage({
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <main className="min-h-screen bg-transparent text-white">
+    <main className="min-h-screen bg-transparent text-[#1f1e1f]">
       {/* BACK */}
       <div className="px-5 pt-32 sm:px-8 md:px-10 lg:px-16 lg:pt-36">
         <div className="mx-auto w-full max-w-[1600px]">
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35 transition-colors hover:text-white"
+            className="group inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-[#1f1e1f] transition-colors hover:text-[#1f1e1f]"
           >
             <ArrowLeft
               size={14}
@@ -116,11 +116,11 @@ export default async function ProjectPage({
       <section className="px-5 pb-20 pt-16 sm:px-8 sm:pb-28 sm:pt-20 md:px-10 lg:px-16 lg:pb-36 lg:pt-20">
         <div className="mx-auto w-full max-w-[1600px]">
           <div className="flex items-center justify-between border-b border-white/10 pb-5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
               {project.category}
             </span>
 
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
               {project.year}
             </span>
           </div>
@@ -131,25 +131,27 @@ export default async function ProjectPage({
             </h1>
 
             <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.45fr] lg:items-end">
-              <p className="max-w-2xl text-base leading-7 text-white/45 sm:text-lg sm:leading-8">
+              <p className="max-w-2xl text-base leading-7 text-[#1f1e1f]/65 sm:text-lg sm:leading-8">
                 {project.description}
               </p>
 
               <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-5 lg:border-t-0 lg:border-l lg:pl-8">
                 <div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#1f1e1f]">
                     Role
                   </span>
 
-                  <p className="mt-2 text-sm text-white/60">{project.role}</p>
+                  <p className="mt-2 text-base text-[#1f1e1f]">
+                    {project.role}
+                  </p>
                 </div>
 
                 <div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#1f1e1f]">
                     Year
                   </span>
 
-                  <p className="mt-2 text-sm text-white/60">
+                  <p className="mt-2 text-base text-[#1f1e1f]">
                     {project.timeline}
                   </p>
                 </div>
@@ -176,7 +178,7 @@ export default async function ProjectPage({
       <section className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-40">
         <div className="mx-auto grid w-full max-w-[1600px] gap-16 lg:grid-cols-[0.35fr_1fr]">
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
               01 / Overview
             </span>
           </div>
@@ -186,13 +188,13 @@ export default async function ProjectPage({
               Building a clear digital experience around the needs of the user.
             </h2>
 
-            <p className="mt-8 max-w-2xl text-sm leading-7 text-white/40 sm:text-base sm:leading-8">
+            <p className="mt-8 max-w-2xl text-base leading-7 text-[#1f1e1f]/65 sm:text-lg sm:leading-8">
               {project.overview}
             </p>
 
             {/* TECHNOLOGIES */}
             <div className="mt-12 border-t border-white/10 pt-6">
-              <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+              <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#1f1e1f]">
                 Technologies
               </span>
 
@@ -200,7 +202,7 @@ export default async function ProjectPage({
                 {project.stack.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-white/10 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/45"
+                    className="rounded-full border border-white/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em] text-[#1f1e1f]/65"
                   >
                     {item}
                   </span>
@@ -216,7 +218,7 @@ export default async function ProjectPage({
         <div className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-36">
           <div className="mx-auto grid w-full max-w-[1600px] gap-16 lg:grid-cols-[0.35fr_1fr]">
             <div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+              <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
                 02 / What I Built
               </span>
             </div>
@@ -228,11 +230,11 @@ export default async function ProjectPage({
                     key={feature}
                     className="grid grid-cols-[45px_1fr] gap-5 py-6 sm:grid-cols-[60px_1fr] sm:py-7"
                   >
-                    <span className="font-mono text-[10px] text-white/20">
+                    <span className="font-mono text-[11px] text-[#1f1e1f]/65">
                       0{index + 1}
                     </span>
 
-                    <p className="text-base leading-7 text-white/55 sm:text-lg">
+                    <p className="text-base leading-7 text-[#1f1e1f]/65 sm:text-lg">
                       {feature}
                     </p>
                   </div>
@@ -247,11 +249,11 @@ export default async function ProjectPage({
       <section className="px-5 py-24 sm:px-8 sm:py-32 md:px-10 lg:px-16 lg:py-40">
         <div className="mx-auto w-full max-w-[1600px]">
           <div className="mb-10 flex items-end justify-between border-b border-white/10 pb-5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
               03 / Interface
             </span>
 
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
               Selected Views
             </span>
           </div>
@@ -309,11 +311,11 @@ export default async function ProjectPage({
           <div className="border-t border-white/10 pt-8">
             <a href="#" className="group flex items-center justify-between">
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/20">
+                <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#1f1e1f]">
                   External Link
                 </span>
 
-                <p className="mt-2 text-2xl font-medium tracking-tight text-white/60 transition-colors duration-300 group-hover:text-white sm:text-3xl">
+                <p className="mt-2 text-2xl font-medium tracking-tight text-[#1f1e1f] transition-colors duration-300 group-hover:text-[#1f1e1f] sm:text-3xl">
                   View Live Project
                 </p>
               </div>
@@ -338,7 +340,7 @@ export default async function ProjectPage({
               href={`/projects/${nextProject.slug}`}
               className="group block"
             >
-              <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/20">
+              <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#1f1e1f]">
                 Next Project
               </span>
 
