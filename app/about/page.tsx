@@ -1,20 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import {
-  ArrowDownRight,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Blocks,
   Code2,
   Database,
-  GitBranch,
   Globe2,
   Layers3,
   Monitor,
   Server,
   Sparkles,
   Wrench,
-  Check,
 } from "lucide-react";
 import ScrollZoom from "@/components/ScrollZoom";
 
@@ -26,7 +26,6 @@ const expertise = [
       "Creating responsive, intuitive interfaces that make websites enjoyable and easy to use.",
     icon: Monitor,
     technologies: ["React", "Next.js", "TypeScript"],
-    className: "lg:col-span-2",
   },
   {
     number: "02",
@@ -35,7 +34,6 @@ const expertise = [
       "Bringing the frontend and backend together to build complete, functional web applications.",
     icon: Layers3,
     technologies: ["Node.js", "PHP", "Laravel", "APIs"],
-    className: "lg:col-span-2",
   },
   {
     number: "03",
@@ -44,7 +42,6 @@ const expertise = [
       "Building and customizing content-driven websites that are practical to manage and maintain.",
     icon: Blocks,
     technologies: ["WordPress", "Gutenberg", "GenerateBlocks"],
-    className: "lg:col-span-2",
   },
 ];
 
@@ -118,6 +115,8 @@ function Label({ children }: { children: React.ReactNode }) {
 }
 
 export default function AboutPage() {
+  const [activeExpertise, setActiveExpertise] = useState(0);
+
   return (
     <ScrollZoom>
       <main className="min-h-screen overflow-hidden bg-[#1f1e1f] text-[#e8e8e5]">
@@ -237,72 +236,170 @@ export default function AboutPage() {
 
           {/* Areas of work */}
           <section className="mt-20 sm:mt-28">
-            <div className="mb-7 flex items-end justify-between gap-4">
+            <div className="mb-10 flex items-end justify-between gap-4">
               <div>
                 <Label>01 / What I do</Label>
+
                 <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
                   A little bit of everything.
                 </h2>
+
                 <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
                   Different parts of web development, working together to create
                   complete digital experiences.
                 </p>
               </div>
 
-              <span className="hidden text-xs text-white/30 sm:block">
+              <span className="hidden text-xs tracking-widest text-white/30 sm:block">
                 MY EXPERTISE
               </span>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-6">
-              {expertise.map((item) => {
-                const Icon = item.icon;
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_0.85fr] lg:gap-12">
+              {/* Interactive expertise list */}
+              <div className="border-t border-white/10">
+                {expertise.map((item, index) => {
+                  const Icon = item.icon;
+                  const isActive = activeExpertise === index;
 
-                return (
-                  <article
-                    data-scroll-zoom
-                    key={item.number}
-                    className={`${card} group p-6 transition-colors duration-300 hover:border-white/[0.17] sm:p-8 ${item.className}`}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="grid size-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
-                        <Icon size={20} className="text-white/75" />
-                      </div>
-
-                      <span className="font-mono text-xs text-white/30">
+                  return (
+                    <button
+                      key={item.number}
+                      type="button"
+                      aria-pressed={isActive}
+                      onMouseEnter={() => setActiveExpertise(index)}
+                      onFocus={() => setActiveExpertise(index)}
+                      onClick={() => setActiveExpertise(index)}
+                      className={`group flex w-full items-center gap-4 border-b border-white/10 py-6 text-left transition-colors duration-300 sm:py-8 ${
+                        isActive
+                          ? "text-white"
+                          : "text-white/40 hover:text-white/80"
+                      }`}
+                    >
+                      <span className="w-7 shrink-0 font-mono text-xs text-white/30 sm:w-8">
                         {item.number}
                       </span>
-                    </div>
 
-                    <h3 className="mt-8 text-xl font-medium tracking-tight sm:text-2xl">
-                      {item.title}
-                    </h3>
+                      <span
+                        className={`grid size-10 shrink-0 place-items-center rounded-xl border transition-all duration-300 ${
+                          isActive
+                            ? "border-white/20 bg-white/[0.08]"
+                            : "border-white/[0.06] bg-transparent group-hover:border-white/15"
+                        }`}
+                      >
+                        <Icon
+                          size={19}
+                          className={`transition-colors duration-300 ${
+                            isActive ? "text-white" : "text-white/40"
+                          }`}
+                        />
+                      </span>
 
-                    <p className="mt-3 max-w-md text-sm leading-7 text-white/55">
-                      {item.description}
-                    </p>
-
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {item.technologies.map((technology) => (
-                        <span
-                          key={technology}
-                          className="rounded-lg border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 text-xs text-white/55"
-                        >
-                          {technology}
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-base font-medium tracking-tight sm:text-xl lg:text-2xl">
+                          {item.title}
                         </span>
-                      ))}
-                    </div>
 
-                    <div className="mt-8 flex items-center gap-2 text-xs text-white/35 transition-colors group-hover:text-white/65">
-                      <span>Part of what I do</span>
+                        <span
+                          className={`mt-2 block text-xs leading-5 transition-all duration-300 sm:text-sm sm:leading-6 lg:hidden ${
+                            isActive
+                              ? "translate-y-0 text-white/50 opacity-100"
+                              : "hidden"
+                          }`}
+                        >
+                          {item.description}
+                        </span>
+                      </span>
+
                       <ArrowRight
-                        size={13}
-                        className="transition-transform group-hover:translate-x-1"
+                        size={18}
+                        className={`shrink-0 transition-all duration-300 ${
+                          isActive
+                            ? "translate-x-0 text-white opacity-100"
+                            : "-translate-x-2 text-white/30 opacity-0 group-hover:translate-x-0 group-hover:opacity-70"
+                        }`}
                       />
-                    </div>
-                  </article>
-                );
-              })}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Hover / tap preview */}
+              <div className="relative min-h-[340px] sm:min-h-[360px]">
+                {expertise.map((item, index) => {
+                  const Icon = item.icon;
+                  const isActive = activeExpertise === index;
+
+                  return (
+                    <article
+                      key={item.number}
+                      aria-hidden={!isActive}
+                      className={`absolute inset-0 overflow-hidden rounded-2xl border border-white/10 bg-[#252425] p-6 transition-[opacity,transform,border-color] duration-500 sm:p-8 ${
+                        isActive
+                          ? "translate-y-0 scale-100 opacity-100"
+                          : "pointer-events-none translate-y-3 scale-[0.98] opacity-0"
+                      }`}
+                    >
+                      {/* Subtle card decoration */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 overflow-hidden"
+                      >
+                        <div className="absolute -right-16 -top-16 size-48 rounded-full bg-white/[0.035] blur-[70px]" />
+                        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-white/20 via-white/[0.04] to-transparent" />
+                      </div>
+
+                      <div className="relative flex items-start justify-between">
+                        <div className="grid size-12 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
+                          <Icon size={22} className="text-white/80" />
+                        </div>
+
+                        <span className="font-mono text-xs text-white/30">
+                          {item.number} / 03
+                        </span>
+                      </div>
+
+                      <div className="relative mt-10 sm:mt-12">
+                        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/35">
+                          Area of expertise
+                        </p>
+
+                        <h3 className="mt-3 text-2xl font-medium tracking-tight sm:text-3xl">
+                          {item.title}
+                        </h3>
+
+                        <p className="mt-4 max-w-md text-sm leading-7 text-white/55">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      <div className="relative mt-8 border-t border-white/10 pt-5">
+                        <p className="mb-4 text-xs text-white/35">
+                          Tools & technologies
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {item.technologies.map((technology) => (
+                            <span
+                              key={technology}
+                              className="rounded-lg border border-white/10 bg-white/[0.025] px-3 py-2 text-xs text-white/60 transition-colors duration-300 hover:border-white/20 hover:text-white"
+                            >
+                              {technology}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <Icon
+                        aria-hidden="true"
+                        size={180}
+                        strokeWidth={0.65}
+                        className="pointer-events-none absolute -bottom-12 -right-10 text-white/[0.025]"
+                      />
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </section>
 
@@ -310,9 +407,11 @@ export default function AboutPage() {
           <section className="mt-20 sm:mt-28">
             <div className="mb-7">
               <Label>02 / My approach</Label>
+
               <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
                 How I like to work.
               </h2>
+
               <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
                 Beyond writing code, I care about the thinking and decisions
                 that make a project successful.
@@ -346,9 +445,11 @@ export default function AboutPage() {
           <section className="mt-20 sm:mt-28">
             <div className="mb-7">
               <Label>03 / Technologies</Label>
+
               <h2 className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">
                 Tools I work with.
               </h2>
+
               <p className="mt-3 max-w-xl text-sm leading-6 text-white/50">
                 The technologies I use to bring different ideas and projects to
                 life.
@@ -369,6 +470,7 @@ export default function AboutPage() {
                       <div className="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
                         <Icon size={18} className="text-white/65" />
                       </div>
+
                       <h3 className="text-base font-medium">{group.title}</h3>
                     </div>
 
@@ -427,6 +529,7 @@ export default function AboutPage() {
           <footer className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-medium text-white/75">Kenneth</p>
+
               <p className="mt-1 text-xs text-white/35">
                 Web Developer · Building useful digital experiences
               </p>
